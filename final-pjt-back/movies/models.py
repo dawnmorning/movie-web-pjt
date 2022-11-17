@@ -25,15 +25,8 @@ class Genre(models.Model):
     name = models.CharField(max_length=20)
     movies = models.ManyToManyField(Movie, blank=True, related_name='genres')
 
-class Worldcup(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='worldcup')
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
 # 월드컵 결과에 따른 추천 모델
-class WorldcupLogic(models.Model):
-    user = models.ForeignKey(Worldcup, on_delete=models.CASCADE)
-    genre_rank1 = models.IntegerField(null=True)
-    genre_rank2 = models.IntegerField(null=True)
-    genre_rank3 = models.IntegerField(null=True)
-    genre_rank4 = models.IntegerField(null=True)
+class WorldcupRecommend(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='worldcup_recommend')
+    genre_rank1 = models.IntegerField()
+    genre_rank2 = models.IntegerField()
