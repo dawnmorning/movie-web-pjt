@@ -1,17 +1,28 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
-from .serializers import GenreMoviegenreSerializer
-# Create your views here.
+
 import time
 import random
-import requests
+
 from django.db.models import Q
 from accounts.models import User
+from django.shortcuts import render, redirect, get_object_or_404
+
 from .models import Genre, Movie, WorldcupRecommend
-from rest_framework.permissions import IsAuthenticated
 from .serializers import MovieSerializer, WorldcupRecommendSerializer
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def movies(request) :
+    if request.method == 'GET' :
+        random_movies = Movie.objects.order_by('?')[:16]
+        serializer = MovieSerializer(data = random_movies, many=True)
+        print(serializer.is_valid())
+        return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -33,6 +44,7 @@ def worldcup(request):
         serializer = MovieSerializer(data=movielist, many=True)
         serializer.is_valid()
         return Response(serializer.data)
+
 
 # 월드컵게임 결과 기반 영화 추천 알고리즘
 @api_view(['GET', 'POST'])
