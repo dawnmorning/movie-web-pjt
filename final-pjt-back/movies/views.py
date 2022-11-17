@@ -6,7 +6,7 @@ from .serializers import GenreMoviegenreSerializer
 import time
 import random
 import requests
-from .models import Genre, WorldcupLogic
+from .models import Genre, WorldcupLogic, Movie
 from rest_framework.permissions import IsAuthenticated
 from .serializers import MovieSerializer, WorldcupLogicSerializer
 
@@ -28,6 +28,14 @@ def Worldcup(request):
         print(serializer.is_valid())
         return Response(serializer.data)    
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def movies(request) :
+    if request.method == 'GET' :
+        random_movies = Movie.objects.order_by('?')[:16]
+        serializer = MovieSerializer(data = random_movies, many=True)
+        print(serializer.is_valid())
+        return Response(serializer.data)
 # @api_view(['GET', 'POST'])
 # @permission_classes([IsAuthenticated])
 # def WorldcupLogic(request):
