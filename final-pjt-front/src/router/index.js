@@ -6,6 +6,9 @@ import HomeView from '@/views/HomeView'
 import Myprofile from '@/views/MyProfile'
 import RecomView from '@/views/RecomView'
 
+import testView from '@/views/testView'
+import EditProfile from '@/views/EditProfile'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,6 +31,16 @@ const routes = [
     path: '/recommendation',
     name: 'RecomView',
     component: RecomView
+  },
+  {
+    path: '/test',
+    name: 'testView',
+    component: testView
+  },
+  {
+    path: '/edit/:username',
+    name: 'EditProfile',
+    component: EditProfile
   },
 
 ]

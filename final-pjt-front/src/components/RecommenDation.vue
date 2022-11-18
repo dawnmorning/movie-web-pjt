@@ -56,6 +56,7 @@ export default {
                 .then(res=>{
                     // console.log(res.data)
                     this.movies = res.data
+                    console.log(res.data)
                     // console.log(this.movies)
                     this.movies.forEach(movie =>{
                         movie.poster_path = "https://image.tmdb.org/t/p/w500" +movie.poster_path
