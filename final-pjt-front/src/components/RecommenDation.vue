@@ -82,7 +82,7 @@ export default {
     /* width: 90%; */
     display: grid;
     /* grid-template-areas: 1fr 1fr 1fr 1fr 1fr 1fr; */
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(10, 1fr);
     /* grid-auto-rows: 300px; */
     /* grid-auto-flow: column; */
     /* grid-auto-columns: 1fr 1fr 1fr; */
