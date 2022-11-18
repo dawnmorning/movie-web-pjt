@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+
+# 'api/v3/'
 urlpatterns = [
 
     path('reviews/', views.reviews, name='reviews'),

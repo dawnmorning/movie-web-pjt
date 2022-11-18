@@ -2,6 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 
 from movies.models import Movie
+from accounts.models import Profile
 from .models import Review, Comment
 from .serializers import ReviewSerializer,CommentSerializer
 
@@ -11,34 +12,31 @@ from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 
-# Create your views here.
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def reviews(request):
     # 리뷰수가 많은 상황을 대비하여 Paginator 사용
-    try:
-        page = int(request.GET.get('page'))
-        reviews_list = Review.objects.all().order_by('-created_at')
-        paginator = Paginator(reviews_list, 5, allow_empty_first_page = True)
-        reviews = paginator.page(page)
+    reviews = Review.objects.all().order_by('-created_at')
+    serializer = ReviewSerializer(data=reviews, many=True)
+    serializer.is_valid()
 
-        serializer = ReviewSerializer(data=reviews, many=True)
-        serializer.is_valid()
-        return Response(serializer.data, status=status.HTTP_404_NOT_FOUND)
+    context = {
+        "reviews"
+    }
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
-    except:
-        return Response({'message': '게시글이 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def review_c(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
+    profile = get_object_or_404(Profile, user=request.user)
     
     serializer = ReviewSerializer(data=request.data)
     
     if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie, user = request.user)
+        serializer.save(movie=movie, author = request.user, profile=profile)
         return Response(serializer.data, status= status.HTTP_201_CREATED)
 
 @api_view(['PUT'])
@@ -46,10 +44,10 @@ def review_c(request, movie_pk):
 def review_u(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
 
-    if request.user != review.user:
+    if request.user != review.author:
         return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_401_UNAUTHORIZED)
-    serializer = ReviewSerializer(review, data=request.data)
     
+    serializer = ReviewSerializer(review, data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save()
         return Response(serializer.data, status= status.HTTP_200_OK)
@@ -59,7 +57,7 @@ def review_u(request, review_pk):
 def review_d(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
 
-    if request.user != review.user:
+    if request.user != review.author:
         return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_401_UNAUTHORIZED)
     
     review.delete()
@@ -92,7 +90,7 @@ def comment_c(request, review_pk):
     serializer = CommentSerializer(data=request.data)
     
     if serializer.is_valid(raise_exception=True):
-        serializer.save(review=review, user = request.user)
+        serializer.save(review=review, author = request.user)
         return Response(serializer.data, status= status.HTTP_201_CREATED)
 
 @api_view(['DELETE'])
@@ -100,7 +98,7 @@ def comment_c(request, review_pk):
 def comment_d(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     
-    if request.user != comment.user:
+    if request.user != comment.author:
         return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     comment.delete()

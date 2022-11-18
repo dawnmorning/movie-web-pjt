@@ -1,18 +1,22 @@
 from .models import Review, Comment
 from rest_framework import serializers
+from accounts.serializers import ProfileSerializer
+from movies.serializers import MovieSerializer
 
 class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
         fields = '__all__'
-        read_only_fields = ('like_users', 'review', 'user',)
+        read_only_fields = ('like_users', 'review', 'author',)
 
 class ReviewSerializer(serializers.ModelSerializer):
-    comments = CommentSerializer(read_only=True,many=True)
+    movie = MovieSerializer(read_only=True)
+    profile = ProfileSerializer(read_only=True)
+    comments = CommentSerializer(source='comment_set.all', read_only=True ,many=True)
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
 
     class Meta:
         model = Review
         fields = '__all__'
-        read_only_fields = ('movie', 'user', 'like_users',)
+        read_only_fields = ('movie', 'author', 'like_users', 'profile')
