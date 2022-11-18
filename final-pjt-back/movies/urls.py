@@ -5,6 +5,6 @@ urlpatterns = [
 
     path('worldcup/', views.worldcup, name='worldcup'),
     path('worldcup/recommend/', views.worldcup_recommend, name='worldcup_recommend'),
-    path('movies/', views.movies, name='movies'),
+    path('movies/', views.movies_r, name='movies_r'),
 
 ]

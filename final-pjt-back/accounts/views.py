@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 
 @api_view(["GET", "PUT"])
 @permission_classes([IsAuthenticated])
-def Profile_RU(request, username):
+def profile_ru(request, username):
     person = get_object_or_404(User, username=username)
     profile = get_object_or_404(Profile, user=person)
 

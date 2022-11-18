@@ -12,17 +12,47 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Genre, Movie, WorldcupRecommend
 from .serializers import MovieSerializer, WorldcupRecommendSerializer
+import datetime as dt
+x = dt.datetime.now()
+_today = f'{x.year}-{x.month}-{x.day}'
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def movies_r(request) :
+    st = time.time()
+    # 상영 예정작
+    movies = Movie.objects.all()
+    movies1 = movies.filter(release_date__gte=_today)
+    # 오늘 개봉 영화도 포함되어 있음 뷰에서 처리하기
+    upcomming_movies = movies1.order_by('release_date')[:16]
+    # 현재 개봉한 영화로 필터링
+    movies2 = movies.filter(release_date__lte=_today)
+    random_movies = movies2.order_by('?')[:16]
+    latest_movies = movies2.order_by('-release_date')[:16]
+    popular_movies = movies2.order_by('-popularity')[:16]
+    vote_movies = movies2.order_by('-vote_average')[:16]
+    
+    movies_list_name = ['upcomming_movies', 'random_movies', 'latest_movies', 'popular_movies', 'vote_movies']
+    movies_list = [upcomming_movies, random_movies, latest_movies, popular_movies, vote_movies]
+    upcomming_serializer, random_serializer, latest_serializer, popular_serializer, vote_serializer = 0, 0, 0, 0, 0
+    serializer_list = [upcomming_serializer, random_serializer, latest_serializer, popular_serializer, vote_serializer]
+
+    context = {}
+    for i in range(5):
+        serializer_list[i] = MovieSerializer(data=movies_list[i], many=True)
+        serializer_list[i].is_valid()
+        context[movies_list_name[i]] = serializer_list[i].data
+    ed = time.time()
+    print(ed - st)
+    return Response(context)
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def movies(request) :
-    if request.method == 'GET' :
-        random_movies = Movie.objects.order_by('?')[:16]
-        serializer = MovieSerializer(data = random_movies, many=True)
-        print(serializer.is_valid())
-        return Response(serializer.data)
+def movie_detail_r(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -41,6 +71,7 @@ def worldcup(request):
                     continue
                 movielist.append(movie_by_genre)
                 break
+
         serializer = MovieSerializer(data=movielist, many=True)
         serializer.is_valid()
         return Response(serializer.data)
