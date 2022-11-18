@@ -7,7 +7,7 @@
         <p>등급  {{ information.grade }}</p>
         <p>프로필 이미지 <img :src="profileImage" alt="프로필 이미지"></p>  
     </div> 
-    <button >프로필 수정</button>
+    <button @click='goModify'>프로필 수정</button>
   </div>
 </template>
 
@@ -45,6 +45,11 @@ export default {
                 // console.log(this.information)
                 console.log(res)
             })
+    },
+    methods:{
+        goModify(){
+            this.$router.push({name: 'EditProfile', params: {username: this.username}})
+        }
     }
 }
 </script>

@@ -24,7 +24,8 @@
                 <a class="nav-link" href="#">커뮤니티</a>
               </li>
               <li class="nav-item">
-                <router-link class='nav-link' :to="`/profile/${this.$store.state.username}`">내 프로필</router-link>
+                <!-- <router-link class='nav-link' :to="`/profile/${this.$store.state.username}`">내 프로필</router-link> -->
+                <a class='nav-link' :href="`/profile/${username}`">내 프로필</a>
               </li>
               <li class="nav-item">
                 <a @click='noToken' class="nav-link" href="#">로그아웃</a>
@@ -96,6 +97,9 @@ export default {
     noToken(){
       this.$store.state.token = null
       this.$store.state.username = null
+      this.$store.state.nickname = null
+      this.$store.state.interested = null
+      this.$store.state.profile_image = null
       localStorage.clear()
       this.$router.push({name: "HomeView"})
     },
