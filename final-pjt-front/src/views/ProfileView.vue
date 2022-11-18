@@ -9,7 +9,7 @@
 import UserInformation from '@/components/UserInformation'
 
 export default {
-    name: 'MyProfile',
+    name: 'ProfileView',
     components:{
         UserInformation,
     }

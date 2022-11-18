@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 import SignUp from '@/views/SignUp'
 import HomeView from '@/views/HomeView'
-import Myprofile from '@/views/MyProfile'
+import ProfileView from '@/views/ProfileView'
 import RecomView from '@/views/RecomView'
 import testView from '@/views/testView'
 import EditProfile from '@/views/EditProfile'
@@ -23,8 +23,8 @@ const routes = [
   },
   {
     path: '/profile/:username',
-    name: 'MyProfile',
-    component: Myprofile
+    name: 'ProfileView',
+    component: ProfileView
   },
   {
     path: '/recommendation',
