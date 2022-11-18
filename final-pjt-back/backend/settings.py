@@ -36,10 +36,11 @@ INSTALLED_APPS = [
     # Django app
     'accounts',
     'movies',
-    'django_extensions',
+    'communities',
 
     'rest_framework',
     'imagekit', # 장고 이미지 프로세싱 앱
+    'django_extensions',
 
     # Auth
     'rest_framework.authtoken',
