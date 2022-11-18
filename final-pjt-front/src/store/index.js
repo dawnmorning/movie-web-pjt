@@ -15,6 +15,7 @@ export default new Vuex.Store({
   state: {
     token: null,
     username: null,
+    reviews:null,
   },
   getters: {
     isLogin(state){
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, data){
       state.username = data.username
       state.token = data.token
+    },
+    GET_REVIEWS(state, reviews){
+      state.reviews = reviews
     }
   },
   actions: {
@@ -49,6 +53,7 @@ export default new Vuex.Store({
         
         })
     },
+    
     logIn(context, payload){
       console.log(context, payload)
       axios({
@@ -70,7 +75,23 @@ export default new Vuex.Store({
         .catch(err => {
           console.error(err)
         })
-      }
+    },
+
+    getReviews(context){
+      
+      axios({
+        method: 'get',
+        url:`${DJANGO_URL}/api/v3/reviews/`,
+        headers:{
+          Authorization : `Token ${context.state.token}`,
+        },
+      })
+      .then(res => {
+        const reviews = res.data // Array
+        context.commit('GET_REVIEWS', reviews)
+      })
+      .catch(err => { console.log(err)})
+    }
   },
   
   modules: {

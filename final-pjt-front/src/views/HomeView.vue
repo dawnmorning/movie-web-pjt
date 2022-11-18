@@ -21,7 +21,7 @@
                 <a class="nav-link active" aria-current="page" href="http://localhost:8080/">홈</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">커뮤니티</a>
+                <a class="nav-link" href="/community">커뮤니티</a>
               </li>
               <li class="nav-item">
                 <!-- <router-link class='nav-link' :to="`/profile/${this.$store.state.username}`">내 프로필</router-link> -->
@@ -94,18 +94,18 @@ export default {
       },
     },
     methods:{
-    noToken(){
-      this.$store.state.token = null
-      this.$store.state.username = null
-      this.$store.state.nickname = null
-      this.$store.state.interested = null
-      this.$store.state.profile_image = null
-      localStorage.clear()
-      this.$router.push({name: "HomeView"})
-    },
-    goRecommend(){
-      this.$router.push({name: "RecomView"})
-    }
+      noToken(){
+        this.$store.state.token = null
+        this.$store.state.username = null
+        this.$store.state.nickname = null
+        this.$store.state.interested = null
+        this.$store.state.profile_image = null
+        localStorage.clear()
+        this.$router.push({name: "HomeView"})
+      },
+      goRecommend(){
+        this.$router.push({name: "RecomView"})
+      }
   },
 }
 </script>
