@@ -1,46 +1,34 @@
 <template>
-    <section id="container">
-      <div id='main_container'>
-        <div class='form_container'>
-          <div class='input-wrapper'>
-            <h1></h1>
-
-            <!-- 히히 -->
-            <div class='animate__animated animate__slideInDown delay-5s slower contentsWrap'>
-              <form @submit.prevent='logIn'>
-                <div class='loginWindow jua'>
-                  <br>
-                  <h1>로그인</h1>
-                  <input type="text" id='username' v-model='username'
-                  class='inlineToBlock'
-                  placeholder='아이디'
-                  >
-                  
-                  <input class='inlineToBlock' type="password" id='password' 
-                  autoComplete='on'
-                  placeholder='비밀번호'
-                  v-model='password'>
-                <button class='inlineToBlock ordinaryLgin unactivatedLoginColor btn btn-primary' type="submit" >로그인</button>
-                  
-                  <div>
-                      <!-- 소셜 로그인 할거라면 넣을곳 -->
-                  </div>
-                </div>
-              </form>
-            <div class='haveAccount'>
-                    
+  <nav>
+    <div class='contentsWrap animate__animated animate__slideInDown delay-5s slower' style='margin-top : 20px; height : 100px;' >
+        <form @submit.prevent='logIn' class=''>
+          <div class='loginWindow jua' style= 'margin-top:70px;'>
+            <br>
+            <h1>로그인</h1>
+            <input type="text" id='username' v-model='username'
+            class='inlineToBlock'
+            placeholder='아이디'
+            >
+            
+            <input class='inlineToBlock' type="password" id='password' 
+            autoComplete='on'
+            placeholder='비밀번호'
+            v-model='password'>
+            <button class='inlineToBlock ordinaryLgin unactivatedLoginColor btn btn-primary' type="submit" >로그인</button>
+            
+            <div>
+                <!-- 소셜 로그인 할거라면 넣을곳 -->
+            </div>
+          </div>
+        </form>
+          <div class='haveAccount'>
+              
               <span>계정이 없다면</span> <br>
               <a style='text-decoration:none' href="http://localhost:8080/signup">이곳으로</a>  
-                    
-            </div>  
-      </div>
+              
+          </div>  
     </div>
-  </div>
-</div>
-
-      
-    </section>
-    
+  </nav>
 </template>
 
 <script>
@@ -81,7 +69,8 @@ export default {
 .jua{
   font-family: 'Jua-Regular';
   font-size: 50px;
-  /* margin-top: 50px; */
+  /* margin: 20px; */
+  margin-top: 100px;
   text-align: center;
 } 
 
@@ -91,14 +80,20 @@ body {
 }
 
 .contentsWrap{
+    /* position: absolute; */
+    padding:1px;
     margin: auto;
+    margin-bottom: 10px;
     max-width: 350px;
-    border: none;
-    padding: 50px;
-    text-align: center;
+    border-bottom : 1px;
+    /* padding: 50px; */
+    /* text-align: center; */
 }
 
 .loginWindow {
+    margin-top: -10rem;
+    /* padding:1px; */
+    overflow: hidden;
     background-color: #fcfcfc;
     padding: 10px auto;
     height: 400px;
@@ -107,6 +102,7 @@ body {
 }
 
 .loginWindow input{
+    /* margin-top : 100px; */
     margin-bottom: 10px;
     background-color: #f5f5f5;
     height: 37px;
@@ -161,7 +157,7 @@ body {
 .inlineToBlock {
     display: block;
     margin: 10px;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 /*
@@ -245,7 +241,8 @@ body {
 }
 
 .contentsWrap{
-    margin: auto;
+    /* margin: auto; */
+    margin-top: 40px;
     max-width: 400px;
     border: none;
     max-height: 200px;
