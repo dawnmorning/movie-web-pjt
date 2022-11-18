@@ -5,8 +5,6 @@ import SignUp from '@/views/SignUp'
 import HomeView from '@/views/HomeView'
 import Myprofile from '@/views/MyProfile'
 import RecomView from '@/views/RecomView'
-import testView from '@/views/testView'
-
 
 Vue.use(VueRouter)
 
@@ -30,11 +28,6 @@ const routes = [
     path: '/recommendation',
     name: 'RecomView',
     component: RecomView
-  },
-  {
-    path: '/test',
-    name: 'testView',
-    component: testView
   },
 
 ]

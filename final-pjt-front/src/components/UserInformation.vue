@@ -33,17 +33,13 @@ export default {
         axios({
             method:'get',
             url: `${DJANGO_URL}/api/v1/profile/${this.username}/`,
-            headers:{
-                Authorization : `Token ${this.$store.state.token}`,
-            }
-            // withCredentials: true,
+            headers: `Token ${this.$store.state.token}`
         })
             .then(res =>{
                 // console.log(res)
                 this.information = res.data
                 this.profileImage = `${DJANGO_URL}` + res.data.profile_image
                 // console.log(this.information)
-                console.log(res)
             })
     }
 }

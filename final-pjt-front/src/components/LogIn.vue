@@ -4,41 +4,38 @@
         <div class='form_container'>
           <div class='input-wrapper'>
             <h1></h1>
+            <h1>로그인</h1>
+            <form @submit.prevent='logIn'>
+              <p class='login-wrapper flex-center'>
+                
+                <input type="text" id='username' v-model='username'
+                class='login-input'
+                placeholder='아이디'
+                >
+              </p>
+        
+              
+              <p class='login-wrapper flex-center'>
+                
+                <input class= 'login-input' type="password" id='password' 
+                placeholder='비밀번호'
+                v-model='password'>
+              </p>
+              <div class='flex-center button-wrapper'>
+                <input class='login-button' type="submit" value='logIn'> 
 
-            
-            <div class='animate__animated animate__slideInDown delay-5s slower contentsWrap'>
-              <form @submit.prevent='logIn'>
-                <div class='loginWindow jua'>
-                  <br>
-                  <h1>로그인</h1>
-                  <input type="text" id='username' v-model='username'
-                  class='inlineToBlock'
-                  placeholder='아이디'
-                  >
-                  
-                  <input class='inlineToBlock' type="password" id='password' 
-                  autoComplete='on'
-                  placeholder='비밀번호'
-                  v-model='password'>
-                <button class='inlineToBlock ordinaryLgin unactivatedLoginColor btn btn-primary' type="submit" >로그인</button>
-                  
-                  <div>
-                      <!-- 소셜 로그인 할거라면 넣을곳 -->
-                  </div>
-                </div>
-              </form>
-            <div class='haveAccount'>
-                    
-              <span>계정이 없다면</span> <br>
-              <a style='text-decoration:none' href="http://localhost:8080/signup">이곳으로</a>  
-                    
-            </div>  
+              </div>
+        
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
-      
+      <div class='flex-center findpass'>
+        <div>
+          <span>계정이 없다면</span> <a href="http://localhost:8080/signup">이곳으로</a>  
+        </div>
+      </div>
     </section>
     
 </template>
@@ -74,319 +71,63 @@ export default {
 </script>
 
 <style>
-@font-face{
-  font-family: 'Jua-Regular';
-  src:url('/font/Jua-Regular.ttf')
-}
-.jua{
-  font-family: 'Jua-Regular';
-  font-size: 50px;
-  /* margin-top: 50px; */
-  text-align: center;
-} 
 
 
 body {
-    background-color: #f9f9f9;
+  background-color: rgba(var(--b3f, 250, 250, 250), 1);
+  height: 100%;
 }
-
-.contentsWrap{
-    margin: auto;
-    max-width: 350px;
-    border: none;
-    padding: 50px;
-    text-align: center;
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.loginWindow {
-    background-color: #fcfcfc;
-    padding: 10px auto;
-    height: 400px;
-    border: 1px solid #dfdfdf;
-    border-radius: 3px;
+.login-container {
+  background-color: white;
+  width: 380px;
+  height: 500px;
+  border: 1px solid lightgray;
 }
-
-.loginWindow input{
-    margin-bottom: 10px;
-    background-color: #f5f5f5;
-    height: 37px;
-    padding: 10px 10px;
-    box-sizing: border-box;
-    border: 1px solid #eaeaea;
-    border-radius: 4px;
+.logo-text {
+  font-family: "Lobster", cursive;
+  font-size: 55px;
+  margin-top: 50px;
 }
-
-.loginWindow input::placeholder{
-    font-size: 12px;
-    font-weight:100;
-    text-align: justify;
+.input-wrapper {
+  margin-top: 60px;
 }
-
-.loginWindow input:focus {
-    outline:none;
-    border: 1px solid #aaaaaa;
-    border-radius: 4px;
+.login-wrapper {
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 5px;
 }
-
-.ordinaryLogin {
-    height: 37px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 0px;
-    border-radius: 5px;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 700;
+.login-input {
+  font-size: 14px;
+  width: 330px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.035);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding-left: 10px;
 }
-
-.unactivatedLoginColor {
-    background-color: #acd5e8;
+.login-button {
+  width: 100%;
+  font-size: 15px;
+  color: white;
+  font-weight: bold;
+  background-color: blue;
+  background-color: rgba(0, 162, 255, 0.3);
+  border: none;
+  border-radius: 5px;
+  padding: 9px;
 }
-
-.activatedLoginColor {
-    background-color: #00aeff;
+.button-wrapper {
+  border: none;
+  margin: 15px 40px;
 }
-
-.loginWindow * {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#instaLogo {
-    margin: 40px auto 30px;
-    max-width: 175px;
-}
-
-.inlineToBlock {
-    display: block;
-    margin: 10px;
-    font-size: 20px;
-}
-
-/*
-.horizonAndOr {
-    margin:10% 0;
-    width:100%;
-    box-sizing: border-box;
-}
-*/
-.leftHr {
-    float:left;
-    width:35%;
-    box-sizing: border-box;
-}
-
-.or{
-    float:left;
-    width:17%;
-    margin:2px 5%;
-    font-size: 13px;
-    box-sizing: border-box;
-
-    color: #999999;
-    font-size: 14px;
-    font-weight: 700;
-    margin:0px 15px;
-}
-
-.rightHr {
-    float: right;
-    width:35%;
-    box-sizing: border-box;
-}
-
-.facebookLogin {
-    margin-top: 10px;
-    margin-bottom:10px;
-    background-color: rgba(255, 255, 255, 0.5);
-  
-    height: 37px;
-    
-    box-sizing: border-box;
-    border: 0px;
-    border-radius: 5px;
-    color: #00628f;
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.facebookIcon {
-    width:13px;
-}
-
-
-.haveAccount {
-    background-color: #fcfcfc;
-    margin-top: 10px;
-    padding: 15px;
-    border: 1px solid #dfdfdf;
-    border-radius: 3px;
-}
-
-.haveAccount p {
-    font-size: 14px;
-    font-weight: 300;
-    color: #333333;
-    
-}
-
-.haveAccount div p a{
-    font-weight: 600;
-    color: #248ae3;
-    text-decoration: none;
-}
-
-.noneunderline {
-    text-decoration:none;
-}
-body {
-    background-color: #f9f9f9;
-}
-
-.contentsWrap{
-    margin: auto;
-    max-width: 400px;
-    border: none;
-    max-height: 200px;
-    padding: 20px;
-    text-align: center;
-}
-
-.loginWindow {
-    background-color: #fcfcfc;
-    padding: 10px auto;
-    border: 1px solid #dfdfdf;
-    border-radius: 3px;
-}
-
-.loginWindow input{
-    margin-bottom: 10px;
-    background-color: #f5f5f5;
-    height: 37px;
-    padding: 10px 10px;
-    box-sizing: border-box;
-    border: 1px solid #eaeaea;
-    border-radius: 4px;
-}
-
-.loginWindow input::placeholder{
-    font-size: 12px;
-    font-weight:100;
-}
-
-.loginWindow input:focus {
-    outline:none;
-    border: 1px solid #aaaaaa;
-    border-radius: 4px;
-}
-
-.ordinaryLogin {
-    height: 37px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 0px;
-    border-radius: 5px;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.unactivatedLoginColor {
-    background-color: #acd5e8;
-}
-
-.activatedLoginColor {
-    background-color: #00aeff;
-}
-
-.loginWindow * {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#instaLogo {
-    margin: 40px auto 30px;
-    max-width: 175px;
-}
-
-.inlineToBlock {
-    display: block;
-}
-
-/*
-.horizonAndOr {
-    margin:10% 0;
-    width:100%;
-    box-sizing: border-box;
-}
-*/
-.leftHr {
-    float:left;
-    width:35%;
-    box-sizing: border-box;
-}
-
-.or{
-    float:left;
-    width:17%;
-    margin:2px 5%;
-    font-size: 13px;
-    box-sizing: border-box;
-
-    color: #999999;
-    font-size: 14px;
-    font-weight: 700;
-    margin:0px 15px;
-}
-
-.rightHr {
-    float: right;
-    width:35%;
-    box-sizing: border-box;
-}
-
-.facebookLogin {
-    margin-top: 10px;
-    margin-bottom:10px;
-    background-color: rgba(255, 255, 255, 0.5);
-  
-    height: 37px;
-    
-    box-sizing: border-box;
-    border: 0px;
-    border-radius: 5px;
-    color: #00628f;
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.facebookIcon {
-    width:13px;
-}
-
-
-.haveAccount {
-    background-color: #fcfcfc;
-    margin-top: 10px;
-    padding: 15px;
-    border: 1px solid #dfdfdf;
-    border-radius: 3px;
-}
-
-.haveAccount p {
-    font-size: 14px;
-    font-weight: 300;
-    color: #333333;
-}
-
-.haveAccount p a{
-    font-weight: 600;
-    color: #248ae3;
-}
-
-.noneunderline {
-    text-decoration:none;
+.findpass {
+  margin-top: 140px;
+  font-size: 13px;
+  color: rgb(86, 96, 235);
 }
 </style>

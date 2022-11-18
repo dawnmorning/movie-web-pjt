@@ -15,6 +15,9 @@ def profile_ru(request, username):
     profile = get_object_or_404(Profile, user=person)
 
     if request.method == "PUT":
+        if request.user != person:
+            return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+            
         serializer = ProfileSerializer(profile, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
