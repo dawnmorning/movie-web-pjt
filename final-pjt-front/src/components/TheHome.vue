@@ -2,22 +2,34 @@
   <div>
     <!-- 로그인 시 보일 화면 -->
     <div v-if='isLogin'>
-    <TheHome/>
+      <div class='mx-auto jua animate__animated animate__backInUp delay-4s'>
+        <div class=''>안녕하세요, {{ username }}</div> 
+        <div class='mt-5 ' >오늘 기분은 어때요?</div>
+        <b-button @click='goRecommend' class='btn btn-info btn-lg'><span>영화를 고르러 가볼까요?</span> </b-button>
+      </div>
+        
+        <!-- 라우터링크에 애니메이션 넣기 -->
+        <!-- <router-link :to="{name: 'RecomView'}">영화를 추천해줄게요!</router-link>
+        <b-nav>
+          <router-link :to="{name: 'HomeView'}">홈</router-link> |
+          <router-link :to="`/profile/${this.$route.params.username}`">내 프로필</router-link> |
+        <b-button @click='noToken'>로그아웃</b-button>
+        </b-nav> -->
     </div>
+    <!-- 비로그인 시 보일 화면 -->
     <div v-if='!isLogin'>
       <LogIn/>
     </div>
+    
   </div>
 </template>
 
 <script>
 import LogIn from '@/components/LogIn'
-import TheHome from '@/components/TheHome'
 export default {
-    name: 'HomeView',
+    name: 'TheHome',
     components:{
-      LogIn,
-      TheHome
+      LogIn
     },
     data(){
       return{
