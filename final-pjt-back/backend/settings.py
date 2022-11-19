@@ -83,7 +83,7 @@ REST_FRAMEWORK = {
 # 커스텀 Serializer가 회원가입 시 사용하는 Serializer임을 알림
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    # 'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
 }
 
 SPECTACULAR_SETTINGS = {
@@ -211,3 +211,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS =True
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+ACCOUNT_UNIQUE_EMAIL = True
+# ACCOUNT_LOGOUT_REDIRECT_URL (=`settings.LOGOUT_REDIRECT_URL or “/”`)
+# ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+# ACCOUNT_EMAIL_VERIFICATION = "manadatory"
+# ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = True

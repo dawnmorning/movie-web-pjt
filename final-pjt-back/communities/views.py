@@ -1,9 +1,9 @@
-from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404
+
 
 from movies.models import Movie
-from accounts.models import Profile
 from .models import Review, Comment
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 from .serializers import ReviewSerializer,CommentSerializer
 
 from rest_framework import status
@@ -12,6 +12,7 @@ from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 
+User = get_user_model()
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -20,10 +21,6 @@ def reviews(request):
     reviews = Review.objects.all().order_by('-created_at')
     serializer = ReviewSerializer(data=reviews, many=True)
     serializer.is_valid()
-
-    context = {
-        "reviews"
-    }
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -31,7 +28,7 @@ def reviews(request):
 @permission_classes([IsAuthenticated])
 def review_c(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    profile = get_object_or_404(Profile, user=request.user)
+    profile = get_object_or_404(User, user=request.user)
     
     serializer = ReviewSerializer(data=request.data)
     

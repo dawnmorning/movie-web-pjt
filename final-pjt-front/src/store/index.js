@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-// import router from '@/router'
+import router from '@/router'
+
+
 import createPersistedState from 'vuex-persistedstate'
 
 const DJANGO_URL='http://127.0.0.1:8000'
+
 
 Vue.use(Vuex)
 
@@ -15,7 +18,7 @@ export default new Vuex.Store({
   state: {
     token: null,
     username: null,
-    reviews:null,  
+    reviews:null,
   },
 
   getters: {
@@ -65,18 +68,24 @@ export default new Vuex.Store({
         url: `${DJANGO_URL}/accounts/signup/`,
         data: {
           username: payload.username,
+          nickname: payload.nickname,
+          email: payload.email,
           password1: payload.password1,
           password2: payload.password2,
         }
       })
-        .then((res) => {
+        .then(res => {
           // console.log(res)
           const data = {
             token : res.data.key,
             username: payload.username
           }
           context.commit('SAVE_TOKEN', data)
-        
+        })
+        .catch( function(err) {
+          console.log(err)
+          router.push({ name:'SignUp', query:err })
+
         })
     },
     

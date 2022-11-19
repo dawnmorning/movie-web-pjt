@@ -5,15 +5,18 @@
           <div class='loginWindow jua' style= 'margin-top:70px;'>
             <br>
             <h1>로그인</h1>
-            <input type="text" id='username' v-model='username'
+            <input type="text"
             class='inlineToBlock'
             placeholder='아이디'
+            v-model='username'
             >
             
-            <input class='inlineToBlock' type="password" id='password' 
+            <input type="password" 
+            class='inlineToBlock' 
             autoComplete='on'
             placeholder='비밀번호'
-            v-model='password'>
+            v-model='password'
+            >
             <button class='inlineToBlock ordinaryLgin unactivatedLoginColor btn btn-primary' type="submit" >로그인</button>
             
             <div>
@@ -23,8 +26,7 @@
         </form>
           <div class='haveAccount'>
               
-              <span>계정이 없다면</span> <br>
-              <a style='text-decoration:none' href="http://localhost:8080/signup">이곳으로</a>  
+              <button @click="goToSignup">회원가입</button>  
               
           </div>  
     </div>
@@ -56,6 +58,10 @@ export default {
         
         // console.log(payload)
         this.$router.push({name: 'HomeView', params:{ username: this.username} })
+      },
+      
+      goToSignup() {
+        return this.$router.push('/signup')
       }
     }
 }

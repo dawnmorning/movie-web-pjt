@@ -16,25 +16,10 @@ import CommentListItem from '@/components/CommentListItem'
 export default {
     name: 'CommentList',
     props: {
-        comments:Array,
+        comments:Array, 
     },
-<<<<<<< HEAD
-    methods: {
-        deleteComment(comment) {
-            axios({
-                method : 'delete',
-                url : `${DJANGO_URL}/api/v3/comment/delete/${comment.id}/`,
-                headers:{
-                    Authorization : `Token ${this.$store.state.token}`,
-                },
-            })
-            // .then(res => console.log(res))
-            // .catch(err => console.log(err))
-        }
-=======
     components: {
         CommentListItem
->>>>>>> develop1
     }
 }
 </script>

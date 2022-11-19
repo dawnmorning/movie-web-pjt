@@ -18,11 +18,8 @@ export default {
         comment: Object,
     },
     methods: {
-        deleteComment(comment) {
-            console.log(this.$store.state.reviews)
-            
+        deleteComment(comment) {            
             this.$store.dispatch('deleteComment', comment)  
-            console.log(this.$store.state.reviews)
         }
     }
 }

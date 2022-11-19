@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+User = settings.AUTH_USER_MODEL
 # Create your models here.
 
 class Movie(models.Model):
@@ -25,8 +26,14 @@ class Genre(models.Model):
     name = models.CharField(max_length=20)
     movies = models.ManyToManyField(Movie, blank=True, related_name='genres')
 
+
+class UserLikeGenre(models.Model):
+    genre_id = models.IntegerField()
+    profile = models.ManyToManyField(User, related_name='userLikeGenres')
+
+
 # 월드컵 결과에 따른 추천 모델
 class WorldcupRecommend(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='worldcup_recommend')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     genre_rank1 = models.IntegerField()
     genre_rank2 = models.IntegerField()
