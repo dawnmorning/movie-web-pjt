@@ -1,131 +1,136 @@
 <template>
-  <nav>
-    <!-- profile -->
+  <!-- <div style="overflow: scroll;"> -->
     
-    <div class="profile">
-        <div class="profile_img">
-            <img :src="profileImage" alt="프로필 이미지">
+    <div style='margin:100px;'>
+      <!-- profile -->
+      <div class="continer">
+        
+          <div class="profile">
+              <div class="profile_img">
+                  <img :src="profileImage" alt="프로필 이미지">
+              </div>
+              <div class="info">
+                  <div class="area_text">
+                      <div v-if='information.nickname'>
+                          <h2 class="user_id">{{ information.nickname }}</h2>
+                      </div>
+                      <div v-if='!information.nickname'>
+                          <h2 class="user_id">{{ username }}</h2>
+                      </div>
+                      <a href="" class="profile_edit">프로필 수정</a>
+                      <button type="button" class="setting_btn">
+                          <i class="fas fa-cog"></i>
+                      </button>
+                  </div>
+                  <div class="area_text">
+                      <div class="tit_desc">
+                          <span class="title">게시물</span>
+                          <span class="sub_title">7</span>
+                      </div>
+                      <div class="tit_desc">
+                          <span class="title">팔로워</span>
+                          <span class="sub_title">10</span>
+                      </div>
+                      <div class="tit_desc">
+                          <span class="title">팔로우</span>
+                          <span class="sub_title">15</span>
+                      </div>
+                  </div>
+                  <div class="area_text profile_info">
+                      <h3 class="info_title">안녕하세요.</h3>
+                      <p class="info_sub">네 지나가세요~</p>
+                  </div>
+              </div>
+          </div>
+          <!-- p// rofile -->
+          <!-- contents -->
+                      <div class="contents">
+                          <div class="tab_box">
+                              <ul class="tab_list">
+                                  <li class="active">
+                                      <a href="">
+                                          <i class="fas fa-list"></i>
+                                          <span>게시물</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <i class="fas fa-tv"></i>
+                                          <span>IGTV</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <i class="fas fa-bookmark"></i>
+                                          <span>저장됨</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <i class="fas fa-user-tag"></i>
+                                          <span>태그됨</span>
+                                      </a>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="boards">
+                              <ul class="board_list ">
+                                  <li>
+                                      <a href="">
+                                          <div class="board_img">
+                                              <img src="" alt="이미지">
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <div class="board_img">
+                                              <img src="" alt="이미지">
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <div class="board_img">
+                                              <img src="" alt="이미지">
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <div class="board_img">
+                                              <img src="" alt="이미지">
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <div class="board_img">
+                                              <img src="" alt="이미지">
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <div class="board_img">
+                                              <img src="" alt="이미지">
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="">
+                                          <div class="board_img">
+                                              <img src="" alt="이미지">
+                                          </div>
+                                      </a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                      <!-- // contents -->
         </div>
-        <div class="info">
-            <div class="area_text">
-                <div v-if='information.nickname'>
-                    <h2 class="user_id">{{ information.nickname }}</h2>
-                </div>
-                <div v-if='!information.nickname'>
-                    <h2 class="user_id">{{ username }}</h2>
-                </div>
-                <a href="" class="profile_edit">프로필 수정</a>
-                <button type="button" class="setting_btn">
-                    <i class="fas fa-cog"></i>
-                </button>
-            </div>
-            <div class="area_text">
-                <div class="tit_desc">
-                    <span class="title">게시물</span>
-                    <span class="sub_title">7</span>
-                </div>
-                <div class="tit_desc">
-                    <span class="title">팔로워</span>
-                    <span class="sub_title">10</span>
-                </div>
-                <div class="tit_desc">
-                    <span class="title">팔로우</span>
-                    <span class="sub_title">15</span>
-                </div>
-            </div>
-            <div class="area_text profile_info">
-                <h3 class="info_title">안녕하세요.</h3>
-                <p class="info_sub">네 지나가세요~</p>
-            </div>
-        </div>
-    </div>
-    <!-- p// rofile -->
-     <!-- contents -->
-                <div class="contents">
-                    <div class="tab_box">
-                        <ul class="tab_list">
-                            <li class="active">
-                                <a href="">
-                                    <i class="fas fa-list"></i>
-                                    <span>게시물</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="fas fa-tv"></i>
-                                    <span>IGTV</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="fas fa-bookmark"></i>
-                                    <span>저장됨</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="fas fa-user-tag"></i>
-                                    <span>태그됨</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="boards">
-                        <ul class="board_list">
-                            <li>
-                                <a href="">
-                                    <div class="board_img">
-                                        <img src="" alt="이미지">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="board_img">
-                                        <img src="" alt="이미지">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="board_img">
-                                        <img src="" alt="이미지">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="board_img">
-                                        <img src="" alt="이미지">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="board_img">
-                                        <img src="" alt="이미지">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="board_img">
-                                        <img src="" alt="이미지">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="board_img">
-                                        <img src="" alt="이미지">
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- // contents -->
-  </nav>
+      </div>
+  <!-- </div> -->
     <!-- <nav> -->
         <!-- <p>Hello, {{ username }} </p> -->
         <!-- <div class='entireWrpap'>
