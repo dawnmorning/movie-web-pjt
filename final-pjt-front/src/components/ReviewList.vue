@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="reviews">
     <div v-for="review in reviews" :key="review.id">
         <ReviewListItem
         :review=review
         />
-</div>
+    </div>
   </div>
 </template>
 
