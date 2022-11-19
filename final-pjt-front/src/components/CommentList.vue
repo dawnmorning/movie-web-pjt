@@ -1,24 +1,24 @@
 <template>
   <div v-if='comments'>
     <div v-for="comment in comments" :key="comment.id">
-        <hr>
-        {{ comment.author }} |
-        {{ comment.content }}
-        <button
-        @click="deleteComment(comment)"
-        >X</button>
+        <CommentListItem
+        :comment="comment"
+        />
     </div>
   </div>
 </template>
 
 <script>
-const DJANGO_URL='http://127.0.0.1:8000'
-import axios from 'axios'
+// const DJANGO_URL='http://127.0.0.1:8000'
+// import axios from 'axios'
+import CommentListItem from '@/components/CommentListItem'
+
 export default {
     name: 'CommentList',
     props: {
         comments:Array,
     },
+<<<<<<< HEAD
     methods: {
         deleteComment(comment) {
             axios({
@@ -31,6 +31,10 @@ export default {
             // .then(res => console.log(res))
             // .catch(err => console.log(err))
         }
+=======
+    components: {
+        CommentListItem
+>>>>>>> develop1
     }
 }
 </script>
