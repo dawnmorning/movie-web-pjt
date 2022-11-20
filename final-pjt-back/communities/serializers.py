@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 
 class CommentSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
-    profile = UserSerializer(read_only=True)
     like_users = UserSerializer(read_only=True ,many=True)
 
     class Meta:
@@ -17,7 +16,6 @@ class CommentSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     movie = MovieSerializer(read_only=True)
     author = UserSerializer(read_only=True)
-    profile = UserSerializer(read_only=True)
     like_users = UserSerializer(read_only=True, many=True)
     comments = CommentSerializer(source='comment_set.all', read_only=True ,many=True)
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)

@@ -1,35 +1,111 @@
 <template>
   <div>
-    <h1>Recommendation</h1>
-        <button @click='showRandom'>랜덤으로 골라볼까?</button><br>
 
-    <section class='please'>
-        <div 
-        v-if='movies'
-        class="container"
-        >
-            <div v-for='(movie,idx) in movies' 
-                :key='idx'
-                >
-                <div><img :src="movie.poster_path"></div>
-                <!-- {{ movie.title }} -->
-                
-                <!-- {{ movie.overview}} -->
-                
-                <!-- {{ movie.vote_average}} -->
-                
-                <!-- {{ movie.poster_path}} -->
-                
+<!-- 최신순 영화 -->
+    <div>
+        <h1>최신순</h1>
+        <button
+        @click="latest_count ++"
+        >더보기</button>
+        <section class='please'>
+            <div 
+            v-if='latestMovies'
+            class="container"
+            >
+                <div v-for='movie in latestMovies'
+                    :key='movie.id'
+                    >
+                    <div>
+                        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
+                        <p>제목 : {{movie.title }}</p>
+                        <p>개봉일 : {{movie.release_date}}</p>
+                        <div>
+                            <button
+                            @click="goPostReview(movie)"
+                            >리뷰 작성하기</button>
+                            <button>좋아요</button>
+                        </div>
+                    </div>                
+                </div>        
             </div>
-            
-        </div>
-    </section>
+        </section>
+    </div>
+<!-- 인기순 영화 -->
+    <div>
+        <h1>인기순</h1>
+        <button
+        @click="popular_count ++"
+        >더보기</button>
+        <section class='please'>
+            <div 
+            v-if='popularMovies'
+            class="container"
+            >
+                <div v-for='movie in popularMovies'
+                    :key='movie.id'
+                    >
+                    <div>
+                        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
+                        <p>제목 : {{movie.title}}</p>
+                        <p>개봉일 : {{movie.release_date}}</p>
+                    </div>                
+                </div>        
+            </div>
+        </section>
+    </div>
+<!-- 평점순 영화 -->
+    <div>
+        <h1>평점순</h1>
+        <button
+        @click="vote_count ++"
+        >더보기</button>
+        <section class='please'>
+            <div 
+            v-if='voteMovies'
+            class="container"
+            >
+                <div v-for='movie in voteMovies'
+                    :key='movie.id'
+                    >
+                    <div>
+                        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
+                        <p>제목 : {{movie.id}}</p>
+                        <p>제목 : {{movie.title}}</p>
+                        <p>개봉일 : {{movie.release_date}}</p>
+                    </div>                
+                </div>        
+            </div>
+        </section>
+    </div>
+<!-- 랜덤 영화 -->
+    <div>
+        <h1>랜덤</h1>
+        <button
+        @click="getRandomMovies"
+        >더보기</button>
+        <section class='please'>
+            <div
+            v-if='randomMovies'
+            class="container"
+            >
+                <div v-for='movie in randomMovies'
+                    :key='movie.id'
+                    >
+                    <div>
+                        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
+                        <p>제목 : {{movie.title }}</p>
+                        <p>개봉일 : {{ movie.release_date }}</p>
+                    </div>                
+                </div>        
+            </div>
+        </section>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-
+// import _ from 'lodash'
 
 
 const DJANGO_URL='http://127.0.0.1:8000'
@@ -41,38 +117,52 @@ export default {
     },
     data(){
         return{
-            movies : [],
+            latest_count : 0,
+            popular_count : 0,
+            vote_count : 0,
+            randomMovies : null,
         }
     },
-    methods:{
-        showRandom(){
+    watch: {
+        latest_count(value) {{ this.latest_count = value % 10 }},
+        popular_count(value) {{ this.popular_count = value % 10 }},
+        vote_count(value) {{ this.vote_count = value % 10 }},
+    },
+    computed: {
+        latestMovies() {
+            const fr = this.latest_count
+            return this.$store.state.latest_movies.slice(fr * 10, fr * 10 + 10)
+        },
+        popularMovies() {
+            const fr = this.popular_count
+            return this.$store.state.popular_movies.slice(fr * 10, fr * 10 + 10)
+        },
+        voteMovies() {
+            const fr = this.vote_count
+            return this.$store.state.vote_movies.slice(fr * 10, fr * 10 + 10)
+        },
+
+    },
+    methods: {
+        getRandomMovies(){
             axios({
                 method: 'get',
-                url: `${DJANGO_URL}/api/v2/movies`,
-                headers: {
-                  Authorization : `Token ${this.$store.state.token}`
-                }
+                url: `${DJANGO_URL}/api/v2/movies/random/`,
+                headers: { Authorization : `Token ${this.$store.state.token}` }
             })
-                .then(res=>{
-                    // console.log(res.data)
-                    this.movies = res.data
-                    console.log(res.data)
-                    // console.log(this.movies)
-                    this.movies.forEach(movie =>{
-                        movie.poster_path = "https://image.tmdb.org/t/p/w500" +movie.poster_path
-                        // console.log(movie.poster_path)
-                    })
-                    // this.movies.forEach(movie =>{
-                    //     movie.poster_path = "https://image.tmdb.org/t/p/w500" +this.movie.poster_path
-                    //     console.log(movie.poster_path)
-                    // })
-                    // this.movies[0].poster_path = "https://image.tmdb.org/t/p/w500" +this.movies[0].poster_path
-                    
-                })
-        }
+            .then(res => {
+                this.randomMovies = res.data
+            })
+            .catch(err => { console.log(err) })
+        },
+        goPostReview(movie) {
+            this.$router.push({ name: 'PostReview', params:{ movie_id: movie.id, movie: movie}})
+        },         
     },
+
     created(){
-        this.showRandom()
+        this.$store.dispatch('getMovies')
+        this.getRandomMovies()
     }
 }   
 </script>
@@ -92,8 +182,6 @@ export default {
     width : 1600px;
     margin-top: 100px;
     
-    
-
 }
 .please{
     display: flex;
