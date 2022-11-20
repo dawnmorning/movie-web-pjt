@@ -1,10 +1,12 @@
 <template>
-  <nav>
-    <div class='contentsWrap animate__animated animate__slideInDown delay-5s slower' style='margin-top : 20px; height : 100px;' >
+  <nav v-if='!isLogin'>
+    <div class='contentsWrap animate__animated animate__bounceInUp animate__slow' style='margin-top : 40px; height : 100px;' > 
         <form @submit.prevent='logIn' class=''>
-          <div class='loginWindow jua' style= 'margin-top:70px;'>
+          <div class='jua' style='margin-top:50px;'>우리로고 들어갈 곳</div>
+          <div class='loginWindow jua' style= 'margin-top:30px;'>
+            
             <br>
-            <h1>로그인</h1>
+            <h1 style='margin-top:20px;'>로그인</h1>
             <input type="text"
             class='inlineToBlock'
             placeholder='아이디'
@@ -25,9 +27,8 @@
           </div>
         </form>
           <div class='haveAccount'>
-              
-              <button @click="goToSignup">회원가입</button>  
-              
+              <span>계정이 없다면</span> <br>
+              <a style='text-decoration:none' href="http://localhost:8080/signup">이곳으로</a>  
           </div>  
     </div>
   </nav>
@@ -41,6 +42,11 @@ export default {
             username: null,
             password: null,
         }
+    },
+    computed:{
+        isLogin(){
+          return this.$store.getters.isLogin
+      },
     },
     methods:{
       logIn(){
@@ -76,7 +82,9 @@ export default {
   margin-top: 100px;
   text-align: center;
 } 
-
+.logh1{
+    margin: 20px;
+}
 
 body {
     background-color: #f9f9f9;

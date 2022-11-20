@@ -1,6 +1,5 @@
 <template>
   <!-- <div style="overflow: scroll;"> -->
-    
     <div style='margin:100px;'>
       <!-- profile -->
       <div class="continer">
@@ -11,13 +10,10 @@
               </div>
               <div class="info">
                   <div class="area_text">
-                      <div v-if='information.nickname'>
-                          <h2 class="user_id">{{ information.nickname }}</h2>
+                      <div v-if='nickname'>
+                          <h2 class="user_id">{{ nickname }}</h2>
                       </div>
-                      <div v-if='!information.nickname'>
-                          <h2 class="user_id">{{ username }}</h2>
-                      </div>
-                      <a href="" class="profile_edit">프로필 수정</a>
+                      <button @click='goModify'>프로필 수정</button>
                       <button type="button" class="setting_btn">
                           <i class="fas fa-cog"></i>
                       </button>
@@ -128,8 +124,9 @@
                           </div>
                       </div>
                       <!-- // contents -->
-        </div>
+        
       </div>
+    </div>
   <!-- </div> -->
     <!-- <nav> -->
         <!-- <p>Hello, {{ username }} </p> -->
@@ -160,44 +157,60 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
-const DJANGO_URL='http://127.0.0.1:8000'
+// const DJANGO_URL='http://127.0.0.1:8000'
 
 export default {
     name : 'UserInformation',
     data(){
-        return{
-            information : '',
-            profileImage : '',
-        }
+      return{
+        is_show:false,
+      }
     },
     computed: {
         username() {
             return this.$store.state.username
+        },
+        nickname(){
+            return this.$store.state.nickname
+        },
+        profileImage(){
+            return this.$store.state.profile_image
+        },
+        email(){
+          return this.$store.state.email
         }
     },
-    created(){
-        axios({
-            method:'get',
-            url: `${DJANGO_URL}/api/v1/profile/${this.username}/`,
-            headers:{
-                Authorization : `Token ${this.$store.state.token}`,
-            }
-            // withCredentials: true,
-        })
-            .then(res =>{
-                // console.log(res)
-                this.information = res.data
-                this.profileImage = `${DJANGO_URL}` + res.data.profile_image
-                // console.log(this.information)
-                console.log(res)
-            })
-    },
+    // created(){
+    //     axios({
+    //         method:'get',
+    //         url: `${DJANGO_URL}/api/v1/${this.username}/`,
+    //         headers:{
+    //             Authorization : `Token ${this.$store.state.token}`,
+    //         }
+    //         // withCredentials: true,
+    //     })
+    //         .then(res =>{
+    //             // console.log(res)
+    //             this.information = res.data
+    //             this.profileImage = `${DJANGO_URL}` + res.data.profile_image
+    //             // console.log(this.information)
+    //             console.log(res)
+    //         })
+    // },
     methods:{
         goModify(){
-            this.$router.push({name: 'EditProfile', params: {username: this.username}})
-        }
+            this.$router.push({name: 'EditProfileView', params: {username:this.username, nickname: this.nickname , profile_img : this.profileImage, email:this.email}})
+        },
+        // goModify(event){
+        //   console.log(event.target)
+        //   if(event.target.classList.contains('black-bg') || event.target.classList.contains('close')){
+        //     this.is_show = false;
+        //   } else if(event.target.classList.contains('white-bg')){
+        //     this.is_show = true;
+        //   }
+        // }
     }
 }
 </script>
@@ -359,5 +372,32 @@ export default {
 .footer span {
     font-size: 18px;
     line-height: 1.4;
+}
+.black-tg{
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.6);
+  position: fixed;
+}
+.white-bg{
+  width:90%;
+  margin: 80px auto;
+  background: white;
+  padding: 20px 0;
+}
+.close{
+  cursor: pointer;
+  border: none;
+  background: #6667AB;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px 15px;
+}
+.close:hover{
+  color: white;
+  font-weight: bold;
+  transform: scale(1.1);
+  transition: all 0.5s;
 }
 </style>

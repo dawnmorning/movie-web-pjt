@@ -137,11 +137,18 @@ export default new Vuex.Store({
       .then(res => {
         // console.log(res)
         context.commit('SAVE_TOKEN', res.data.key)
+<<<<<<< HEAD
+      })
+      .then(() => {
+        context.dispatch('getProfile', payload.username)
+        alert('회원가입이 완료되었습니다.')
+=======
         const data = {
           token: res.data.key,
           username: payload.username
         }
         context.dispatch('getProfile', data)
+>>>>>>> 5f366e8cda8e2be596368a12807df0fcd966c854
         router.push({name:'HomeView'})
       })
       .catch( function(err) {
