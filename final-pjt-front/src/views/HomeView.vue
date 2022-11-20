@@ -4,19 +4,16 @@
     <div v-if='isLogin'>
       <TheHome/>
     </div>
-    <div v-if='!isLogin'>
-      <LogIn/>
-    </div>
   </div>
 </template>
 
 <script>
-import LogIn from '@/components/LogIn'
+
 import TheHome from '@/components/TheHome'
 export default {
     name: 'HomeView',
     components:{
-      LogIn,
+      
       TheHome
     },
     data(){

@@ -35,21 +35,17 @@
             </ul>
           </div>
         </div>
-      
-    </nav>
-</span>
-    <!-- 로그인 전 -->
-    
-    <nav v-if ='!isLogin'>
-      <LogIn/>
-    </nav>
-
-    <router-view/>
+     </nav>
+   </span>
+  <router-view/>
+  <!-- <div v-if='!isLogIn'>
+    <LogIn/>
+  </div> -->
   </div>
 </template>
 
 <script>
-import LogIn from '@/components/LogIn'
+// import LogIn from '@/components/LogIn'
 
 export default {
   name: 'App',
@@ -73,9 +69,9 @@ export default {
     // username(){
     //   return 
     // }
-  components:{
-    LogIn,
-  }
+  // components:{
+  //   LogIn,
+  // }
 }
 </script>
 
