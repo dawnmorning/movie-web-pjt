@@ -23,18 +23,18 @@ _today = f'{x.year}-{x.month}-{x.day}'
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def movies_r(request) :
-    st = time.time()
     # 상영 예정작
     movies = Movie.objects.all()
     movies1 = movies.filter(release_date__gte=_today)
     # 오늘 개봉 영화도 포함되어 있음 뷰에서 처리하기
-    upcomming_movies = movies1.order_by('release_date')[:16]
+    upcomming_movies = movies1.order_by('release_date')[:100]
+    print(len(upcomming_movies))
     # 현재 개봉한 영화로 필터링
     movies2 = movies.filter(release_date__lte=_today)
-    random_movies = movies2.order_by('?')[:16]
-    latest_movies = movies2.order_by('-release_date')[:16]
-    popular_movies = movies2.order_by('-popularity')[:16]
-    vote_movies = movies2.order_by('-vote_average')[:16]
+    random_movies = movies2.order_by('?')[:100]
+    latest_movies = movies2.order_by('-release_date')[:100]
+    popular_movies = movies2.order_by('-popularity')[:100]
+    vote_movies = movies2.filter(vote_count__gte=100).order_by('-vote_average')[:100]
     
     movies_list_name = ['upcomming_movies', 'random_movies', 'latest_movies', 'popular_movies', 'vote_movies']
     movies_list = [upcomming_movies, random_movies, latest_movies, popular_movies, vote_movies]
@@ -46,17 +46,26 @@ def movies_r(request) :
         serializer_list[i] = MovieSerializer(data=movies_list[i], many=True)
         serializer_list[i].is_valid()
         context[movies_list_name[i]] = serializer_list[i].data
-    ed = time.time()
-    print(ed - st)
     return Response(context)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def randomMovies_r(request) :
+
+    movies = Movie.objects.filter(release_date__lte=_today)
+    random_movies = movies.order_by('?')[:10]
+    serializer = MovieSerializer(data=random_movies, many=True)
+    serializer.is_valid()
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def movie_detail_r(request, movie_pk):
+def movie_r(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-
-
+    serializer = MovieSerializer(movie)
+    # serializer.is_valid()
+    return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

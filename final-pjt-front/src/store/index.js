@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from '@/router'
-
+import _ from 'lodash'
 
 import createPersistedState from 'vuex-persistedstate'
 
@@ -16,29 +16,40 @@ export default new Vuex.Store({
     createPersistedState(),
   ],
   state: {
+    // 유저 관련 정보
     token: null,
     username: null,
     nickname: null,
     profile_image: null,
+    // 영화 관련 데이터
+    latest_movies: null,
+    popular_movies: null,
+    random_movies: null,
+    upcomming_movies: null,
+    vote_movies: null,
+    movie_detail: null,
+    // 커뮤니티 관련 함수
     reviews:null,
   },
 
   getters: {
-    isLogin(state){
-      return state.token ? true : false
-    }
+    isLogin(state){ return state.token ? true : false },
+    random_movies_10(state) { return _.sampleSize(state.random_movies, 10) },
   },
+
   mutations: {
     SAVE_TOKEN(state, token){
       state.token = token
     },
+
     GET_PROFILE(state, data) {
       state.username = data.username
-      state.nickname = data.username
+      state.nickname = data.nickname
       state.email = data.email
       state.profile_image = data.profile_image
       state.grade = data.grade
     },
+
     LOGOUT(state) {
       state.token = null
       state.username = null
@@ -49,6 +60,21 @@ export default new Vuex.Store({
       router.push({name: "LogIn"})
     },
 
+    // movies 관련 함수
+    GET_MOVIES(state, MoviesData){     
+      state.upcomming_movies = MoviesData.upcomming_movies
+      state.latest_movies = MoviesData.latest_movies   
+      state.popular_movies = MoviesData.popular_movies
+      state.random_movies = MoviesData.random_movies
+      state.vote_movies = MoviesData.vote_movies
+    },
+
+    GET_MOVIE_DETAIL(state, MoviesData){ 
+      state.movie_detail = MoviesData
+    },
+
+
+    // community 관련 함수
     GET_REVIEWS(state, reviews){
       state.reviews = reviews
     },
@@ -79,6 +105,7 @@ export default new Vuex.Store({
     
   },
   actions: {
+    // account 관련 함수
     getProfile(context, data){
       
       axios({
@@ -110,9 +137,11 @@ export default new Vuex.Store({
       .then(res => {
         // console.log(res)
         context.commit('SAVE_TOKEN', res.data.key)
-      })
-      .then(() => {
-        context.dispatch('getProfile', payload.username)
+        const data = {
+          token: res.data.key,
+          username: payload.username
+        }
+        context.dispatch('getProfile', data)
         router.push({name:'HomeView'})
       })
       .catch( function(err) {
@@ -162,6 +191,32 @@ export default new Vuex.Store({
       })
     },
 
+    // movies 관련 함수
+    getMovies(context){
+      axios({
+          method: 'get',
+          url: `${DJANGO_URL}/api/v2/movies/`,
+          headers: { Authorization : `Token ${context.state.token}` }
+      })
+      .then(res => {
+        context.commit('GET_MOVIES', res.data)
+      })
+      .catch(err => { console.log(err) })
+    },
+
+    getMovieDetail(context, payload){
+      axios({
+          method: 'get',
+          url: `${DJANGO_URL}/api/v2/${payload.movie_id}/movies/`,
+          headers: { Authorization : `Token ${context.state.token}` }
+      })
+      .then(res => {
+        context.commit('GET_MOVIE_DETAIL', res.data)
+      })
+      .catch(err => { console.log(err) })
+    },
+  
+    // community
     getReviews(context){
       axios({
         method: 'get',
@@ -175,6 +230,26 @@ export default new Vuex.Store({
         context.commit('GET_REVIEWS', reviews)
       })
       .catch(err => { console.log(err)})
+    },
+
+    postReview(context, payload) {
+      axios({
+        method: 'post',
+        url: `${DJANGO_URL}/api/v3/review/create/${payload.movie_id}/`,
+        headers:{
+          Authorization : `Token ${context.state.token}`,
+        },
+        data: {
+          title: payload.title,
+          content: payload.content,
+          rating: payload.rating,
+        }
+      })
+      .then(res => {
+        console.log(res)
+        router.push({ name : 'ReviewDetail', query:{ review: res.data}})
+      })
+      .catch(err => console.log(err))
     },
 
     deleteComment(context, comment) {

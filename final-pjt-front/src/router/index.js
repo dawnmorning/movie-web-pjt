@@ -3,10 +3,13 @@ import VueRouter from 'vue-router'
 
 import SignUp from '@/components/SignUp'
 import LogIn from '@/components/LogIn'
+import PostReview from '@/components/PostReview'
+import ReviewDetail from '@/components/ReviewDetail'
+
 import HomeView from '@/views/HomeView'
-import ProfileView from '@/views/ProfileView'
-import RecomView from '@/views/RecomView'
 import testView from '@/views/testView'
+import RecomView from '@/views/RecomView'
+import ProfileView from '@/views/ProfileView'
 import EditProfile from '@/views/EditProfile'
 import CommunityView from '@/views/CommunityView'
 
@@ -52,6 +55,16 @@ const routes = [
     path: '/community',
     name: 'CommunityView',
     component: CommunityView
+  },
+  {
+    path: '/post/review/:movie_id',
+    name: 'PostReview',
+    component: PostReview
+  },
+  {
+    path: '/review/detail',
+    name: 'ReviewDetail',
+    component: ReviewDetail
   },
 
 ]
