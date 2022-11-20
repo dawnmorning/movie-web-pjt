@@ -30,6 +30,7 @@
                 <label for="password2">*비밀번호 확인 </label>
                 <input type="password" id='password2' v-model.trim='password2' placeholder="비밀번호를 입력하세요">
                 <p v-if="ErrorMessage?.password2">{{ ErrorMessage.password2[0] }}</p>
+                <p v-if="dismatchPW">{{ dismatchPW }}</p>
                 
             </div>
             <input type="submit" value='Signup'>
@@ -37,7 +38,6 @@
         </form>
     </div>
 </template>
-
 <script>
 
 // const DJ_URL = 'http::/'
@@ -56,6 +56,13 @@ export default {
     },
     computed: {
         ErrorMessage() { return this.$route.query.response?.data },
+        dismatchPW() { 
+            let message = null
+            if (this.password1 != this.password2){
+                message = "The two password fields didn't match."
+            }
+            return message
+        },
 
     },
     methods:{
@@ -70,7 +77,13 @@ export default {
             const payload={
                 username, nickname, email, password1, password2, 
             }
-            this.$store.dispatch('signUp', payload)
+            if (password1 && password2 && password1 != password2) {
+                alert("The two password fields didn't match.")
+                this.password1 = this.password2 = null
+            }
+            else {
+                this.$store.dispatch('signUp', payload)
+            }
 
             // if (this.username && this.password1 && this.password2 && this.nickname){
             //     this.$router.push('/')

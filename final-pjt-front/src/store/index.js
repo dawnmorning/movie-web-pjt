@@ -18,6 +18,8 @@ export default new Vuex.Store({
   state: {
     token: null,
     username: null,
+    nickname: null,
+    profile_image: null,
     reviews:null,
   },
 
@@ -27,10 +29,26 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SAVE_TOKEN(state, data){
-      state.username = data.username
-      state.token = data.token
+    SAVE_TOKEN(state, token){
+      state.token = token
     },
+    GET_PROFILE(state, data) {
+      state.username = data.username
+      state.nickname = data.username
+      state.email = data.email
+      state.profile_image = data.profile_image
+      state.grade = data.grade
+    },
+    LOGOUT(state) {
+      state.token = null
+      state.username = null
+      state.nickname = null
+      state.profile_image = null
+      state.grade = null
+      localStorage.clear()
+      router.push({name: "LogIn"})
+    },
+
     GET_REVIEWS(state, reviews){
       state.reviews = reviews
     },
@@ -61,6 +79,21 @@ export default new Vuex.Store({
     
   },
   actions: {
+    getProfile(context, data){
+      
+      axios({
+        method: 'get',
+        url : `${DJANGO_URL}/api/v1/${data.username}/`,
+        headers:{
+          Authorization : `Token ${data.token}`,
+        },
+      })
+      .then(res => { 
+        context.commit('GET_PROFILE', res.data)
+      })
+      .catch( err => console.log(err))
+    },
+
     signUp(context, payload) {
       // console.log(context, payload)
       axios({
@@ -74,23 +107,21 @@ export default new Vuex.Store({
           password2: payload.password2,
         }
       })
-        .then(res => {
-          // console.log(res)
-          const data = {
-            token : res.data.key,
-            username: payload.username
-          }
-          context.commit('SAVE_TOKEN', data)
-        })
-        .catch( function(err) {
-          console.log(err)
-          router.push({ name:'SignUp', query:err })
-
-        })
+      .then(res => {
+        // console.log(res)
+        context.commit('SAVE_TOKEN', res.data.key)
+      })
+      .then(() => {
+        context.dispatch('getProfile', payload.username)
+        router.push({name:'HomeView'})
+      })
+      .catch( function(err) {
+        console.log(err)
+        router.push({ name:'SignUp', query:err })
+      })
     },
     
     logIn(context, payload){
-      console.log(context, payload)
       axios({
         method:'post',
         url: `${DJANGO_URL}/accounts/login/`,
@@ -99,17 +130,36 @@ export default new Vuex.Store({
           password: payload.password,
         }
       })
-        .then(res => {
-          const data = {
-            token : res.data.key,
-            username: payload.username
-          }
-          context.commit('SAVE_TOKEN', data)
-          
-        })
-        .catch(err => {
-          console.error(err)
-        })
+      .then(res => {
+        context.commit('SAVE_TOKEN', res.data.key)
+
+        const data = {
+          token: res.data.key,
+          username: payload.username
+        }
+        context.dispatch('getProfile', data)
+        router.push({name: 'HomeView'})
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    },
+
+    logOut(context){
+      axios({
+        method:'post',
+        url: `${DJANGO_URL}/accounts/logout/`,
+        headers:{
+          Authorization : `Token ${context.state.token}`,
+        },
+      })
+      .then(() => {
+        context.commit('LOGOUT')
+        console.log('logout')
+      })
+      .catch(err => {
+        console.error(err)
+      })
     },
 
     getReviews(context){

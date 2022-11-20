@@ -49,15 +49,12 @@ export default {
         // if (password !== this.password){
         //   alert('회원정보가 일치하지 않습니다')
         // }
-        const payload = {
-          username: username,
-          password: password,
-        }
+        const payload = { username, password }
         
-        this.$store.dispatch('logIn',payload)
+        this.$store.dispatch('logIn', payload)
         
         // console.log(payload)
-        this.$router.push({name: 'HomeView', params:{ username: this.username} })
+        // this.$router.push({name: 'HomeView', params:{ username: this.username} })
       },
       
       goToSignup() {
