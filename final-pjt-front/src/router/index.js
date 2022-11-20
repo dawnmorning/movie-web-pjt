@@ -7,7 +7,7 @@ import HomeView from '@/views/HomeView'
 import ProfileView from '@/views/ProfileView'
 import RecomView from '@/views/RecomView'
 import testView from '@/views/testView'
-import EditProfile from '@/views/EditProfile'
+import EditProfileView from '@/views/EditProfileView'
 import CommunityView from '@/views/CommunityView'
 
 Vue.use(VueRouter)
@@ -45,8 +45,8 @@ const routes = [
   },
   {
     path: '/edit/:username',
-    name: 'EditProfile',
-    component: EditProfile
+    name: 'EditProfileView',
+    component: EditProfileView,
   },
   {
     path: '/community',

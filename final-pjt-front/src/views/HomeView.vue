@@ -2,7 +2,7 @@
   <div>
     <!-- 로그인 시 보일 화면 -->
     <div v-if='isLogin'>
-    <TheHome/>
+      <TheHome/>
     </div>
     <div v-if='!isLogin'>
       <LogIn/>

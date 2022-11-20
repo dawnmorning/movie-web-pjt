@@ -113,6 +113,7 @@ export default new Vuex.Store({
       })
       .then(() => {
         context.dispatch('getProfile', payload.username)
+        alert('회원가입이 완료되었습니다.')
         router.push({name:'HomeView'})
       })
       .catch( function(err) {
