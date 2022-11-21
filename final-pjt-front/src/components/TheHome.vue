@@ -27,35 +27,35 @@
 <script>
 import LogIn from '@/components/LogIn'
 export default {
-    name: 'TheHome',
-    components:{
-      LogIn
+  name: 'TheHome',
+  components:{
+    LogIn
+  },
+  data(){
+    return{
+    }
+  },
+  computed:{
+    nickname() {
+      return this.$store.state.nickname
     },
-    data(){
-      return{
-      }
+    isLogin(){
+        return this.$store.getters.isLogin
     },
-    computed:{
-      nickname() {
-        return this.$store.state.nickname
-      },
-      isLogin(){
-          return this.$store.getters.isLogin
-      },
+  },
+  methods:{
+    noToken(){
+      this.$store.state.token = null
+      this.$store.state.username = null
+      this.$store.state.nickname = null
+      this.$store.state.interested = null
+      this.$store.state.profile_image = null
+      localStorage.clear()
+      this.$router.push({name: "HomeView"})
     },
-    methods:{
-      noToken(){
-        this.$store.state.token = null
-        this.$store.state.username = null
-        this.$store.state.nickname = null
-        this.$store.state.interested = null
-        this.$store.state.profile_image = null
-        localStorage.clear()
-        this.$router.push({name: "HomeView"})
-      },
-      goRecommend(){
-        this.$router.push({name: "RecomView"})
-      }
+    goRecommend(){
+      this.$router.push({name: "RecomView"})
+    }
   },
 }
 </script>
