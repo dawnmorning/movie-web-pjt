@@ -43,8 +43,6 @@ const routes = [
     path: '/recommendation',
     name: 'RecomView',
     component: RecomView,
-    
-
   },
   {
     path: '/test',
@@ -67,11 +65,10 @@ const routes = [
     component: PostReview
   },
   {
-    path: '/review/detail',
+    path: '/review/:review_id/detail/',
     name: 'ReviewDetail',
     component: ReviewDetail
   },
-
 ]
 
 const router = new VueRouter({

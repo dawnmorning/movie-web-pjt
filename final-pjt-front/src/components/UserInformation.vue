@@ -2,130 +2,84 @@
   <!-- <div style="overflow: scroll;"> -->
     <div style='margin:100px;'>
       <!-- profile -->
-      <div class="continer">
-        
-          <div class="profile">
-              <div class="profile_img">
-                  <img :src="profileImage" alt="프로필 이미지">
-              </div>
-              <div class="info">
-                  <div class="area_text">
-                      <div v-if='nickname'>
-                          <h2 class="user_id">{{ nickname }}</h2>
-                      </div>
-                      <button @click='goModify'>프로필 수정</button>
-                      <button type="button" class="setting_btn">
-                          <i class="fas fa-cog"></i>
-                      </button>
-                  </div>
-                  <div class="area_text">
-                      <div class="tit_desc">
-                          <span class="title">게시물</span>
-                          <span class="sub_title">7</span>
-                      </div>
-                      <div class="tit_desc">
-                          <span class="title">팔로워</span>
-                          <span class="sub_title">10</span>
-                      </div>
-                      <div class="tit_desc">
-                          <span class="title">팔로우</span>
-                          <span class="sub_title">15</span>
-                      </div>
-                  </div>
-                  <div class="area_text profile_info">
-                      <h3 class="info_title">안녕하세요.</h3>
-                      <p class="info_sub">네 지나가세요~</p>
-                  </div>
-              </div>
-          </div>
-          <!-- p// rofile -->
+        <div class="continer">
+            <div class="profile" v-if='nickname'>
+                <div class="profile_img">
+                    <img :src="profileImage" alt="프로필 이미지">
+                </div>
+                <div class="info">
+                    <div class="area_text">
+                        <div >
+                            <h2 class="user_id">{{ nickname }} 님</h2>
+                        </div>
+                        <button
+                        v-if="isMyProfile"
+                        @click='goModify'>프로필 수정</button>
+                        <button
+                        v-if="!isMyProfile"
+                        @click='follower'>
+                        <span v-if="!isFollowing">팔로우</span>
+                        <span v-if="isFollowing">팔로우 취소</span>
+                        </button>
+
+                    </div>
+                    <div class="area_text">
+                        <div class="tit_desc">
+                            <span class="title">게시물</span>
+                            <span class="sub_title">7</span>
+                        </div>
+                        <div class="tit_desc">
+                            <span class="title">팔로워</span>
+                            <span class="sub_title">{{ cnt_followings }}</span>
+                            <span>{{ followings }}</span>
+                            </div>
+                            <div class="tit_desc">
+                                <span class="title">팔로우</span>
+                                <span class="sub_title">{{ cnt_followers }}</span>
+                                <span>{{ followers }}</span>
+                        </div>
+                    </div>
+                    <!-- <div class="area_text profile_info">
+                        <h3 class="info_title">안녕하세요.</h3>
+                        <p class="info_sub">창조주 </p>
+                    </div> -->
+                </div>
+            </div>
+          <!-- profile -->
           <!-- contents -->
-                      <div class="contents">
-                          <div class="tab_box">
-                              <ul class="tab_list">
-                                  <li class="active">
-                                      <a href="">
-                                          <i class="fas fa-list"></i>
-                                          <span>게시물</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <i class="fas fa-tv"></i>
-                                          <span>IGTV</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <i class="fas fa-bookmark"></i>
-                                          <span>저장됨</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <i class="fas fa-user-tag"></i>
-                                          <span>태그됨</span>
-                                      </a>
-                                  </li>
-                              </ul>
-                          </div>
-                          <div class="boards">
-                              <ul class="board_list ">
-                                  <li>
-                                      <a href="">
-                                          <div class="board_img">
-                                              <img src="" alt="이미지">
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <div class="board_img">
-                                              <img src="" alt="이미지">
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <div class="board_img">
-                                              <img src="" alt="이미지">
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <div class="board_img">
-                                              <img src="" alt="이미지">
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <div class="board_img">
-                                              <img src="" alt="이미지">
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <div class="board_img">
-                                              <img src="" alt="이미지">
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="">
-                                          <div class="board_img">
-                                              <img src="" alt="이미지">
-                                          </div>
-                                      </a>
-                                  </li>
-                              </ul>
-                          </div>
-                      </div>
-                      <!-- // contents -->
-        
-      </div>
+            <div class="contents" v-if="username">
+                <div class="tab_box">
+                    <ul class="tab_list">
+                        <li class="active">
+                            <a @click="getMyReviewList">
+                                <i class="fas fa-list"></i>
+                                <span>게시물</span>
+                            </a>
+                        </li>
+                        <li>
+                            <router-link :to="{name : '' }">
+                                <i class="fas fa-tv"></i>
+                                <span>컬랙션</span>
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="boards">
+                    <ul class="board_list " v-if="myReviews">
+                        <li v-for="myReview in myReviews" :key="myReview.id">
+                            <span @click="goReviewDetail(myReview)">
+                                <img :src="`https://image.tmdb.org/t/p/w500/${myReview.movie.poster_path}`">
+                                <p>좋아요 수 : {{ myReview.like_users.length }}</p>
+                                <p>좋아요한 사람 : {{ myReview.like_users }}</p>
+                            </span>
+                            <!-- <MyReviewItem :myReview='myReview'/> -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- // contents -->
+        </div>
     </div>
   <!-- </div> -->
     <!-- <nav> -->
@@ -157,61 +111,95 @@
 </template>
 
 <script>
-// import axios from 'axios'
-
-// const DJANGO_URL='http://127.0.0.1:8000'
+import axios from 'axios'
+// import MyReviewItem from './MyReviewItem.vue'
+const DJANGO_URL='http://127.0.0.1:8000'
 
 export default {
-    name : 'UserInformation',
-    data(){
-      return{
-        is_show:false,
-      }
+    name: "UserInfomation",
+    data() {
+        return {
+            username: null,
+            nickname: null,
+            profileImage: null,
+            email: null,
+            grade: null,
+            cnt_followers: null,
+            cnt_followings: null,
+            followers: null,
+            followings: null,
+            isFollowing: null,
+            myReviews: null,
+        };
     },
     computed: {
-        username() {
-            return this.$store.state.username
-        },
-        nickname(){
-            return this.$store.state.nickname
-        },
-        profileImage(){
-            return this.$store.state.profile_image
-        },
-        email(){
-          return this.$store.state.email
+        isMyProfile() {
+            return this.$route.params.username === this.$store.state.username;
         }
     },
-    // created(){
-    //     axios({
-    //         method:'get',
-    //         url: `${DJANGO_URL}/api/v1/${this.username}/`,
-    //         headers:{
-    //             Authorization : `Token ${this.$store.state.token}`,
-    //         }
-    //         // withCredentials: true,
-    //     })
-    //         .then(res =>{
-    //             // console.log(res)
-    //             this.information = res.data
-    //             this.profileImage = `${DJANGO_URL}` + res.data.profile_image
-    //             // console.log(this.information)
-    //             console.log(res)
-    //         })
-    // },
-    methods:{
-        goModify(){
-            this.$router.push({name: 'EditProfileView', params: {username:this.username, nickname: this.nickname , profile_img : this.profileImage, email:this.email}})
+    methods: {
+        goModify() {
+            this.$router.push({ name: "EditProfileView", params: { username: this.username, nickname: this.nickname, profile_img: this.profileImage, email: this.email } });
         },
-        // goModify(event){
-        //   console.log(event.target)
-        //   if(event.target.classList.contains('black-bg') || event.target.classList.contains('close')){
-        //     this.is_show = false;
-        //   } else if(event.target.classList.contains('white-bg')){
-        //     this.is_show = true;
-        //   }
-        // }
-    }
+        getProfile() {
+            axios({
+                method: "get",
+                url: `${DJANGO_URL}/api/v1/${this.$route.params.username}/`,
+                headers: { Authorization: `Token ${this.$store.state.token}` }
+            })
+                .then(res => {
+                const userInfo = res.data;
+                const user_id = this.$store.state.user_id;
+                this.username = userInfo.username;
+                this.nickname = userInfo.nickname,
+                this.profileImage = DJANGO_URL + userInfo.profile_image,
+                this.email = userInfo.email,
+                this.grade = userInfo.grade,
+                this.cnt_followers = userInfo.cnt_followers;
+                this.cnt_followings = userInfo.cnt_followings;
+                this.followers = userInfo.followers;
+                this.followings = userInfo.followings;
+                this.isFollowing = userInfo.followers.some(follower => { return follower.id === user_id; });
+            });
+        },
+        follower() {
+            axios({
+                method: "put",
+                url: `${DJANGO_URL}/api/v1/follow/${this.username}/`,
+                headers: { Authorization: `Token ${this.$store.state.token}` }
+            })
+                .then((res) => {
+                const data = res.data;
+                this.isFollowing = data.is_following;
+                this.followers = data.followers;
+                this.followings = data.followings;
+                this.cnt_followers = data.cnt_followers;
+                this.cnt_followings = data.cnt_followings;
+            }).catch(() => { });
+        },
+        getMyReviewList() {
+            const username = this.$route.params.username;
+            axios({
+                method: "get",
+                url: `${DJANGO_URL}/api/v3/reviews/${username}/`,
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`,
+                },
+            })
+                .then((res) => {
+                this.myReviews = res.data;
+            })
+                .catch(err => { console.log(err); });
+        },
+        goReviewDetail(myReview) {
+            this.$router.push({name: 'ReviewDetail' , params : {review_id: myReview.id}})
+        }
+    },
+    created() {
+        this.getProfile(),
+            this.getMyReviewList();
+    },
+    // components: { MyReviewItem }
 }
 </script>
 

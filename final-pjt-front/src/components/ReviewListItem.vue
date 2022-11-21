@@ -30,9 +30,8 @@
         @click="createComment"
         >입력</button>
         
+        </div>
     </div>
-    </div>
-    
   </div>
 </template>
 <script>

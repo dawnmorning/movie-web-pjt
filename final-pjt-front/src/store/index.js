@@ -234,6 +234,21 @@ export default new Vuex.Store({
       })
       .catch(err => { console.log(err)})
     },
+    
+    // getReviewDetail(context, payload){
+    //   axios({
+    //     method: 'get',
+    //     url:`${DJANGO_URL}/api/v3/review/`,
+    //     headers:{
+    //       Authorization : `Token ${context.state.token}`,
+    //     },
+    //   })
+    //   .then(res => {
+    //     const reviews = res.data // Array
+    //     context.commit('GET_REVIEWS', reviews)
+    //   })
+    //   .catch(err => { console.log(err)})
+    // },
 
     postReview(context, payload) {
       axios({
@@ -248,9 +263,8 @@ export default new Vuex.Store({
           rating: payload.rating,
         }
       })
-      .then(res => {
-        console.log(res)
-        router.push({ name : 'ReviewDetail', query:{ review: res.data}})
+      .then(() => {
+        router.push({ name : 'CommunityView'})
       })
       .catch(err => console.log(err))
     },

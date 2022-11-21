@@ -10,6 +10,7 @@
                   aria-expanded="false" aria-label="Toggle navigation">
             <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
           </b-button>
+
           <div class="justify-content-end collapse navbar-collapse " id="navbarSupportedContent">
             <form class="d-flex justify-content-center">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -33,14 +34,12 @@
                 <a @click='logOut' class="nav-link" href="#">로그아웃</a>
               </li>
             </ul>
+            
           </div>
         </div>
-     </nav>
-   </span>
-  <router-view/>
-  <!-- <div v-if='!isLogIn'>
-    <LogIn/>
-  </div> -->
+      </nav>
+    </span>
+    <router-view/>
   </div>
 </template>
 

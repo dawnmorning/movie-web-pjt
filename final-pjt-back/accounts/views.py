@@ -26,3 +26,30 @@ def user_ru(request, username):
     elif request.method == 'GET':
         serializer = UserSerializer(person)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(["PUT"])
+@permission_classes([IsAuthenticated])
+def follow(request, username):
+    User = get_user_model()
+    me = request.user
+    you = User.objects.get(username=username)
+
+    if me != you:
+        if you.followers.filter(pk=me.pk).exists():
+            you.followers.remove(me)
+            is_following = False
+        else:
+            you.followers.add(me)
+            is_following = True
+    
+    followers = list(you.followers.all().values('id', 'nickname', 'profile_image', 'grade'))
+
+    context = {
+        'is_following': is_following,
+        'followers': followers,
+        'cnt_followers': you.followers.count(),
+        'cnt_followings': you.followings.count(),
+    }
+    print(context)
+    
+    return Response(context)
