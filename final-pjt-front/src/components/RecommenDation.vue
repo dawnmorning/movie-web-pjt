@@ -15,7 +15,7 @@
                 
                 
                  <div v-for='movie in latestMovies' :key='movie.id' style='margin-top:-20px;'> 
-                    <MovieCard :movie_id="movie_id"/>
+                    <MovieCard :movie="movie.id"/>
                 
                 </div>        
             </div>
@@ -33,7 +33,7 @@
         <div class=''>
             <div  v-if='popularMovies' class='update' >
                 <div v-for='movie in popularMovies' :key='movie.id'>
-                    <MovieCard :movie="movie"/>
+                    <MovieCard :movie="movie.id"/>
                 </div>        
             </div>
         </div>
@@ -50,7 +50,7 @@
         <div class=''>
             <div  v-if='voteMovies' class='update' >
                 <div v-for='movie in voteMovies' :key='movie.id'>
-                    <MovieCard :movie="movie"/>
+                    <MovieCard :movie="movie.id"/>
                 </div>        
             </div>
         </div>
@@ -70,7 +70,7 @@
                 <carousel :per-page="9" :navigate-to="someLocalProperty" :mouse-drag="false">
                     <slide v-for='movie in randomMovies' :key='movie.id' class='slide__item '>
                 <!-- <div v-for='movie in randomMovies' :key='movie.id'> -->
-                    <MovieCard  :movie="movie"/>
+                    <MovieCard  :movie="movie.id"/>
                     </slide>
                 </carousel>
                 <!-- </div>         -->
