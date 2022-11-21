@@ -39,8 +39,6 @@ def getMOVIES():
         response_MOVIE = requests.get(TMDB_URL, params=params).json()
         results += response_MOVIE['results']
     
-    # 만 개 데이터
-    print(len(results))
     # 더 필요한 정보를 movie detail api에서 보충하기
     genre_ids = {}
 

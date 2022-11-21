@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404
 
 from django.contrib.auth import get_user_model
 from .models import Genre, Movie, WorldcupRecommend
+from accounts.serializers import NestedUserSerializer
 from .serializers import MovieSerializer, WorldcupRecommendSerializer
 import datetime as dt
 
@@ -144,11 +145,12 @@ def movie_like(request, movie_pk):
         print(movie.like_users.all())
         is_like = True
     
-    like_users = list(movie.like_users.all().values('id', 'nickname', 'profile_image', 'grade'))
-
+    like_users = movie.like_users.all()
+    like_users = NestedUserSerializer(data=like_users, many=True)
+    like_users.is_valid()
     context = {
         'is_like': is_like,
         'count': movie.like_users.count(),
-        'like_users': like_users
+        'like_users': like_users.data,
     }
     return Response(context)

@@ -1,11 +1,15 @@
 <template>
   <div class="container" v-if="reviews">
     <div>나는야 홈런왕</div>
+
+    <!-- 리뷰 자리 -->
     <div class='left_body' v-for="review in reviews" :key="review.id">
         <ReviewListItem
-        :review=review
+        :review_id=review.id
         />
     </div>
+    
+    <!-- 프로필 자리 -->
     <div class='right_body'>
       <div class=profile_box>
         <img class='profile_img' :src=profileImage alt="">
@@ -18,30 +22,31 @@
 </template>
 
 <script>
+
 const DJANGO_URL = 'http://127.0.0.1:8000'
 import ReviewListItem from '@/components/ReviewListItem'
 export default {
-    name:'ReviewList',
-    data(){
-      return{
-      }
-    },
-    components: {
-        ReviewListItem,
-    },
-    computed:{
-      reviews(){
-        return this.$store.state.reviews
-      },
-      profileImage(){
-        return DJANGO_URL+this.$store.state.profile_image
-      }
-    },
-    created() {
-      this.$store.dispatch('getReviews')
-    },
-    methods:{
+  name:'ReviewList',
+  data(){
+    return{
     }
+  },
+  components: {
+      ReviewListItem,
+  },
+  computed:{
+    reviews(){
+      return this.$store.state.reviews
+    },
+    profileImage(){
+      return DJANGO_URL+this.$store.state.profile_image
+    }
+  },
+  created() {
+    this.$store.dispatch('getReviews')
+  },
+  methods:{
+  }
 }
 </script>
 
@@ -91,7 +96,7 @@ export default {
   /* background-color: yellow;  */
   position : absolute;
   top : 17%;
-  right: 200px; 
+  right: 500px; 
   width:320px; 
   height:1000px; 
   /* position: sticky; */

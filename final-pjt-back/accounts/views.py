@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
-from .serializers import UserSerializer
+from .serializers import UserSerializer, NestedUserSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -42,8 +42,9 @@ def follow(request, username):
             you.followers.add(me)
             is_following = True
     
-    followers = list(you.followers.all().values('id', 'nickname', 'profile_image', 'grade'))
-
+    followers = you.followers.all()
+    followers = NestedUserSerializer(data=followers, many=True)
+    
     context = {
         'is_following': is_following,
         'followers': followers,

@@ -1,8 +1,5 @@
 <template>
-    <div v-if="movie">
-        <!-- {{movie}} -->
-        
-        <div>
+    <div>
             <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" class='gridimage animate__animated animate__jackInTheBox'>
             <div 
             class='hoverbtn animate__animated animate__fadeInUp' style=''>
@@ -17,14 +14,16 @@
                 class= 'fun-btn'
                 >좋아요</button>
                 {{like_users_count}}
-                {{like_users}}
+            <div v-if="like_users">
+                <h6>좋아요 누른 사람</h6>
+                <ul v-for="like_user in like_users" :key="like_user.id">
+                    <img :src="`http://127.0.0.1:8000${like_user.profile_image}`" alt="프로필 이미지">
+                   <router-link :to="{name: 'ProfileView', params: { username : like_user.username}}">
+                        {{like_user.nickname}}
+                    </router-link>
+                </ul>
             </div>
         </div>
-        
-     
-        <!-- <p>제목 : {{movie.title }}</p>
-        <p>개봉일 : {{movie.release_date}}</p> -->
-       
     </div>                
 </template>
 
@@ -35,41 +34,56 @@ const DJANGO_URL='http://127.0.0.1:8000'
 
 export default {
     name:'MovieCard',
-    components:{
-        // Carousel,
-        // Slide
-    },
     props: {
-        movie:Object,
+        movie_id:Number,
     },
     data() {
         return {
-            // is_focus: false,  blur/focus 함수 할때 써먹을용 삭제 x -종혁
-    }
+            user_id: this.$store.state.user_id,
+            movie: null,
+            like_users_count: null,
+            like_users: null,
+            isLike: null,
+        }
     },
     methods: {
-        goPostReview(movie) {
-            this.$router.push({ name: 'PostReview', params:{ movie_id: movie.id, movie: movie}})
+        goPostReview() {
+            this.$router.push({ name: 'PostReview', params:{ movie_id: this.movie.id, movie: this.movie}})
         },
-        likeMovie(){
+        likeMovie() {
             axios({
                 method: 'put',
                 url: `${DJANGO_URL}/api/v2/movies/like/${this.movie.id}/`,
-                headers: { Authorization : `Token ${this.$store.state.token}` }
+                headers: { Authorization : `Token ${this.$store.state.token}` },
             })
-            .then((res) => {
+            .then(res => {
                 this.isLike = res.data.isLike,
                 this.like_users_count = res.data.count
                 this.like_users = res.data.like_users
             })
-            .catch(() => {})
+        },
+        getMovie() {
+            axios({
+                method: 'get',
+                url: `${DJANGO_URL}/api/v2/${this.movie_id}/movies/`,
+                headers: { Authorization : `Token ${this.$store.state.token}` }
+            })
+            .then(res => {
+                const data = res.data
+                this.movie = res.data
+                this.isLike = data.like_users.some(user => { return user.id === this.user_id })
+                this.like_users_count = data.cnt_like_users
+                this.like_users = data.like_users       
+            })
+            .catch(err => { console.log(err) })
+        }
     },
-
-    },
+    created(){
+        this.getMovie()
+    }
 
 }
 </script>
-
 
 <style>
 

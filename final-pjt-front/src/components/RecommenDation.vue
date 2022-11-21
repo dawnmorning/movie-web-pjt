@@ -15,7 +15,7 @@
                 
                 
                  <div v-for='movie in latestMovies' :key='movie.id' style='margin-top:-20px;'> 
-                    <MovieCard :movie="movie"/>
+                    <MovieCard :movie_id="movie_id"/>
                 
                 </div>        
             </div>

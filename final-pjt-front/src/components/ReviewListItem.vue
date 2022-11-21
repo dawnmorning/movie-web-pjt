@@ -1,6 +1,6 @@
 <template>
 
-  <div class='bodyWrap'>
+  <div class='bodyWrap' v-if="review">
     <!-- {{review.comments}} -->
     <div class="card-body">
       <div class='needinLine'>
@@ -10,7 +10,7 @@
 
       <img class='reviewimg' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
       <hr>       
-      <h5 class="card-title" style='text-align: center;'>영화 : {{review.movie.title}}</h5>
+      <h5 class="card-title" style='text-align:center;'>영화 : {{review.movie.title}}</h5>
   
       <hr>
       <div class="card-body">
@@ -18,6 +18,11 @@
         <h5 class="card-subtitle mb-2 text-muted">{{review.updated_at}}</h5>
         <h5 class="card-subtitle mb-2 text-muted">별점 : {{review.rating}}</h5>
         <p class="card-text">{{review.content}}</p>
+        <button @click="likeReview">
+        <span v-if="!review_isLike">좋아요</span>
+        <span v-if="review_isLike">좋아요 취소</span>
+        </button>
+        {{review_like_users_count}}
       </div>
         
       <!-- 댓글 -->
@@ -33,7 +38,7 @@
         v-model="inputData"
         @keyup.enter="createComment"
         placeholder="댓글 달기"
-        style= 'width: 100%;' 
+        style= 'width:100%;' 
         >
         <div
         @click="createComment"
@@ -49,7 +54,6 @@
           <button @click= 'isclose'>닫기</button>
         </div>
       </form>
-
         <!-- <hr>
         <h5>댓글 작성하기</h5>
         <input type="text"
@@ -64,56 +68,96 @@
 </template>
 <script>
 import CommentList from '@/components/CommentList'
+import axios from 'axios'
+
 // const IMG_URL = "https://image.tmdb.org/t/p/w500"
 // console.log(review.author.profile)
 const DJANGO_URL = 'http://127.0.0.1:8000'
 
 export default {
-    name: 'ReviewListItem',
-    data() {
-        return {
-            inputData: null,
-            is_open : false,
+  name: 'ReviewListItem',
+  props:{
+      review_id:Number,
+  },
+  data() {
+      return {
+        inputData: null,
+        is_open : false,
+        user_id: this.$store.state.user_id,
+        review: null,
+        review_like_users: null,
+        review_like_users_count: null,
+        review_isLike: null,
+      }
+  },
+  components: {
+      CommentList,
+  },
+  // computed: {
+  //     comments() {
+  //         return this.review.comments
+  //     }
+  // },
+  methods: {
+    createComment() {
+        const payload = {
+            review_id: this.review_id,
+            comment: this.inputData,
         }
+        this.$store.dispatch('createComment', payload)
+        this.inputData = null
     },
-    components: {
-        CommentList,
-    },
-    props:{
-        review:Object,
-    },
-    // computed: {
-    //     comments() {
-    //         return this.review.comments
-    //     }
-    // },
-    methods: {
-      createComment() {
-          const payload = {
-              review_id: this.review.id,
-              comment: this.inputData,
-          }
-          this.$store.dispatch('createComment', payload)
-          this.inputData = null
 
-      },
-      isopen(){
-        this.is_open= true
-        console.log(this.is_open)
-      },
-      isclose(){
-        this.is_open= false
-      }
+    isopen(){
+      this.is_open= true
     },
-    created() {
-        // console.log(this.review.comments)
-        // console.log(this.review.movie)
+
+    isclose(){
+      this.is_open= false
     },
-    computed:{
-      profileImage(){
-        return DJANGO_URL+this.$store.state.profile_image
-      }
+    getReview() {
+      axios({
+        method: 'get',
+        url:`${DJANGO_URL}/api/v3/review/${this.review_id}/detail/`,
+        headers:{
+          Authorization : `Token ${this.$store.state.token}`,
+        },
+      })
+      .then(res => {
+        this.review = res.data
+        this.review_like_users = res.data.like_users,
+        this.review_like_users_count = res.data.cnt_like_users,
+        this.review_isLike =  res.data.like_users.some(like_user => { return like_user.id === this.user_id })
+        console.log(this.review)
+        
+      })
+      .catch(err => { console.log(err)})
+      
+    },
+    
+    likeReview() {
+      axios({
+        method: "put",
+        url: `${DJANGO_URL}/api/v3/review/like/${this.review_id}/`,
+        headers: { Authorization: `Token ${this.$store.state.token}` }
+      })
+      .then(res => {
+        const data = res.data
+        this.review_like_users = data.like_users,
+        this.review_like_users_count = data.count,
+        this.review_isLike =  data.is_like
+        
+      })
+    },
+  },
+  created() {
+    this.getReview()
+  },
+  computed:{
+    profileImage(){
+      return DJANGO_URL+this.$store.state.profile_image
     }
+  }
 }
 </script>
 
