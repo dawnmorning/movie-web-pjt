@@ -10,7 +10,7 @@
         <section class='please'>
             <div  v-if='latestMovies' class="container" >
                 <div v-for='movie in latestMovies' :key='movie.id'>
-                    <MovieCard :movie="movie"/>
+                    <MovieCard :movie_id="movie.id"/>
                 </div>        
             </div>
         </section>

@@ -147,7 +147,7 @@ export default {
                 url: `${DJANGO_URL}/api/v1/${this.$route.params.username}/`,
                 headers: { Authorization: `Token ${this.$store.state.token}` }
             })
-                .then(res => {
+            .then(res => {
                 const userInfo = res.data;
                 const user_id = this.$store.state.user_id;
                 this.username = userInfo.username;
@@ -186,10 +186,10 @@ export default {
                     Authorization: `Token ${this.$store.state.token}`,
                 },
             })
-                .then((res) => {
-                this.myReviews = res.data;
+            .then((res) => {
+            this.myReviews = res.data;
             })
-                .catch(err => { console.log(err); });
+            .catch(err => { console.log(err); });
         },
         goReviewDetail(myReview) {
             this.$router.push({name: 'ReviewDetail' , params : {review_id: myReview.id}})
@@ -197,9 +197,8 @@ export default {
     },
     created() {
         this.getProfile(),
-            this.getMyReviewList();
+        this.getMyReviewList()
     },
-    // components: { MyReviewItem }
 }
 </script>
 

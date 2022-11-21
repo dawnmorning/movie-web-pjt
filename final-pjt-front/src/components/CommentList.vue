@@ -2,7 +2,7 @@
   <div v-if='comments'>
     <div v-for="comment in comments" :key="comment.id">
         <CommentListItem
-        :comment="comment"
+        :comment_id="comment.id"
         />
     </div>
   </div>

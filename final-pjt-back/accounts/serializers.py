@@ -63,7 +63,7 @@ class NestedUserSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = get_user_model()
-        fields = ('id', 'nickname', 'profile_image', 'grade', 'followings')
+        fields = ('id', 'username', 'nickname', 'profile_image', 'grade', 'followings')
 
 class UserSerializer(serializers.ModelSerializer):
     grade = serializers.IntegerField(

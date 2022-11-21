@@ -75,7 +75,7 @@ def review_d(request, review_pk):
     review.delete()
     return Response({'message': f'리뷰 {review_pk}번 글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
 
-@api_view(['POST'])
+@api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def review_like(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
@@ -88,7 +88,7 @@ def review_like(request, review_pk):
         review.like_users.add(user)
         is_like = True
 
-    like_users = list(review.like_users.all().values('id', 'nickname', 'profile_image', 'grade'))
+    like_users = list(review.like_users.all().values('id', 'username', 'nickname', 'grade'))
 
     context = {
         'is_like': is_like,
@@ -97,6 +97,13 @@ def review_like(request, review_pk):
     }
     return Response(context)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def comment_r(request, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    serializer = CommentSerializer(comment)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -136,8 +143,9 @@ def comment_like(request, comment_pk):
         is_like = True
 
     like_users = list(comment.like_users.all().values('id', 'nickname', 'profile_image', 'grade'))
-
+    serializer = CommentSerializer(comment)
     context = {
+        'comment': serializer,
         'is_like': is_like,
         'count': comment.like_users.count(),
         'like_users': like_users,
