@@ -15,11 +15,14 @@ import CommunityView from '@/views/CommunityView'
 
 Vue.use(VueRouter)
 
+// const isAuth = localStorage.getItem('token')
+
 const routes = [
   {
     path: '/',
     name: 'LogIn',
-    component: LogIn
+    component: LogIn,
+
   },
   {
     path: '/signup',
@@ -39,7 +42,9 @@ const routes = [
   {
     path: '/recommendation',
     name: 'RecomView',
-    component: RecomView
+    component: RecomView,
+    
+
   },
   {
     path: '/test',
@@ -74,6 +79,24 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((to,from,next)=>{  
+
+//   const allowAllpages = ['LogIn','SignUp']
+
+//   const isAuthRequired = !allowAllpages.includes(to.name)
+//  console.log(isAuth)
+//   if (isAuth===null){
+//     console.log('로그인으로 이동')
+//     next({name: 'LogIn'})
+//   } else{
+//     console.log('to로 이동')
+//     next()
+//   }
+// })
+
+// beforeEach()를 호출하고나면 모든 라우팅이 대기상태가 된다.
+// URL로 라우팅하기위해서는 next()를 호출해야한다.
 
 // 로그아웃 시 NavigationDuplicated 에러
 // https://velog.io/@hschoi1104/Vue.js-NavigationDuplicated-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0
