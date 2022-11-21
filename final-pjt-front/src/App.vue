@@ -3,7 +3,7 @@
     <!-- 로그인 후 -->
     <span v-if='isLogin'>
       <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light ">
-        <div class="container-fluid">
+        <div class="container-fluid jua " style='margin-top:0px; width:1300px;' >
           <a class="navbar-brand fs-1" href="#">우리 프로젝트 명</a>
           <b-button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -110,6 +110,7 @@ nav{
   height: 70px;
   left: 0;
   right: 0;
+  margin:0 auto;
 }
 
 /* nav a.router-link-exact-active {
