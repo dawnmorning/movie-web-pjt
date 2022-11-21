@@ -4,7 +4,6 @@ from rest_framework.validators import UniqueValidator
 from django.core.validators import MinValueValidator, MaxValueValidator
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import LoginSerializer
-
 User = get_user_model()
 
 # class CustomLoginSerializer(LoginSerializer):
@@ -55,18 +54,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         data = super().get_cleaned_data()
         data['profile_image'] = self.validated_data.get('profile_image', '')
         data['nickname'] = self.validated_data.get('nickname', '')
-
         return data
-
-class UserSerializer(serializers.ModelSerializer):
-    grade = serializers.IntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(5)],
-        read_only=True)
- 
-    class Meta:
-        model = get_user_model()
-        fields = ('id', 'username', 'email', 'is_active', 'nickname', 'profile_image','grade',)
-        read_only_fields = ('id', 'username', 'is_active','grade',)
 
 class NestedUserSerializer(serializers.ModelSerializer):
     grade = serializers.IntegerField(
@@ -75,13 +63,21 @@ class NestedUserSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = get_user_model()
-        fields = ('id', 'nickname', 'profile_image','grade',)
+        fields = ('id', 'nickname', 'profile_image', 'grade', 'followings')
 
+class UserSerializer(serializers.ModelSerializer):
+    grade = serializers.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(5)],
+        read_only=True)
+    followings = NestedUserSerializer(source='followings.all', many=True, read_only=True)
+    followers = NestedUserSerializer(source='followers.all', many=True, read_only=True)
+    cnt_followings = serializers.IntegerField(source='followings.count', read_only=True)
+    cnt_followers = serializers.IntegerField(source='followers.count',  read_only=True)
 
-# class ProfileSerializer(serializers.ModelSerializer):
-#     user = UserSerializer(read_only=True)
-
-#     class Meta:
-#         model = Profile
-#         fields = '__all__'
-#         read_only_fields = ('user',)
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'id', 'username', 'email', 'nickname', 'profile_image',
+            'grade', 'followings', 'followers','cnt_followings', 'cnt_followers',
+            )
+        read_only_fields = ('id', 'username', 'grade',)

@@ -13,6 +13,7 @@
             @click="likeMovie"
             >좋아요</button>
             {{like_users_count}}
+            {{like_users}}
         </div>
     </div>                
 </template>
@@ -48,7 +49,7 @@ export default {
             .then((res) => {
                 this.isLike = res.data.isLike,
                 this.like_users_count = res.data.count
-                console.log(res.data.like_users)
+                this.like_users = res.data.like_users
             })
             .catch(() => { })
     },

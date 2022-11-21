@@ -6,48 +6,59 @@
       <div class='needinLine'>
         <img :src=profileImage alt="" class='userImage'>
         <p class="card-text" style='font-size:16px; margin-top:5px;'>{{review.author.nickname}}</p>
-
       </div>
-        <img class='reviewimg' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
-        <hr>       
-        <h5 class="card-title" style='text-align: center;'>영화 : {{review.movie.title}}</h5>
-    
-        <hr>
-        <div class="card-body">
-          <h5 class="card-title">리뷰 : {{review.title}}</h5>
-          <h5 class="card-subtitle mb-2 text-muted">{{review.updated_at}}</h5>
-          <h5 class="card-subtitle mb-2 text-muted">별점 : {{review.rating}}</h5>
-          <p class="card-text">{{review.content}}</p>
-        </div>
-        
-        <!-- 댓글 -->
-        <CommentList
-        :comments=review.comments
-        />
 
-        <hr style='margin:0px;'>
-        <!-- <h5>댓글 입력</h5> -->
-        <form class='commentstyle'>
-          <input type="text"
-          v-model="inputData"
-          @keyup.enter="createComment"
-          placeholder="댓글 달기"
-          style= 'width: 100%;' 
-          >
-          <div
-          @click="createComment"
-          class='buttonstyle'
-          >입력</div>
-          <!-- 모달 -->
-          <div @click='isopen' class='clickcursor'>댓글모두 보기</div>
-          <div class='black-bg' v-if='is_open'>
-            <div class='white-bg'>
-              <h4>댓글 목록</h4>
-              <p>댓글 내용</p>
-            </div>
-              <button @click= 'isclose'>닫기</button>
+      <img class='reviewimg' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
+      <hr>       
+      <h5 class="card-title" style='text-align: center;'>영화 : {{review.movie.title}}</h5>
+  
+      <hr>
+      <div class="card-body">
+        <h5 class="card-title">리뷰 : {{review.title}}</h5>
+        <h5 class="card-subtitle mb-2 text-muted">{{review.updated_at}}</h5>
+        <h5 class="card-subtitle mb-2 text-muted">별점 : {{review.rating}}</h5>
+        <p class="card-text">{{review.content}}</p>
+      </div>
+        
+      <!-- 댓글 -->
+      <CommentList
+      :comments=review.comments
+      />
+
+
+      <hr style='margin:0px;'>
+      <!-- <h5>댓글 입력</h5> -->
+      <form class='commentstyle'>
+        <input type="text"
+        v-model="inputData"
+        @keyup.enter="createComment"
+        placeholder="댓글 달기"
+        style= 'width: 100%;' 
+        >
+        <div
+        @click="createComment"
+        class='buttonstyle'
+        >입력</div>
+        <!-- 모달 -->
+        <div @click='isopen' class='clickcursor'>댓글모두 보기</div>
+        <div class='black-bg' v-if='is_open'>
+          <div class='white-bg'>
+            <h4>댓글 목록</h4>
+            <p>댓글 내용</p>
           </div>
-        </form>
+          <button @click= 'isclose'>닫기</button>
+        </div>
+      </form>
+
+        <!-- <hr>
+        <h5>댓글 작성하기</h5>
+        <input type="text"
+        v-model="inputData"
+        @keyup.enter="createComment" 
+        >
+        <button
+        @click="createComment"
+        >입력</button> -->
     </div>
   </div>
 </template>

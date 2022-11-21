@@ -23,6 +23,23 @@ def reviews(request):
     serializer.is_valid()
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_reviews(request, username):
+    # 리뷰수가 많은 상황을 대비하여 Paginator 사용
+    user = get_object_or_404(User, username=username)
+    my_reviews = user.reviews.all().order_by('-created_at')
+    serializer = ReviewSerializer(data=my_reviews, many=True)
+    serializer.is_valid()
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def review_r(request, review_pk):
+    # 리뷰수가 많은 상황을 대비하여 Paginator 사용
+    review = get_object_or_404(Review, pk=review_pk)
+    serializer = ReviewSerializer(review)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -31,8 +48,8 @@ def review_c(request, movie_pk):
     
     serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie, author = request.user)
-        return Response(serializer.data, status= status.HTTP_201_CREATED)
+        serializer.save(movie=movie, author=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
@@ -45,7 +62,7 @@ def review_u(request, review_pk):
     serializer = ReviewSerializer(review, data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save()
-        return Response(serializer.data, status= status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
@@ -56,11 +73,11 @@ def review_d(request, review_pk):
         return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_401_UNAUTHORIZED)
     
     review.delete()
-    return Response({'message':f'리뷰 {review_pk}번 글이 삭제되었습니다.'}, status= status.HTTP_204_NO_CONTENT)
+    return Response({'message': f'리뷰 {review_pk}번 글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def review_like(request,review_pk):
+def review_like(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     user = request.user
 
@@ -70,9 +87,13 @@ def review_like(request,review_pk):
     else:
         review.like_users.add(user)
         is_like = True
-    context ={
-        'is_like':is_like,
+
+    like_users = list(review.like_users.all().values('id', 'nickname', 'profile_image', 'grade'))
+
+    context = {
+        'is_like': is_like,
         'count': review.like_users.count(),
+        'like_users': like_users,
     }
     return Response(context)
 
@@ -85,8 +106,8 @@ def comment_c(request, review_pk):
     serializer = CommentSerializer(data=request.data)
     
     if serializer.is_valid(raise_exception=True):
-        serializer.save(review=review, author = request.user)
-        return Response(serializer.data, status= status.HTTP_201_CREATED)
+        serializer.save(review=review, author=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
@@ -97,7 +118,7 @@ def comment_d(request, comment_pk):
         return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     comment.delete()
-    return Response({'message':f'댓글 {comment_pk}번 글이 삭제되었습니다.'}, status= status.HTTP_204_NO_CONTENT)
+    return Response({'message': f'댓글 {comment_pk}번 글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
 
 
 # 댓글에 하트 표시
@@ -113,8 +134,12 @@ def comment_like(request, comment_pk):
     else:
         comment.like_users.add(user)
         is_like = True
-    context ={
+
+    like_users = list(comment.like_users.all().values('id', 'nickname', 'profile_image', 'grade'))
+
+    context = {
         'is_like': is_like,
-        'count':comment.like_users.count(),
+        'count': comment.like_users.count(),
+        'like_users': like_users,
     }
     return Response(context)

@@ -6,6 +6,8 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
+import random
+random_number = random.randrange(1, 9)
 
 class User(AbstractUser):
     nickname = models.CharField(max_length=128)
@@ -16,12 +18,14 @@ class User(AbstractUser):
         processors=[ResizeToFill(300, 300)],
         format='JPEG',
         options={'quality': 70},
-        default='default.jpg',
+        default=f'default{random_number}.jpg',
     )
     grade = models.IntegerField(
         default=0,
         validators=[MinValueValidator(0), MaxValueValidator(5)],
     )
+    followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
+
     def __str__(self):
         return self.username
 

@@ -133,16 +133,20 @@ def worldcup_recommend(request):
 def movie_like(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     user = request.user
-    like_users = list(movie.like_users.all().values('id', 'nickname', 'profile_image', 'grade'))
 
 
     if movie.like_users.filter(pk=user.pk).exists():
         movie.like_users.remove(user)
+        print(movie.like_users.all())
         is_like = False
     else:
         movie.like_users.add(user)
+        print(movie.like_users.all())
         is_like = True
-    context ={
+    
+    like_users = list(movie.like_users.all().values('id', 'nickname', 'profile_image', 'grade'))
+
+    context = {
         'is_like': is_like,
         'count': movie.like_users.count(),
         'like_users': like_users
