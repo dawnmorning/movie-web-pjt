@@ -15,6 +15,7 @@
             </div>
         </section>
     </div>
+    
 <!-- 인기순 영화 -->
     <div>
         <h1>인기순</h1>
@@ -24,7 +25,7 @@
         <section class='please'>
             <div  v-if='popularMovies' class="container" >
                 <div v-for='movie in popularMovies' :key='movie.id'>
-                    <MovieCard :movie="movie"/>
+                    <MovieCard :movie_id="movie_id"/>
                 </div>        
             </div>
         </section>
@@ -38,7 +39,7 @@
         <section class='please'>
             <div  v-if='voteMovies' class="container" >
                 <div v-for='movie in voteMovies' :key='movie.id'>
-                    <MovieCard :movie="movie"/>
+                    <MovieCard :movie_id="movie.id"/>
                 </div>        
             </div>
         </section>
@@ -52,7 +53,7 @@
         <section class='please'>
             <div  v-if='randomMovies' class="container" >
                 <div v-for='movie in randomMovies' :key='movie.id'>
-                    <MovieCard :movie="movie"/>
+                    <MovieCard :movie_id="movie.id"/>
                 </div>        
             </div>
         </section>

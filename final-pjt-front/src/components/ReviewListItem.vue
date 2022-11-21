@@ -23,12 +23,23 @@
         <span v-if="review_isLike">좋아요 취소</span>
         </button>
         {{review_like_users_count}}
+        <div v-if="review_like_users">
+          <h6>좋아요 누른 사람</h6>
+          <ul v-for="review_like_user in review_like_users" :key="review_like_user.id">
+              <img :src="`http://127.0.0.1:8000${review_like_user.profile_image}`" alt="프로필 이미지">
+              <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}">
+                  {{review_like_user.nickname}}
+              </router-link>
+          </ul>
+        </div>
       </div>
         
       <!-- 댓글 -->
-      <CommentList
-      :comments=review.comments
-      />
+      <div v-for="comment in review.comments" :key="comment.id">
+        <CommentListItem
+        :comment=comment
+        />
+      </div>
 
 
       <hr style='margin:0px;'>
@@ -67,7 +78,7 @@
   </div>
 </template>
 <script>
-import CommentList from '@/components/CommentList'
+import CommentListItem from '@/components/CommentListItem'
 import axios from 'axios'
 
 // const IMG_URL = "https://image.tmdb.org/t/p/w500"
@@ -91,7 +102,7 @@ export default {
       }
   },
   components: {
-      CommentList,
+      CommentListItem,
   },
   // computed: {
   //     comments() {
@@ -127,9 +138,7 @@ export default {
         this.review = res.data
         this.review_like_users = res.data.like_users,
         this.review_like_users_count = res.data.cnt_like_users,
-        this.review_isLike =  res.data.like_users.some(like_user => { return like_user.id === this.user_id })
-        console.log(this.review)
-        
+        this.review_isLike =  res.data.like_users.some(like_user => { return like_user.id === this.user_id })        
       })
       .catch(err => { console.log(err)})
       

@@ -14,20 +14,24 @@
                 <h5 class="card-subtitle mb-2 text-muted">별점 : {{review.rating}}</h5>
                 <p class="card-text">{{review.content}}</p>
                 </div>
-                       <!-- 댓글 -->
-                <CommentList
-                :comments=review.comments
-                />
-
-                <hr>
-                <h5>댓글 작성하기</h5>
-                <input type="text"
-                v-model="inputData"
-                @keyup.enter="createComment" 
-                >
-                <button
-                @click="createComment"
-                >입력</button>
+                
+                <!-- 댓글 -->
+                <div v-for="comment in review.comments" :key="comment.id">
+                    <CommentListItem
+                    :comment=comment
+                    />
+                </div>
+                <div>
+                    <hr>
+                    <h5>댓글 작성하기</h5>
+                    <input type="text"
+                    v-model="inputData"
+                    @keyup.enter="createComment" 
+                    >
+                    <button
+                    @click="createComment"
+                    >입력</button>
+                </div>
 
             </div>
         </div>
@@ -37,7 +41,7 @@
 <script>
 // import axios from 'axios'
 // const DJANGO_URL='http://127.0.0.1:8000'
-import CommentList from '@/components/CommentList'
+import CommentListItem from '@/components/CommentListItem'
 
 export default {
     name: 'ReviewDetail',
@@ -58,7 +62,7 @@ export default {
         }
     },
     components: {
-        CommentList,
+        CommentListItem,
     },
     methods: {
         goBack() {

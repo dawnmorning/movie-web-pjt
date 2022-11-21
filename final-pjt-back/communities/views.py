@@ -5,6 +5,7 @@ from .models import Review, Comment
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from .serializers import ReviewSerializer,CommentSerializer
+from accounts.serializers import NestedUserSerializer
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -88,12 +89,14 @@ def review_like(request, review_pk):
         review.like_users.add(user)
         is_like = True
 
-    like_users = list(review.like_users.all().values('id', 'username', 'nickname', 'grade'))
-
+    like_users = review.like_users.all()
+    serializer = NestedUserSerializer(data=like_users, many=True)
+    serializer.is_valid()
+    
     context = {
         'is_like': is_like,
         'count': review.like_users.count(),
-        'like_users': like_users,
+        'like_users': serializer.data,
     }
     return Response(context)
 
@@ -125,7 +128,8 @@ def comment_d(request, comment_pk):
         return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     comment.delete()
-    return Response({'message': f'댓글 {comment_pk}번 글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
+    serializer = CommentSerializer(comment)
+    return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
 
 
 # 댓글에 하트 표시
@@ -142,12 +146,12 @@ def comment_like(request, comment_pk):
         comment.like_users.add(user)
         is_like = True
 
-    like_users = list(comment.like_users.all().values('id', 'nickname', 'profile_image', 'grade'))
-    serializer = CommentSerializer(comment)
+    like_users = comment.like_users.all()
+    serializer = NestedUserSerializer(data=like_users, many=True)
+    serializer.is_valid()
     context = {
-        'comment': serializer,
         'is_like': is_like,
         'count': comment.like_users.count(),
-        'like_users': like_users,
+        'like_users': serializer.data,
     }
     return Response(context)

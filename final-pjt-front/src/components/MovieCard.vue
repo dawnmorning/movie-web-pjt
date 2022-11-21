@@ -8,10 +8,10 @@
             <button
             @click="goPostReview"
             >리뷰 작성하기</button>
-            <button
-            
-            @click="likeMovie"
-            >좋아요</button>
+            <button @click="likeMovie">
+                <span v-if="!isLike">좋아요</span>
+                <span v-if="isLike">좋아요 취소</span>    좋아요
+            </button>
             {{like_users_count}}
             <div v-if="like_users">
                 <h6>좋아요 누른 사람</h6>

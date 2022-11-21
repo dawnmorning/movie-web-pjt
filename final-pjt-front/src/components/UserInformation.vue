@@ -50,18 +50,21 @@
             <div class="contents" v-if="username">
                 <div class="tab_box">
                     <ul class="tab_list">
+                        <!-- myReview -->
                         <li class="active">
                             <a @click="getMyReviewList">
                                 <i class="fas fa-list"></i>
                                 <span>게시물</span>
                             </a>
                         </li>
+                        <!-- myLike -->
                         <li>
                             <router-link :to="{name : '' }">
                                 <i class="fas fa-tv"></i>
                                 <span>컬랙션</span>
                             </router-link>
                         </li>
+
                     </ul>
                 </div>
                 
