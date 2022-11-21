@@ -1,7 +1,7 @@
 <template>
   <div>
     <hr>
-    {{ comment.author }} |
+    {{ comment.author.nickname }} |
     {{ comment.content }}
     <button
     @click="deleteComment(comment)"
