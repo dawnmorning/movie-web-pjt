@@ -91,7 +91,7 @@ export default {
   /* background-color: yellow;  */
   position : absolute;
   top : 17%;
-  right: 500px; 
+  right: 200px; 
   width:320px; 
   height:1000px; 
   /* position: sticky; */
