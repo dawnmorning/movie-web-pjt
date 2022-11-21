@@ -2,13 +2,8 @@
   <div>
     <!-- 로그인 시 보일 화면 -->
     <div v-if='isLogin'>
-<<<<<<< HEAD
       <div class='jua animate__animated animate__backInUp delay-4s'>
-        <div class=''>안녕하세요, {{ username }}</div> 
-=======
-      <div class='mx-auto jua animate__animated animate__backInUp delay-4s'>
         <div class=''>안녕하세요, {{ nickname }} 님</div> 
->>>>>>> 5f366e8cda8e2be596368a12807df0fcd966c854
         <div class='mt-5 ' >오늘 기분은 어때요?</div>
         <b-button @click='goRecommend' class='btn btn-info btn-lg'><span>영화를 고르러 가볼까요?</span> </b-button>
       </div>

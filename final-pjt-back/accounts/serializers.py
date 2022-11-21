@@ -68,6 +68,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email', 'is_active', 'nickname', 'profile_image','grade',)
         read_only_fields = ('id', 'username', 'is_active','grade',)
 
+class NestedUserSerializer(serializers.ModelSerializer):
+    grade = serializers.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(5)],
+        read_only=True)
+ 
+    class Meta:
+        model = get_user_model()
+        fields = ('id', 'nickname', 'profile_image','grade',)
+
 
 # class ProfileSerializer(serializers.ModelSerializer):
 #     user = UserSerializer(read_only=True)

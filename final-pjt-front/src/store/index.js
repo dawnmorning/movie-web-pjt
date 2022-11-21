@@ -18,6 +18,7 @@ export default new Vuex.Store({
   state: {
     // 유저 관련 정보
     token: null,
+    user_id: null,
     username: null,
     nickname: null,
     profile_image: null,
@@ -43,6 +44,7 @@ export default new Vuex.Store({
     },
 
     GET_PROFILE(state, data) {
+      state.user_id = data.id
       state.username = data.username
       state.nickname = data.nickname
       state.email = data.email
@@ -51,6 +53,7 @@ export default new Vuex.Store({
     },
 
     LOGOUT(state) {
+      state.user_id = null
       state.token = null
       state.username = null
       state.nickname = null
@@ -72,7 +75,6 @@ export default new Vuex.Store({
     GET_MOVIE_DETAIL(state, MoviesData){ 
       state.movie_detail = MoviesData
     },
-
 
     // community 관련 함수
     GET_REVIEWS(state, reviews){
@@ -137,18 +139,12 @@ export default new Vuex.Store({
       .then(res => {
         // console.log(res)
         context.commit('SAVE_TOKEN', res.data.key)
-<<<<<<< HEAD
-      })
-      .then(() => {
-        context.dispatch('getProfile', payload.username)
         alert('회원가입이 완료되었습니다.')
-=======
         const data = {
           token: res.data.key,
           username: payload.username
         }
         context.dispatch('getProfile', data)
->>>>>>> 5f366e8cda8e2be596368a12807df0fcd966c854
         router.push({name:'HomeView'})
       })
       .catch( function(err) {

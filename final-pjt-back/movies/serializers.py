@@ -1,5 +1,6 @@
 from .models import Movie, Genre, WorldcupRecommend
 from rest_framework import serializers
+from accounts.serializers import NestedUserSerializer
         
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -14,7 +15,7 @@ class NestedGenreSerializer(serializers.ModelSerializer):
         fields = ('genre_id', 'name',)
 
 class MovieSerializer(serializers.ModelSerializer):
-
+    like_users = NestedUserSerializer(many=True, read_only=True)
     class Meta:
         model = Movie
         fields = '__all__'
@@ -22,7 +23,8 @@ class MovieSerializer(serializers.ModelSerializer):
 # 디테일은 장르까지 포함해서 같이 보내기
 class MovieDetailSerializer(serializers.ModelSerializer):
     genres = NestedGenreSerializer(many=True, read_only=True) # 조회될 때 장르 보내기
-
+    like_users = NestedUserSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Movie
         fields = '__all__'

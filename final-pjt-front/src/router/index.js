@@ -8,13 +8,9 @@ import ReviewDetail from '@/components/ReviewDetail'
 
 import HomeView from '@/views/HomeView'
 import testView from '@/views/testView'
-<<<<<<< HEAD
 import EditProfileView from '@/views/EditProfileView'
-=======
 import RecomView from '@/views/RecomView'
 import ProfileView from '@/views/ProfileView'
-import EditProfile from '@/views/EditProfile'
->>>>>>> 5f366e8cda8e2be596368a12807df0fcd966c854
 import CommunityView from '@/views/CommunityView'
 
 Vue.use(VueRouter)

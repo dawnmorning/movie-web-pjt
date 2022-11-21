@@ -126,43 +126,25 @@ def worldcup_recommend(request):
     serializer.is_valid()
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-'''
-    if request.method == 'POST':
-        genre_ranks = request.data
-        
-        # 1. 기존에 랭크 정보가 있는 경우과 없는 경우로 나누기
-        if WorldcupRecommend.objects.filter(user=user).exists():
-            serializer = WorldcupRecommendSerializer(user, data=request.data)
-        else:
-            serializer = WorldcupRecommendSerializer(data=request.data)
-        
-        # 2. 월드컵 게임 결과 저장 및 업데이트
-        if serializer.is_valid(raise_exception=True):
-            serializer.save(user=user)
 
-        # 월드컵 결과에 따른 추천목록 반환
-        # orm 쿼리셋 함수 활용을 통한 코드 최적화
-        rank1genre = Genre.objects.get(genre_id=int(genre_ranks['genre_rank1']))
-        rank2genre = Genre.objects.get(genre_id=int(genre_ranks['genre_rank2']))
+# 댓글에 하트 표시
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def movie_like(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    user = request.user
+    like_users = list(movie.like_users.all().values('id', 'nickname', 'profile_image', 'grade'))
 
-        rank1movies = rank1genre.movies.all()
-        filteredmovies = rank2genre.movies.all().intersection(rank1movies)
-        serializer = MovieSerializer(data=filteredmovies, many=True)
-        return Response(filteredmovies)
 
-    elif request.method == "GET":
-        if WorldcupRecommend.objects.filter(user=user).exists():
-            genre_ranks = WorldcupRecommend.objects.get(user=user)
-            rank1genre = Genre.objects.get(genre_id=genre_ranks.genre_rank1)
-            rank2genre = Genre.objects.get(genre_id=genre_ranks.genre_rank2)
-
-            rank1movies = rank1genre.movies.all()
-            filteredmovies = rank2genre.movies.all().intersection(rank1movies)
-            serializer = MovieSerializer(data=filteredmovies, many=True)
-            # print(serializer.is_valid())
-            return Response(serializer.data)
-
-        else:
-            return Response({'message':' no data'})
-
-'''
+    if movie.like_users.filter(pk=user.pk).exists():
+        movie.like_users.remove(user)
+        is_like = False
+    else:
+        movie.like_users.add(user)
+        is_like = True
+    context ={
+        'is_like': is_like,
+        'count': movie.like_users.count(),
+        'like_users': like_users
+    }
+    return Response(context)

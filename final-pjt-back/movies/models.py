@@ -16,6 +16,7 @@ class Movie(models.Model):
     vote_average = models.FloatField(null=True)
     vote_count = models.IntegerField(null=True)
     adult = models.BooleanField(null=True)
+    like_users = models.ManyToManyField(User, blank=True, related_name='like_movies')
     # detail에서 가져올 필드
     # homepage = models.URLField(blank=True)
     # runtime = models.IntegerField(blank=True)

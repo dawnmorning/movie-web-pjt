@@ -8,24 +8,9 @@
         @click="latest_count ++"
         >더보기</button>
         <section class='please'>
-            <div 
-            v-if='latestMovies'
-            class="container"
-            >
-                <div v-for='movie in latestMovies'
-                    :key='movie.id'
-                    >
-                    <div>
-                        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
-                        <p>제목 : {{movie.title }}</p>
-                        <p>개봉일 : {{movie.release_date}}</p>
-                        <div>
-                            <button
-                            @click="goPostReview(movie)"
-                            >리뷰 작성하기</button>
-                            <button>좋아요</button>
-                        </div>
-                    </div>                
+            <div  v-if='latestMovies' class="container" >
+                <div v-for='movie in latestMovies' :key='movie.id'>
+                    <MovieCard :movie="movie"/>
                 </div>        
             </div>
         </section>
@@ -37,18 +22,9 @@
         @click="popular_count ++"
         >더보기</button>
         <section class='please'>
-            <div 
-            v-if='popularMovies'
-            class="container"
-            >
-                <div v-for='movie in popularMovies'
-                    :key='movie.id'
-                    >
-                    <div>
-                        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
-                        <p>제목 : {{movie.title}}</p>
-                        <p>개봉일 : {{movie.release_date}}</p>
-                    </div>                
+            <div  v-if='popularMovies' class="container" >
+                <div v-for='movie in popularMovies' :key='movie.id'>
+                    <MovieCard :movie="movie"/>
                 </div>        
             </div>
         </section>
@@ -60,19 +36,9 @@
         @click="vote_count ++"
         >더보기</button>
         <section class='please'>
-            <div 
-            v-if='voteMovies'
-            class="container"
-            >
-                <div v-for='movie in voteMovies'
-                    :key='movie.id'
-                    >
-                    <div>
-                        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
-                        <p>제목 : {{movie.id}}</p>
-                        <p>제목 : {{movie.title}}</p>
-                        <p>개봉일 : {{movie.release_date}}</p>
-                    </div>                
+            <div  v-if='voteMovies' class="container" >
+                <div v-for='movie in voteMovies' :key='movie.id'>
+                    <MovieCard :movie="movie"/>
                 </div>        
             </div>
         </section>
@@ -84,21 +50,13 @@
         @click="getRandomMovies"
         >더보기</button>
         <section class='please'>
-            <div
-            v-if='randomMovies'
-            class="container"
-            >
-                <div v-for='movie in randomMovies'
-                    :key='movie.id'
-                    >
-                    <div>
-                        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
-                        <p>제목 : {{movie.title }}</p>
-                        <p>개봉일 : {{ movie.release_date }}</p>
-                    </div>                
+            <div  v-if='randomMovies' class="container" >
+                <div v-for='movie in randomMovies' :key='movie.id'>
+                    <MovieCard :movie="movie"/>
                 </div>        
             </div>
         </section>
+        
     </div>
   </div>
 </template>
@@ -106,14 +64,14 @@
 <script>
 import axios from 'axios'
 // import _ from 'lodash'
-
+import MovieCard from '@/components/MovieCard'
 
 const DJANGO_URL='http://127.0.0.1:8000'
 // const IMG_URL = "https://image.tmdb.org/t/p/w500"
 export default {
     name: 'RecommenDation',
     components:{
-    
+        MovieCard,
     },
     data(){
         return{
@@ -154,10 +112,7 @@ export default {
                 this.randomMovies = res.data
             })
             .catch(err => { console.log(err) })
-        },
-        goPostReview(movie) {
-            this.$router.push({ name: 'PostReview', params:{ movie_id: movie.id, movie: movie}})
-        },         
+        },     
     },
 
     created(){
