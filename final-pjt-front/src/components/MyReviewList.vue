@@ -4,7 +4,7 @@
       <MyReviewItem
       :myReview="myReview"
       />
-      <img :src="`https://image.tmdb.org/t/p/w500/${myReview.movie.poster_path}`">
+      <img  class="border border-secondary" :src="`https://image.tmdb.org/t/p/w500/${myReview.movie.poster_path}`">
     </div>
   </div>
 </template>
