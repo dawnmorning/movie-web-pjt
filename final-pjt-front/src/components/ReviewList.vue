@@ -1,5 +1,8 @@
 <template>
   <div class="container" v-if="reviews">
+    <!-- 팔로워 목록 -->
+
+
     <div>나는야 홈런왕</div>
 
     <!-- 리뷰 자리 -->
@@ -40,10 +43,13 @@ export default {
     },
     profileImage(){
       return DJANGO_URL+this.$store.state.profile_image
-    }
+    },
+
+
   },
   created() {
     this.$store.dispatch('getReviews')
+    this.$store.dispatch('getFollowings')
   },
   methods:{
   }

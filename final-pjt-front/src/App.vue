@@ -65,9 +65,7 @@ export default {
     goRecommend(){
       this.$router.push({name: "RecomView"})
     },
-
   },
-
 }
 </script>
 

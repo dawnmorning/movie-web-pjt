@@ -120,8 +120,24 @@ export default new Vuex.Store({
   },
   actions: {
     // account 관련 함수
-    getProfile(context, data){
-      
+    getProfile(context, data){     
+      axios({
+        method: 'get',
+        url : `${DJANGO_URL}/api/v1/${data.username}/`,
+        headers:{
+          Authorization : `Token ${data.token}`,
+        },
+      })
+      .then(res => {
+        console.log(res)
+        console.log(context)
+        
+        // context.commit('GET_PROFILE', res.data)
+      })
+      .catch( err => console.log(err))
+    },
+
+    getFollowings(context, data){     
       axios({
         method: 'get',
         url : `${DJANGO_URL}/api/v1/${data.username}/`,
