@@ -82,16 +82,17 @@
                 </div>
                 
                 <div class="boards">
-                    <ul class="board_list " v-if="myReviews">
-                        <li v-for="myReview in myReviews" :key="myReview.id">
-                            <span @click="goReviewDetail(myReview)">
-                                <img :src="`https://image.tmdb.org/t/p/w500/${myReview.movie.poster_path}`">
-                                <p>좋아요 수 : {{ myReview.like_users.length }}</p>
-                                <p>좋아요한 사람 : {{ myReview.like_users }}</p>
-                            </span>
+                    <div class="board_list " v-if="myReviews">
+                        <div v-for="myReview in myReviews" :key="myReview.id">
+                            <div @click="goReviewDetail(myReview)">
+                                <img class='profilegrid' :src="`https://image.tmdb.org/t/p/w500/${myReview.movie.poster_path}`">
+                                <!-- 좋아요 있을 때 좋아요 표시필요 -->
+																<span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요 수 : {{ myReview.like_users.length }}</span>
+                                <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요한 사람 : {{ myReview.like_users }}</span>
+                            </div>
                             <!-- <MyReviewItem :myReview='myReview'/> -->
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -374,5 +375,15 @@ export default {
   font-weight: bold;
   transform: scale(1.1);
   transition: all 0.5s;
+}
+ul{
+    list-style:none;
+}
+.profilegrid{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	padding: 5px;
+	/* grid-template-rows: 300px 300px; */
+	width:314px;
 }
 </style>

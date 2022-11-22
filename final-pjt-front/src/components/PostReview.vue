@@ -1,5 +1,5 @@
 <template>
-    <div class='reviewbody'>
+    <div class='reviewbody '>
 			<div id="box" class='postfont animate__animated animate__fadeIn animate-delay-2s'>
 				<img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" style='height: 500px; margin-left:15%; border-radius: 0.5cm;'>
 				<h1 class="heading" style='font-weight:600;'>{{movie.title}}</h1>
@@ -15,29 +15,15 @@
 					data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰쓰기
 					</button>
 				</div>
-			
-        <!-- 모달 들어갈 내용 -->
-        <!-- <div class='reviewModal' v-if='is_show' style='text-align:center; margin-top:10px; '>
-            <div class="ReviewInlineblock" style= 'width: 400px;'>
-                <input style=' width:400px;' type="text" id='username' v-model='title' placeholder="댓글 제목" class='id'>
-            </div>
-            <div class="ReviewInlineblock">
-                <input style=' width:400px;' type="text" id='content'  v-model='content' placeholder="내용" class='content'>      
-            </div>
-            <div class="ReviewInlineblock">
-              <input  type="number" value="rating"  v-model='rating' placeholder="평점">
-            </div>
-              <button style='font-size:15px; margin-left:30px; width:60px; height:40px; bottom:100px;' @click='postReview'>작성</button>
-        </div> -->
       </div>
       
       <!-- Modal -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog jua">
           <div class="modal-content">
-            <div class="modal-header ">
-              <h1 class="text-align-center modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header">
+              <h1 class="text-align-center modal-title fs-5" id="staticBackdropLabel">리뷰 작성</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style='font-size:20px;'></button>
             </div>
             <!-- 작성 내용 부분 -->
             <div class="modal-body jua" style='margin-top:10px;'>
@@ -46,17 +32,20 @@
                   <input style=' width:400px;' type="text" id='username' v-model='title' placeholder="댓글 제목" class='id'>
               </div>
               <div class="ReviewInlineblock">
-                  <input style=' width:400px;' type="text" id='content'  v-model='content' placeholder="내용" class='content'>      
+                  <input size='44' style=' height:100px; flex-wrap:wrap' type="text" id='content'  v-model='content' placeholder="내용" class='content'>      
               </div>
               <div class="ReviewInlineblock">
-                <input  type="number" value="rating"  v-model='rating' placeholder="평점">
+                <star-rating id=setstar :star-size="30" v-model="rating" :border-width="5" border-color="#d8d8d8" 
+                :rounded-corners="true" 
+                :increment="0.5"
+                :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]">
+                </star-rating>
               </div>
-                <button style='font-size:15px; margin-left:30px; width:60px; height:40px; bottom:100px; left: 100px; border-radius:0.1cm' @click='postReview'>작성</button>
               </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary">작성하기</button>
+                <button @click='postReview' type="button" class="btn btn-primary">작성하기</button>
               </div>
           </div>
         </div>
@@ -67,9 +56,12 @@
 
 <script>
 // const IMG_URL = "https://image.tmdb.org/t/p/w500"
-
+import StarRating from 'vue-star-rating'
 export default {
     name: 'PostReview',
+    components:{
+    StarRating
+  },
     data() {
         return {
             // movie:null,
