@@ -1,94 +1,78 @@
 <template>
-  <div>
-
-<!-- 최신순 영화 -->
-    <div class='new'>
-        <div class='jua' style='margin-top:80px;'>
-            <h1 style='margin-bottom:5px; margin-top:20px;'>최근 개봉한 영화</h1>
-            <button
-            @click="latest_count ++"
-            style='font-size:20px; margin-top:20px;'
-            >더보기</button>
-        </div>
-        <div>
-            <div  v-if='latestMovies' class='update' >
-                
-                
-                 <div v-for='movie in latestMovies' :key='movie.id' style='margin-top:-20px;'> 
-                    <MovieCard :movie="movie.id"/>
-                
-                </div>        
-            </div>
-        </div>
-    </div>
-    
-<!-- 인기순 영화 -->
-    <div class='popular'>
-        <div class='jua' style='margin-top:80px;'>
-        <h1 style='margin-bottom:5px; margin-top:20px;' >지금, 인기있는 영화</h1>
-        <button
-        @click="popular_count ++"
-        style='font-size:20px; margin-top:20px;'
-        >더보기</button>
-        </div>
-        <div class=''>
-            <div  v-if='popularMovies' class='update' >
-                <div v-for='movie in popularMovies' :key='movie.id'>
-                    <MovieCard :movie_id="movie_id"/>
-                </div>        
-            </div>
-        </div>
-    </div>
-<!-- 평점순 영화 -->
-    <div class='voteaver'>
-        <div class='jua' style='margin-top:80px;'>
-            <h1 style='margin-bottom:5px; margin-top:20px;'>평점순</h1>
-            <button
-            @click="vote_count ++"
-            style='font-size:20px; margin-top:20px;'
-            >더보기</button>
-        </div>
-        <div class=''>
-            <div  v-if='voteMovies' class='update' >
-                <div v-for='movie in voteMovies' :key='movie.id'>
-                    <MovieCard :movie_id="movie.id"/>
-
-                </div>        
-            </div>
-        </div>
-    </div>
-<!-- 랜덤 영화 -->
     <div>
-        <h1>랜덤</h1>
-        <button
-        @click="getRandomMovies"
-        >더보기</button>
-        <section class='please'>
-            <div  v-if='randomMovies' class="container" >
-                <div v-for='movie in randomMovies' :key='movie.id'>
-                    <MovieCard :movie_id="movie.id"/>
-                </div>        
-    <div class='random' >
-        <div class='jua' style='margin-top:80px;'>
-            <h1 style='margin-bottom:5px; margin-top:20px;'>랜덤</h1>
-            <button
-            @click="getRandomMovies"
-            style='font-size:20px; margin-top:20px;'
-            >더보기</button>
-            
-        </div>
-        <div class=''>
-            <div  v-if='randomMovies' class='update' >
-                <carousel :per-page="9" :navigate-to="someLocalProperty" :mouse-drag="false">
-                    <slide v-for='movie in randomMovies' :key='movie.id' class='slide__item '>
-                <!-- <div v-for='movie in randomMovies' :key='movie.id'> -->
-                    <MovieCard  :movie="movie.id"/>
-                    </slide>
-                </carousel>
-                <!-- </div>         -->
+<!-- 최신순 영화 -->
+        <div class='new'>
+            <div class='jua' style='margin-top:80px;'>
+                <h1 style='margin-bottom:5px; margin-top:20px;'>최근 개봉한 영화</h1>
+                <button
+                @click="latest_count ++"
+                style='font-size:20px; margin-top:20px;'
+                >더보기</button>
+            </div>
+            <div>
+                <div  v-if='latestMovies' class='update' >
+                    <div v-for='movie in latestMovies' :key='movie.id' style='margin-top:-20px;'> 
+                        <MovieCard :movie="movie"/>
+                    
+                    </div>        
+                </div>
             </div>
         </div>
-    </div>
+        
+<!-- 인기순 영화 -->
+        <div class='popular'>
+            <div class='jua' style='margin-top:80px;'>
+            <h1 style='margin-bottom:5px; margin-top:20px;' >지금, 인기있는 영화</h1>
+            <button
+            @click="popular_count ++"
+            style='font-size:20px; margin-top:20px;'
+            >더보기</button>
+            </div>
+            <div class=''>
+                <div  v-if='popularMovies' class='update' >
+                    <div v-for='movie in popularMovies' :key='movie.id'>
+                        <MovieCard :movie="movie"/>
+                    </div>        
+                </div>
+            </div>
+        </div>
+<!-- 평점순 영화 -->
+        <div class='voteaver'>
+            <div class='jua' style='margin-top:80px;'>
+                <h1 style='margin-bottom:5px; margin-top:20px;'>평점순</h1>
+                <button
+                @click="vote_count ++"
+                style='font-size:20px; margin-top:20px;'
+                >더보기</button>
+            </div>
+            <div class=''>
+                <div  v-if='voteMovies' class='update' >
+                    <div v-for='movie in voteMovies' :key='movie.id'>
+                        <MovieCard :movie="movie"/>
+
+                    </div>        
+                </div>
+            </div>
+        </div>
+<!-- 랜덤 영화 -->   
+        <div class='random' >
+            <div class='jua' style='margin-top:80px;'>
+                <h1 style='margin-bottom:5px; margin-top:20px;'>랜덤</h1>
+                <button
+                @click="getRandomMovies"
+                style='font-size:20px; margin-top:20px;'
+                >더보기</button>
+            </div>
+            <div class=''>
+                <div  v-if='randomMovies' class='update' >
+                    <carousel :per-page="9" :navigate-to="someLocalProperty" :mouse-drag="false">
+                        <slide v-for='movie in randomMovies' :key='movie.id' class='slide__item '>
+                            <MovieCard  :movie="movie"/>
+                        </slide>
+                    </carousel>
+                </div>
+            </div>
+        </div>
   </div>
 </template>
 
