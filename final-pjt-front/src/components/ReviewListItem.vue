@@ -2,13 +2,13 @@
 
   <div class='bodyWrap' v-if="review">
     <!-- {{review.comments}} -->
-    <div class="card-body">
+    <div class="card-body border border-secondary" style='border-radius:0.3cm'>
       <div class='needinLine' v-if="profileImage">
         <img :src=profileImage alt="" class='userImage'>
         <p class="card-text" style='font-size:16px; margin-top:5px;'>{{review.author.nickname}}</p>
       </div>
 
-      <img class='reviewimg' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
+      <img class='reviewimg ' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
       <hr>       
       <h5 class="card-title" style='text-align:center;'>영화 : {{review.movie.title}}</h5>
   

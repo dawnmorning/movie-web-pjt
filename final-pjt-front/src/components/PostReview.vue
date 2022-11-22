@@ -1,7 +1,7 @@
 <template>
     <div class='reviewbody '>
 			<div id="box" class='postfont animate__animated animate__fadeIn animate-delay-2s'>
-				<img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" style='height: 500px; margin-left:15%; border-radius: 0.5cm;'>
+				<img class='img-fluid' :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" style='height: 500px; margin-left:15%; border-radius: 0.5cm;'>
 				<h1 class="heading" style='font-weight:600;'>{{movie.title}}</h1>
 				<div class="data">
 					<span class="average">평점 {{movie.vote_average}}</span>
