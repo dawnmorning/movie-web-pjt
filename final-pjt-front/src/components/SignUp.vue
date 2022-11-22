@@ -10,7 +10,7 @@
                     <p class='ErrorMsg' v-if="ErrorMessage?.username">{{ ErrorMessage.username[0] }}</p>
                 </div>
                 <div class="inlineToBlock">
-                    <input type="text" id='nickname' v-model.trim='nickname' placeholder="닉네임" class='nickname'>
+                    <input type="text" id='nickname' v-model.trim='nickname' placeholder="닉네임" class='nick'>
                     <p class='ErrorMsg' v-if="ErrorMessage?.nickname">{{ ErrorMessage.nickname[0] }}</p>         
                 </div>
                 <div class="inlineToBlock">
