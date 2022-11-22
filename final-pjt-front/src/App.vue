@@ -57,21 +57,17 @@ export default {
           return this.$store.getters.isLogin
       },
   },
-    methods:{
-      logOut(){
-        this.$store.dispatch('logOut')
-        
-      },
-      goRecommend(){
-        this.$router.push({name: "RecomView"})
-      }
+  methods:{
+    logOut(){
+      this.$store.dispatch('logOut')
+      
+    },
+    goRecommend(){
+      this.$router.push({name: "RecomView"})
+    },
+
   },
-    // username(){
-    //   return 
-    // }
-  // components:{
-  //   LogIn,
-  // }
+
 }
 </script>
 

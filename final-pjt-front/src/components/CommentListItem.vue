@@ -14,7 +14,9 @@
         <form @submit.prevent="updateComment">
           <input type="text" v-model.trim='inputComment'>
           <button type="submit">수정</button> |
+
           <button @click='deleteComment'>삭제</button>
+
         </form>
       </div>
 

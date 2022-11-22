@@ -81,36 +81,8 @@
                     </ul>
                 </div>
             </div>
-            <!-- // contents -->
         </div>
     </div>
-  <!-- </div> -->
-    <!-- <nav> -->
-        <!-- <p>Hello, {{ username }} </p> -->
-        <!-- <div class='entireWrpap'>
-          <div class='imgWrap'>
-            <div class = 'profile_img'>
-              <img :src="profileImage" alt="프로필 이미지">
-            </div>
-          </div>
-          <div class='detail'>
-            <div class='top'>
-              <div>{{ username }}</div>
-              <div>닉네임  {{ information.nickname }}</div>
-            </div>  
-          </div>  
-          <ul class='middle'>
-            <li>
-              <div>관심장르  {{ information.interested }}</div>
-            </li>
-            <li>
-              <div>등급  {{ information.grade }}</div>
-            </li>
-          </ul>
-        </div> 
-        <button @click='goModify'>프로필 수정</button>
-    </nav> -->
-
 </template>
 
 <script>
