@@ -17,6 +17,6 @@ class CustomAccountAdapter(DefaultAccountAdapter):
 
         if nickname:
             user.nickname = nickname
-
+        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         user.save()
         return user
