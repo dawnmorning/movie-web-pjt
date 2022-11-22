@@ -171,7 +171,7 @@ export default {
                 url: `${DJANGO_URL}/api/v1/follow/${this.username}/`,
                 headers: { Authorization: `Token ${this.$store.state.token}` }
             })
-                .then((res) => {
+            .then((res) => {
                 const data = res.data;
                 this.isFollowing = data.is_following;
                 this.followers = data.followers;

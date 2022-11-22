@@ -44,10 +44,11 @@ def follow(request, username):
     
     followers = you.followers.all()
     followers = NestedUserSerializer(data=followers, many=True)
+    followers.is_valid()
     
     context = {
         'is_following': is_following,
-        'followers': followers,
+        'followers': followers.data,
         'cnt_followers': you.followers.count(),
         'cnt_followings': you.followings.count(),
     }

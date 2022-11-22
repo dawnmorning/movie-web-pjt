@@ -43,8 +43,12 @@ User = get_user_model()
 
 class CustomRegisterSerializer(RegisterSerializer):
     # 기본 설정 필드: username, password, email
-    # 추가 설정 필드: profile_image    class Meta:
+    # 추가 설정 필드: profile_image, nickname
     profile_image = serializers.ImageField(use_url=True, required=False)
+    username = serializers.CharField(
+        max_length=100,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+        )
     nickname = serializers.CharField(
         max_length=100,
         validators=[UniqueValidator(queryset=User.objects.all())]

@@ -3,7 +3,7 @@
   <div class='bodyWrap' v-if="review">
     <!-- {{review.comments}} -->
     <div class="card-body">
-      <div class='needinLine'>
+      <div class='needinLine' v-if="profileImage">
         <img :src=profileImage alt="" class='userImage'>
         <p class="card-text" style='font-size:16px; margin-top:5px;'>{{review.author.nickname}}</p>
       </div>
@@ -35,7 +35,7 @@
       </div>
         
       <!-- 댓글 -->
-      <div v-for="comment in review.comments" :key="comment.id">
+      <div v-for="comment in comments" :key="comment.id">
         <CommentListItem
         :comment=comment
         />
@@ -55,6 +55,7 @@
         @click="createComment"
         class='buttonstyle'
         >입력</div>
+        
         <!-- 모달 -->
         <div @click='isopen' class='clickcursor'>댓글모두 보기</div>
         <div class='black-bg' v-if='is_open'>
@@ -88,37 +89,36 @@ const DJANGO_URL = 'http://127.0.0.1:8000'
 export default {
   name: 'ReviewListItem',
   props:{
-      review_id:Number,
+      review:Object,
+  },
+  components: {
+      CommentListItem,
   },
   data() {
       return {
         inputData: null,
         is_open : false,
-        user_id: this.$store.state.user_id,
-        review: null,
-        review_like_users: null,
-        review_like_users_count: null,
-        review_isLike: null,
+        review_like_users: this.review.like_users, 
+        review_like_users_count: this.review.cnt_like_users,
       }
   },
-  components: {
-      CommentListItem,
+  computed:{
+    user_id() { return this.$store.state.user_id },
+    comments() { return this.review.comments },
+    review_isLike() { return this.review_like_users.some(user => { return user.id === this.user_id })},
+    profileImage() { return DJANGO_URL+this.$store.state.profile_image },
+
   },
-  // computed: {
-  //     comments() {
-  //         return this.review.comments
-  //     }
-  // },
+
   methods: {
     createComment() {
         const payload = {
-            review_id: this.review_id,
+            review_id: this.review.id,
             comment: this.inputData,
         }
         this.$store.dispatch('createComment', payload)
         this.inputData = null
     },
-
     isopen(){
       this.is_open= true
     },
@@ -135,7 +135,6 @@ export default {
         },
       })
       .then(res => {
-        this.review = res.data
         this.review_like_users = res.data.like_users,
         this.review_like_users_count = res.data.cnt_like_users,
         this.review_isLike =  res.data.like_users.some(like_user => { return like_user.id === this.user_id })        
@@ -147,7 +146,7 @@ export default {
     likeReview() {
       axios({
         method: "put",
-        url: `${DJANGO_URL}/api/v3/review/like/${this.review_id}/`,
+        url: `${DJANGO_URL}/api/v3/review/like/${this.review.id}/`,
         headers: { Authorization: `Token ${this.$store.state.token}` }
       })
       .then(res => {
@@ -159,14 +158,9 @@ export default {
       })
     },
   },
-  created() {
-    this.getReview()
-  },
-  computed:{
-    profileImage(){
-      return DJANGO_URL+this.$store.state.profile_image
-    }
-  }
+  // created() {
+  //   this.getReview()
+  // },
 }
 </script>
 
