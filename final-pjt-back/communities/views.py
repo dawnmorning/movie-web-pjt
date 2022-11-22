@@ -101,12 +101,19 @@ def review_like(request, review_pk):
     return Response(context)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
-def comment_r(request, comment_pk):
+def comment_ru(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
-    serializer = CommentSerializer(comment)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    if request.method == "GET":
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == "PUT":
+        serializer = CommentSerializer(comment, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -122,18 +129,17 @@ def comment_c(request, review_pk):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def comment_d(request, comment_pk):
-    comment = get_object_or_404(Comment, pk=comment_pk)
+    comment = get_object_or_404(Comment, id=comment_pk)
     
     if request.user != comment.author:
         return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     comment.delete()
-    serializer = CommentSerializer(comment)
-    return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+    return Response({'comment_pk':comment_pk}, status=status.HTTP_204_NO_CONTENT)
 
 
 # 댓글에 하트 표시
-@api_view(['POST'])
+@api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def comment_like(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)

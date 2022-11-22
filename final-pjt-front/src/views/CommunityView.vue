@@ -12,9 +12,6 @@ export default {
     components: {
       ReviewList,
     }
-
- 
-
 }
 </script>
 

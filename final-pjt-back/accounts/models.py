@@ -7,9 +7,10 @@ from imagekit.processors import ResizeToFill
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 import random
-random_number = random.randrange(1, 9)
 
 class User(AbstractUser):
+    random_number = random.randrange(1, 9)
+    
     nickname = models.CharField(max_length=128)
     # 업로드할 경로, 이미지를 선택하지 않았을 때 대신 올라갈 기본값 설정
     profile_image = ProcessedImageField(

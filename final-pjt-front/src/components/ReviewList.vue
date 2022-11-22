@@ -5,12 +5,12 @@
     <!-- 리뷰 자리 -->
     <div class='left_body' v-for="review in reviews" :key="review.id">
         <ReviewListItem
-        :review_id=review.id
+        :review=review
         />
     </div>
     
     <!-- 프로필 자리 -->
-    <div class='right_body'>
+    <div class='right_body' v-if="profileImage">
       <div class=profile_box>
         <img class='profile_img' :src=profileImage alt="">
         <div>{{ this.$store.state.username }}</div>

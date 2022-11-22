@@ -1,7 +1,7 @@
 <template>
   <nav class='navWrap'>
     <div class='contentsWrap ' style='font-size:20px; margin-top:0;'>
-        <form @submit.prevent='signUp' class = 'formWrap animate__animated animate__fadeIn'>
+        <form @keyup.enter="signUp" @submit.prevent='signUp' class = 'formWrap animate__animated animate__fadeIn'>
             <!-- <div class="jua"></div> -->
             <div class='signupWindow jua' style=''>
                 <h1>회원 가입</h1>
@@ -78,6 +78,10 @@ export default {
 
             const payload={
                 username, nickname, email, password1, password2, 
+            }
+            if (password1 < 9) {
+                alert("비밀번호가 너무 짧습니다.")
+                this.password1 = this.password2 = null
             }
             if (password1 && password2 && password1 != password2) {
                 alert("비밀번호가 일치하지 않습니다")

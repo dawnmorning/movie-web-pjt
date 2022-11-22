@@ -16,7 +16,7 @@
                 </div>
                 
                 <!-- 댓글 -->
-                <div v-for="comment in review.comments" :key="comment.id">
+                <div v-for="comment in comments" :key="comment.id">
                     <CommentListItem
                     :comment=comment
                     />
@@ -59,6 +59,9 @@ export default {
                 }
             })            
             return myReview
+        },
+        comments() {
+            return this.review.comments
         }
     },
     components: {

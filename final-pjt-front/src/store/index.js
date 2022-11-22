@@ -103,7 +103,19 @@ export default new Vuex.Store({
         if (review.id == comment.review) { review.comments.push(comment) }
         return review
       })      
-    }
+    },
+
+    UPDATE_COMMENT(state, comment) {
+      state.reviews = state.reviews.map(review => {
+        if (review.id == comment.review) { 
+          review.comments = review.comments.map(commentInReview => {
+            if (commentInReview.id === comment.id) { commentInReview.content = comment.content }
+            return commentInReview
+          })
+        }
+        return review
+      })
+    },
     
   },
   actions: {
@@ -147,9 +159,14 @@ export default new Vuex.Store({
         context.dispatch('getProfile', data)
         router.push({name:'HomeView'})
       })
-      .catch( function(err) {
-        console.log(err)
-        router.push({ name:'SignUp', query:err })
+      .catch(err => {
+        if (err.response.data?.non_field_errors && err.response.data.non_field_errors?.include('The password is too similar to the email address.')) {
+          alert('회원가입이 완료되었습니다.')
+          router.push({name:'LogIn'})
+
+        }else{
+          router.push({ name:'SignUp', query:err })
+        }
       })
     },
     
@@ -276,6 +293,7 @@ export default new Vuex.Store({
           headers: { Authorization : `Token ${context.state.token}`,},
       })
       .then(() => { 
+        
         context.commit('DELETE_COMMENT', comment)
       })
       .catch(err => {
@@ -295,10 +313,27 @@ export default new Vuex.Store({
         }
       })
       .then(res => {
+        console.log(res)
+        
         context.commit('CREATE_COMMENT', res.data)
       })
-    }
+    },
 
+    updateComment(context, payload) {
+      axios({
+        method: 'put',
+        url: `${DJANGO_URL}/api/v3/comment/${payload.comment_id}/`,
+        headers: { Authorization : `Token ${context.state.token}`,},
+        data: {
+          content: payload.content,
+        }
+      })
+      .then(res => {
+        console.log(res)
+        
+        context.commit('UPDATE_COMMENT', res.data)
+      })
+    }
   },
   modules: {
   }
