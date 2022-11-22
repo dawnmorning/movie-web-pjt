@@ -35,11 +35,7 @@
       </div>
         
       <!-- 댓글 -->
-      <div v-for="comment in comments" :key="comment.id">
-        <CommentListItem
-        :comment=comment
-        />
-      </div>
+      
 
 
       <hr style='margin:0px;'>
@@ -57,24 +53,31 @@
         >입력</div>
         
         <!-- 모달 -->
-        <div @click='isopen' class='clickcursor'>댓글모두 보기</div>
-        <div class='black-bg' v-if='is_open'>
-          <div class='white-bg'>
-            <h4>댓글 목록</h4>
-            <p>댓글 내용</p>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style='font-size:15px; width:70px;'>
+          댓글보기
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">댓글목록</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div v-for="comment in comments" :key="comment.id">
+                  <CommentListItem
+                  :comment=comment
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+              </div>
+            </div>
           </div>
-          <button @click= 'isclose'>닫기</button>
         </div>
       </form>
-        <!-- <hr>
-        <h5>댓글 작성하기</h5>
-        <input type="text"
-        v-model="inputData"
-        @keyup.enter="createComment" 
-        >
-        <button
-        @click="createComment"
-        >입력</button> -->
     </div>
   </div>
 </template>
@@ -97,7 +100,7 @@ export default {
   data() {
       return {
         inputData: null,
-        is_open : false,
+        // is_open : false,
         review_like_users: this.review.like_users, 
         review_like_users_count: this.review.cnt_like_users,
       }
@@ -119,13 +122,13 @@ export default {
         this.$store.dispatch('createComment', payload)
         this.inputData = null
     },
-    isopen(){
-      this.is_open= true
-    },
+    // isopen(){
+    //   this.is_open= true
+    // },
 
-    isclose(){
-      this.is_open= false
-    },
+    // isclose(){
+    //   this.is_open= false
+    // },
     getReview() {
       axios({
         method: 'get',
@@ -196,8 +199,9 @@ div .card-body{
   height: 20px;
   /* font-size:10px; */
   display: inline;
-  /* position: relative; */
-  top: 15px;
+  position: relative;
+  top: 20px;
+  text-align: center;
   /* right: 30px; */
 
 }
@@ -210,26 +214,6 @@ div .card-body{
   overflow: auto;
 }
 /* 모달 */
-.black-bg{
-  box-sizing: border-box;
-  width : auto; height: auto;
-  background:  rgba(0,0,0,0.5);
-  position: fixed; padding: 20px;
-  position: absolute;
-  z-index: 10;
-  bottom: 150px;
-} 
-.white-bg{
-  width: auto; background: white;
-  height: auto; 
-  border-radius: 8px;
-  padding: 20px;
-   position: absolute;
-  z-index: 10;
-  text-align: center;
-  justify-content: center;
-  bottom: 10px;   
-}
 .userImage{
   width:10%;
 }

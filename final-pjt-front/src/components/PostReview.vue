@@ -9,24 +9,57 @@
 				<p class="texts">
 					{{movie.overview}}
 				</p>
+        <!-- Button trigger modal -->
 				<div style='text-align: center;'>
 					<button @click='showModal' class='jua btn-open-popup' style='font-size:15px; margin-top: -30px; width:80px; border-radius:0.3cm;' 
 					data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰쓰기
 					</button>
 				</div>
-			</div>
-      <!-- 모달 들어갈 내용 -->
-      <div class='reviewModal jua' v-if='is_show' style='text-align:center; margin-top:10px; '>
+			
+        <!-- 모달 들어갈 내용 -->
+        <!-- <div class='reviewModal' v-if='is_show' style='text-align:center; margin-top:10px; '>
             <div class="ReviewInlineblock" style= 'width: 400px;'>
-                <input style=' width:400px;' type="text" id='username'  placeholder="댓글 제목" class='id'>
+                <input style=' width:400px;' type="text" id='username' v-model='title' placeholder="댓글 제목" class='id'>
             </div>
             <div class="ReviewInlineblock">
-                <input style=' width:400px;' type="text" id='content'  placeholder="댓글 내용" class='content'>      
+                <input style=' width:400px;' type="text" id='content'  v-model='content' placeholder="내용" class='content'>      
             </div>
             <div class="ReviewInlineblock">
-              <input  type="number" value="rating"  placeholder="평점">
+              <input  type="number" value="rating"  v-model='rating' placeholder="평점">
             </div>
               <button style='font-size:15px; margin-left:30px; width:60px; height:40px; bottom:100px;' @click='postReview'>작성</button>
+        </div> -->
+      </div>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header ">
+              <h1 class="text-align-center modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- 작성 내용 부분 -->
+            <div class="modal-body jua" style='margin-top:10px;'>
+              <div class='reviewModal' v-if='is_show' style='text-align:center; margin-top:10px; '>
+              <div class="ReviewInlineblock" style= 'width: 400px;'>
+                  <input style=' width:400px;' type="text" id='username' v-model='title' placeholder="댓글 제목" class='id'>
+              </div>
+              <div class="ReviewInlineblock">
+                  <input style=' width:400px;' type="text" id='content'  v-model='content' placeholder="내용" class='content'>      
+              </div>
+              <div class="ReviewInlineblock">
+                <input  type="number" value="rating"  v-model='rating' placeholder="평점">
+              </div>
+                <button style='font-size:15px; margin-left:30px; width:60px; height:40px; bottom:100px; left: 100px; border-radius:0.1cm' @click='postReview'>작성</button>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary">작성하기</button>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -43,7 +76,7 @@ export default {
             title:null,
             content:null,
             rating:null,
-						is_show : false,
+						is_show : true,
 					
         }
     },
@@ -153,7 +186,7 @@ export default {
 .reviewModal{
   position: relative;
   width: 490px;
-  left: 700px;
+  /* left: 700px; */
   
 }
 .ReviewInlineblock {
@@ -166,9 +199,8 @@ export default {
 .reviewModal button{
   position: relative;
   top:-75px;
-  left: 220px;
 }
-input #content{
+.modal {
 
 }
 </style>

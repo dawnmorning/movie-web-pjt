@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    
     <!-- 로그인 후 -->
     <span v-if='isLogin'>
       <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light ">
