@@ -21,8 +21,8 @@
                         <span v-if="!isFollowing">팔로우</span>
                         <span v-if="isFollowing">팔로우 취소</span>
                         </button>
-
                     </div>
+
                     <div class="area_text">
                         <div class="tit_desc">
                             <span class="title">게시물</span>
@@ -30,13 +30,26 @@
                         </div>
                         <div class="tit_desc">
                             <span class="title">팔로워</span>
-                            <span class="sub_title">{{ cnt_followings }}</span>
+                            <span class="sub_title">{{ cnt_followers }}</span>
+                            <ul v-for="follower in followers" :key="follower.id">
+                                <img :src="`http://127.0.0.1:8000${follower.profile_image}`" alt="프로필 이미지">
+                                <router-link :to="{name: 'ProfileView', params: { username : follower.username}}">
+                                {{follower.nickname}}
+                                </router-link>
+                            </ul>
+                        </div>
+                        <div class="tit_desc">
                             <span>{{ followings }}</span>
-                            </div>
-                            <div class="tit_desc">
-                                <span class="title">팔로우</span>
-                                <span class="sub_title">{{ cnt_followers }}</span>
-                                <span>{{ followers }}</span>
+                            
+                            <span class="title">팔로우</span>
+                            <span class="sub_title">{{ cnt_followings }}</span>
+                            <ul v-for="following in followings" :key="following.id">
+                                <img :src="`http://127.0.0.1:8000${following.profile_image}`" alt="프로필 이미지">
+                                <router-link :to="{name: 'ProfileView', params: { username : following.username}}">
+                                {{following.nickname}}
+                                </router-link>
+                            </ul>
+                            
                         </div>
                     </div>
                     <!-- <div class="area_text profile_info">
