@@ -33,9 +33,9 @@
                             <span class="sub_title">{{ cnt_followers }}</span>
                             <ul v-for="follower in followers" :key="follower.id">
                                 <img :src="`http://127.0.0.1:8000${follower.profile_image}`" alt="프로필 이미지">
-                                <router-link :to="{name: 'ProfileView', params: { username : follower.username}}">
+                                <a :href="`http://localhost:8080/profile/${follower.username}`">
                                 {{follower.nickname}}
-                                </router-link>
+                                </a>
                             </ul>
                         </div>
                         <div class="tit_desc">
@@ -45,9 +45,9 @@
                             <span class="sub_title">{{ cnt_followings }}</span>
                             <ul v-for="following in followings" :key="following.id">
                                 <img :src="`http://127.0.0.1:8000${following.profile_image}`" alt="프로필 이미지">
-                                <router-link :to="{name: 'ProfileView', params: { username : following.username}}">
+                                <a a :href="`http://localhost:8080/profile/${following.username}`">
                                 {{following.nickname}}
-                                </router-link>
+                                </a>
                             </ul>
                             
                         </div>
@@ -106,6 +106,9 @@ const DJANGO_URL='http://127.0.0.1:8000'
 
 export default {
     name: "UserInfomation",
+    // props: {
+    //     profile: Object,
+    // },
     data() {
         return {
             username: null,
@@ -159,11 +162,26 @@ export default {
             })
             .then((res) => {
                 const data = res.data;
+
+                // cnt_followers
+                // : 
+                // 1
+                // cnt_followings
+                // : 
+                // 1
+                // followers
+                // : 
+                // [{…}, __ob__: Observer]
+                // is_following
+                // : 
+                // true
                 this.isFollowing = data.is_following;
                 this.followers = data.followers;
                 this.followings = data.followings;
                 this.cnt_followers = data.cnt_followers;
                 this.cnt_followings = data.cnt_followings;
+                this.$store.commit('GET_PROFILE', data.myFollowings)
+                
             }).catch(() => { });
         },
         getMyReviewList() {
@@ -185,9 +203,12 @@ export default {
         }
     },
     created() {
-        this.getProfile(),
         this.getMyReviewList()
+        this.getProfile()
     },
+    updated() {
+
+    }
 }
 </script>
 

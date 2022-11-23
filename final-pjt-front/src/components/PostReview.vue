@@ -91,7 +91,6 @@ export default {
             else { alert('빈 칸을 채워주세요.') }
         },
 				showModal(){
-					console.log('show')
 					this.is_show = true
 				}
     },

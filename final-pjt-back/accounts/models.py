@@ -6,10 +6,8 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
-import random
 
 class User(AbstractUser):
-    random_number = random.randrange(1, 9)
     
     nickname = models.CharField(max_length=128)
     # 업로드할 경로, 이미지를 선택하지 않았을 때 대신 올라갈 기본값 설정
@@ -19,7 +17,7 @@ class User(AbstractUser):
         processors=[ResizeToFill(300, 300)],
         format='JPEG',
         options={'quality': 70},
-        default=f'default{random_number}.jpg',
+        default='default.jpg',
     )
     grade = models.IntegerField(
         default=0,

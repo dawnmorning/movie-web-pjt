@@ -2,16 +2,22 @@
 
   <div class='bodyWrap' v-if="review">
     <!-- {{review.comments}} -->
+    
     <div class="card-body border border-secondary" style='border-radius:0.3cm'>
-      <div class='needinLine' v-if="profileImage">
-        <img :src=profileImage alt="" class='userImage'>
+      <div class='needinLine' v-if="profileImage" style="height:10%;">
+        <a class='jua' style='text-decoration: none; color:; font-size:smaller; height:10%; margin:0px;' :href="`http://localhost:8080/profile/${review.author.username}`">
+        <div class="splide-card" :style="`background-image: ${profileImage};`">
+        </div>
+          <!-- <img :src=profileImage alt="" class='userImage'> -->
         <p class="card-text" style='font-size:16px; margin-top:5px;'>{{review.author.nickname}}</p>
+        </a>
+        
       </div>
-
+      
       <img class='reviewimg ' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
       <hr>       
       <h5 class="card-title" style='text-align:center;'>영화 : {{review.movie.title}}</h5>
-  
+      
       <hr>
       <div class="card-body">
         <h5 class="card-title">리뷰 : {{review.title}}</h5>
@@ -21,25 +27,23 @@
         <button @click="likeReview">
         <span v-if="!review_isLike">좋아요</span>
         <span v-if="review_isLike">좋아요 취소</span>
-        </button>
-        {{review_like_users_count}}
-        <div v-if="review_like_users">
-          <h6>좋아요 누른 사람</h6>
-          <ul v-for="review_like_user in review_like_users" :key="review_like_user.id">
-              <img :src="`http://127.0.0.1:8000${review_like_user.profile_image}`" alt="프로필 이미지">
-              <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}">
-                  {{review_like_user.nickname}}
+      </button>
+      {{review_like_users_count}}
+      <div v-if="review_like_users">
+        <h6>좋아요 누른 사람</h6>
+        <ul v-for="review_like_user in review_like_users" :key="review_like_user.id">
+          <img :src="`http://127.0.0.1:8000${review_like_user.profile_image}`" alt="프로필 이미지">
+          <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}">
+            {{review_like_user.nickname}}
               </router-link>
-          </ul>
+            </ul>
+          </div>
         </div>
-      </div>
         
-      <!-- 댓글 -->
-      
-
-
-      <hr style='margin:0px;'>
-      <!-- <h5>댓글 입력</h5> -->
+        <!-- 댓글 -->
+        
+        <hr style='margin:0px;'>
+        <!-- <h5>댓글 입력</h5> -->
       <form class='commentstyle'>
         <input type="text"
         v-model="inputData"
@@ -109,7 +113,7 @@ export default {
     user_id() { return this.$store.state.user_id },
     comments() { return this.review.comments },
     review_isLike() { return this.review_like_users.some(user => { return user.id === this.user_id })},
-    profileImage() { return DJANGO_URL+this.$store.state.profile_image },
+    profileImage() { return DJANGO_URL+this.review.author.profile_image },
 
   },
 
@@ -219,5 +223,11 @@ div .card-body{
 }
 .needinLine{
   display: flex
+}
+.splide-card {
+  height: 10%;
+  width: 10px;
+  background-size: cover;
+  background-position: center center;
 }
 </style>

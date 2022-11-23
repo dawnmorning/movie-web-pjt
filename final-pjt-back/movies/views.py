@@ -23,19 +23,19 @@ _today = f'{x.year}-{x.month}-{x.day}'
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def movies_r(request) :
+def movies_r(request):
     # 상영 예정작
     movies = Movie.objects.all()
     movies1 = movies.filter(release_date__gte=_today)
     # 오늘 개봉 영화도 포함되어 있음 뷰에서 처리하기
-    upcomming_movies = movies1.order_by('release_date')[:100]
+    upcomming_movies = movies1.order_by('release_date')[:200]
     print(len(upcomming_movies))
     # 현재 개봉한 영화로 필터링
     movies2 = movies.filter(release_date__lte=_today)
-    random_movies = movies2.order_by('?')[:100]
-    latest_movies = movies2.order_by('-release_date')[:100]
-    popular_movies = movies2.order_by('-popularity')[:100]
-    vote_movies = movies2.filter(vote_count__gte=100).order_by('-vote_average')[:100]
+    random_movies = movies2.order_by('?')[:200]
+    latest_movies = movies2.order_by('-release_date')[:200]
+    popular_movies = movies2.order_by('-popularity')[:200]
+    vote_movies = movies2.filter(vote_count__gte=100).order_by('-vote_average')[:200]
     
     movies_list_name = ['upcomming_movies', 'random_movies', 'latest_movies', 'popular_movies', 'vote_movies']
     movies_list = [upcomming_movies, random_movies, latest_movies, popular_movies, vote_movies]

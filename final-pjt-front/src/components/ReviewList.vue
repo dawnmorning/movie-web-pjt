@@ -1,24 +1,35 @@
 <template>
   <div class="container" v-if="reviews">
     <!-- 팔로워 목록 -->
+    
 
-
-    <div>나는야 홈런왕</div>
-
+    <div v-if="myFollowings">
+      <div v-for="myFollowing in myFollowings" :key="myFollowing.id">
+        <div class='profile_box' >
+          <a class='jua' style='text-decoration: none; color:; font-size:smaller ' :href="`http://localhost:8080/profile/${myFollowing.username}`">
+            <img class='profile_img' :src="`http://127.0.0.1:8000${myFollowing.profile_image}`" alt="">
+            <p>{{myFollowing.nickname}}</p>
+          </a>
+        </div>
+      </div>
+    </div>
     <!-- 리뷰 자리 -->
-    <div class='left_body' v-for="review in reviews" :key="review.id">
+    <div class='left_body'>
+      <div  v-for="review in reviews" :key="review.id">
         <ReviewListItem
         :review=review
         />
+      </div>
     </div>
     
     <!-- 프로필 자리 -->
     <div class='right_body' v-if="profileImage">
-      <div class=profile_box>
-        <img class='profile_img' :src=profileImage alt="">
-        <div>{{ this.$store.state.username }}</div>
-        <div class='nickname'>{{ this.$store.state.nickname }}</div>
-        <div></div>
+      <div class='profile_box'>
+        <a class='jua' style='text-decoration: none; color:; font-size:smaller ' :href="`http://localhost:8080/profile/${username}`">
+          <img class='profile_img' :src=profileImage alt="">
+          <div v-if="username">{{ username }}</div>
+          <div class='nickname'>{{ this.$store.state.nickname }}</div>
+        </a>
       </div>
     </div>
   </div>
@@ -28,31 +39,45 @@
 
 const DJANGO_URL = 'http://127.0.0.1:8000'
 import ReviewListItem from '@/components/ReviewListItem'
+
 export default {
   name:'ReviewList',
   data(){
     return{
+      username: this.$store.state.username,
     }
   },
   components: {
       ReviewListItem,
   },
   computed:{
-    reviews(){
-      return this.$store.state.reviews
+   myFollowings() {
+      return this.$store.state.followings
     },
+   following_ids() {
+      const following_ids = this.$store.state.followings.map(following => { return following.id })
+      return following_ids
+    },
+
+    reviews(){
+      const following_reviews = this.$store.state.reviews.filter( review => {
+        return this.following_ids.includes(review.author.id) || this.$store.state.user_id ===  review.author.id
+      } )
+      return following_reviews
+    },
+
     profileImage(){
       return DJANGO_URL+this.$store.state.profile_image
     },
 
 
   },
+
   created() {
     this.$store.dispatch('getReviews')
     this.$store.dispatch('getFollowings')
   },
-  methods:{
-  }
+
 }
 </script>
 
@@ -171,10 +196,14 @@ span{
   object-fit: cover;
   object-fit:cover;
 }
-.nickname{
+.
+{
   color: blue;
   font-weight: 500;
   opacity:0.3;
   margin-top: 5px;
+}
+a {
+  text-decoration: none;
 }
 </style>
