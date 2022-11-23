@@ -87,6 +87,11 @@
                                 <!-- 좋아요 있을 때 좋아요 표시필요 -->
                                 <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요 수 : {{ myReview.like_users.length }}</span>
                                 <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요한 사람 : {{ myReview.like_users}}</span>
+                                <div v-for="like_user in myReview.like_users" :key='like_user.id'>
+                                
+                                    {{like_user.nickname}}
+
+                                </div>
                             </div>
                             <!-- <MyReviewItem :myReview='myReview'/> -->
                         </div>

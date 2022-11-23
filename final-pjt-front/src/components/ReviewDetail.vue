@@ -10,31 +10,54 @@
                 <h5 class="card-title">영화 : {{review.movie.title}}</h5>
                 <hr>
                 <div class="card-body" style='height:200px;'>
-                    <h5 class="card-title">리뷰 : {{review.title}}</h5>
-                    <h5 class="card-subtitle mb-2 text-muted">{{review.updated_at}}</h5>
-                    <h5>별점 : {{review.rating}}</h5>
-                    <!-- <star-rating class="card-subtitle mb-2 text-muted" :value='`${review.rating}`' :read-only='true'>별점 : {{review.rating}}</star-rating> -->
-                    <p class="card-text">{{review.content}}</p>
+                    <div style='text-align:left; width:100%;'>
+                        <h5 class="card-title" style=''>제목 : {{review.title}}</h5>
+                        <h5 class="card-subtitle mb-2 text-muted">{{review.updated_at}}</h5>
+                        <h5>별점 : {{review.rating}}</h5>
+                        <!-- <star-rating class="card-subtitle mb-2 text-muted" :value='`${review.rating}`' :read-only='true'>별점 : {{review.rating}}</star-rating> -->
+                        <p class="card-text">{{review.content}}</p>
+                        <hr>
+                        <h5>댓글 작성하기</h5>
+                        <input type="text"
+                        v-model="inputData"
+                        @keyup.enter="createComment" 
+                        >
+                        <button
+                        @click="createComment"
+                        >입력</button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style='display: flex; position:absolute; bottom:50px; left:120px; font-size:16px;'>
+                            ...댓글보기
+                        </button>
+                    </div>
                 </div>
-                
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">댓글목록</h1>
+                               
+                            </div>
+                            <div class="modal-body" style='padding:0'>
+                                <div v-for="comment in comments" :key="comment.id">
+                                        <CommentListItem
+                                        :comment=comment
+                                        style='text-align:left;'
+                                        />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>											</div>
+                        </div>
+                    </div>
+                </div>
                 <!-- 댓글 -->
-                <div v-for="comment in comments" :key="comment.id">
+                <!-- <div v-for="comment in comments" :key="comment.id">
                     <CommentListItem
                     :comment=comment
                     />
-                </div>
-                <div>
-                    <hr>
-                    <h5>댓글 작성하기</h5>
-                    <input type="text"
-                    v-model="inputData"
-                    @keyup.enter="createComment" 
-                    >
-                    <button
-                    @click="createComment"
-                    >입력</button>
-                </div>
-            <button @click="goBack" style='font-size:20px; left:40px;'>뒤로가기</button>
+                </div> -->
+                
+            <button @click="goBack" style='float:right; font-size:20px; position:relative; bottom:50px;'>뒤로가기</button>
             </div>
         </div>
     </div>
@@ -71,7 +94,7 @@ export default {
     },
     methods: {
         goBack() {
-            this.$router.push()
+            this.$router.go(-1)
         },
         createComment() {
             const payload = {
