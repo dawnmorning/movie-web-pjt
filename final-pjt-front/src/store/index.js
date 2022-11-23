@@ -140,6 +140,7 @@ export default new Vuex.Store({
           Authorization : `Token ${data.token}`,
         },
       })
+
       .then(res => {                
         context.commit('GET_PROFILE', res.data)
       })
@@ -205,12 +206,14 @@ export default new Vuex.Store({
         }
       })
       .then(res => {
+        console.log(res)
         context.commit('SAVE_TOKEN', res.data.key)
 
         const data = {
           token: res.data.key,
           username: payload.username
         }
+        
         context.dispatch('getProfile', data)
         router.push({name: 'HomeView'})
       })

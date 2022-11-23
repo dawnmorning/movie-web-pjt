@@ -1,8 +1,6 @@
 <template>
   <div class="container" v-if="reviews">
     <!-- 팔로워 목록 -->
-    
-
     <div v-if="myFollowings">
       <div v-for="myFollowing in myFollowings" :key="myFollowing.id">
         <div class='profile_box' >
@@ -13,6 +11,7 @@
         </div>
       </div>
     </div>
+
     <!-- 리뷰 자리 -->
     <div class='left_body'>
       <div  v-for="review in reviews" :key="review.id">

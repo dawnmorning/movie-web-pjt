@@ -1,15 +1,13 @@
 <template>
   <div  v-if="comment">
-    <hr>
 
-    <router-link :to="{name: 'ProfileView', params: { username : comment.author.username}}">
-      <img :src="`http://127.0.0.1:8000${comment.author.profile_image}`" alt="프로필 이미지">
-      {{ comment.author.nickname }}
+    <router-link :to="{name: 'ProfileView', params: { username : comment.author.username}}" style='text-decoration-line: none; color:black; font-weight:100;'>
+      <img :src="`http://127.0.0.1:8000${comment.author.profile_image}`" alt="프로필 이미지" style='width:10%;'>
+      <div >{{ comment.author.nickname }}</div>
     </router-link>
     
 
-    | {{ comment.content }} | 
-
+      <div>{{ comment.content }}</div>
       <div v-if="user_id === comment.author.id">
         <form @submit.prevent="updateComment">
           <input type="text" v-model.trim='inputComment'>
@@ -20,7 +18,7 @@
         </form>
       </div>
 
-    <button @click="likeComment" class= 'fun-btn'>
+    <button @click="likeComment" class= 'fun-btn'  style='width:17%;'>
       <span v-if="!comment_isLike">좋아요</span>
       <span v-if="comment_isLike">좋아요 취소</span>
     </button>

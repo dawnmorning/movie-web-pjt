@@ -3,12 +3,12 @@
 		<div>	
 			<img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" class='gridimage animate__animated animate__jackInTheBox'>
 			<div class='hoverbtn animate__animated animate__fadeInUp' style=''>
-				<button @click="goPostReview" class='w-btn w-btn-blue fun-btn'><i class="fa-solid fa-pen-to-square"></i></button>
-				<button @click="likeMovie" class= 'fun-btn'>
+				<button @click="goPostReview" class='w-btn w-btn-blue fun-btn'><i class="fa-sharp fa-solid fa-question"></i></button>
+				<button @click="likeMovie" class= 'fun-btn '>
 					<span v-if="!isLike"><i class="fa-regular fa-heart"></i></span>
 					<span v-if="isLike"><i class="fa-solid fa-heart"></i></span>
 				</button>
-				{{like_users_count}}
+				<span class='showlikeuser'>{{like_users_count}}</span>
 				<div v-if="like_users">
 					<h6>좋아요 누른 사람</h6>
 					<ul v-for="like_user in like_users" :key="like_user.id">
@@ -151,9 +151,9 @@ img:hover +.hoverbtn{
 	align-self: center;
 	cursor: pointer;
 	font-weight: bold;
-	width:118px;
+	width:100px;
 	height:30px;
-		border-radius: 15px;
+	border-radius: 15px;
 
 }
 
