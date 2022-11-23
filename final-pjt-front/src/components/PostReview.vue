@@ -1,5 +1,8 @@
 <template>
+<div>
+  <div class='jua juaDetail' :style="`background-image: url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`" ></div>
     <div class='reviewbody' style='margin-top: 100px;'>
+
 			<div id="box" class='postfont animate__animated animate__fadeIn animate-delay-2s'>
 				<img class='img-fluid' :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" style='height: 500px; margin-left:15%; border-radius: 0.5cm;'>
 				<h1 class="heading" style='font-weight:600;'>{{movie.title}}</h1>
@@ -51,7 +54,7 @@
         </div>
       </div>
     </div>
-
+</div>
 </template>
 
 <script>
