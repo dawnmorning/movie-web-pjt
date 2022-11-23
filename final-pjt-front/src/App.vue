@@ -13,10 +13,28 @@
           </b-button>
 
           <div class="justify-content-end collapse navbar-collapse " id="navbarSupportedContent">
+            <!-- <i class="fas fa-search">
+              <input @keyup="movieInput" type="text" style="margin-bottom : 15px;" />
+            </i>
+
+            <div class="autocomplete disabled">
+              <div
+                @click="searchMovieAdd"
+                style="cursor: pointer"
+                v-for="(res,i) in result"
+                :key="i"
+                >{{ res.title }}
+                <hr>
+              </div>
+            </div> -->
+
+
             <form class="d-flex justify-content-center">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+
+
 
             <ul class="nav justify-content-end fs-6">
               <li class="nav-item">
@@ -34,6 +52,7 @@
               <li class="nav-item">
                 <a @click='logOut' class="nav-link" href="#">로그아웃</a>
               </li>
+              
             </ul>
             
           </div>
@@ -49,6 +68,11 @@
 
 export default {
   name: 'App',
+  data() {
+    return {
+      result: null,
+    }
+  },
   computed:{
     username() {
         return this.$store.state.username
@@ -56,8 +80,23 @@ export default {
       isLogin(){
           return this.$store.getters.isLogin
       },
+      movieTitles() {
+        return this.$store.state.movieTitles
+      }
   },
   methods:{
+    movieInput(event) {
+      const inputData = event.taget.value
+      const autocomplete = document.querySelector(".autocomplete");
+      console.log(inputData)
+      if (inputData) {
+        autocomplete.classList.remove("disabled");
+        this.result = this.movieTitles.filter((title) => {
+          return title.title.includes(inputData)})
+      } else {
+        autocomplete.classList.add("disabled");
+      }
+    },
     logOut(){
       this.$store.dispatch('logOut')
       
@@ -65,7 +104,13 @@ export default {
     goRecommend(){
       this.$router.push({name: "RecomView"})
     },
+    getMovieTitle() {
+      this.$store.dispatch('getMovieTitles')
+    }
   },
+  created() {
+    this.getMovieTitle()
+  }
 }
 </script>
 

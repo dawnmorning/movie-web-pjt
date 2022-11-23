@@ -31,6 +31,7 @@ export default new Vuex.Store({
     upcomming_movies: null,
     vote_movies: null,
     movie_detail: null,
+    movieTitles: null,
     // 커뮤니티 관련 함수
     reviews:null,
   },
@@ -81,6 +82,9 @@ export default new Vuex.Store({
       state.popular_movies = MoviesData.popular_movies
       state.random_movies = MoviesData.random_movies
       state.vote_movies = MoviesData.vote_movies
+    },
+    GET_MOVIETITLES(state, MoviesData){  
+      state.movieTitles = MoviesData
     },
 
     GET_MOVIE_DETAIL(state, MoviesData){ 
@@ -266,6 +270,20 @@ export default new Vuex.Store({
       })
       .then(res => {
         context.commit('GET_MOVIES', res.data)
+      })
+      .catch(err => { console.log(err) })
+    },
+
+    getMovieTitles(context){
+      axios({
+          method: 'get',
+          url: `${DJANGO_URL}/api/v2/movies/titles/`,
+          headers: { Authorization : `Token ${context.state.token}` }
+      })
+      .then(res => {
+        // console.log(res.data)
+        
+        context.commit('GET_MOVIETITLES', res.data)
       })
       .catch(err => { console.log(err) })
     },

@@ -8,12 +8,12 @@ import random
 
 from django.db.models import Q
 from accounts.models import User
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 
 from django.contrib.auth import get_user_model
 from .models import Genre, Movie, WorldcupRecommend
 from accounts.serializers import NestedUserSerializer
-from .serializers import MovieSerializer, WorldcupRecommendSerializer
+from .serializers import MovieSerializer, WorldcupRecommendSerializer, MovieTitlesSerializer
 import datetime as dt
 
 User = get_user_model()
@@ -66,6 +66,14 @@ def movie_r(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieSerializer(movie)
     # serializer.is_valid()
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def movie_titles_r(request):
+    movies = Movie.objects.all().values('title', 'id')
+    serializer = MovieTitlesSerializer(data=movies, many=True)
+    serializer.is_valid()
     return Response(serializer.data)
 
 @api_view(['GET'])

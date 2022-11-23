@@ -22,6 +22,12 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie
         fields = '__all__'
 
+class MovieTitlesSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Movie
+        fields = ('title', 'id',)
+
 # 디테일은 장르까지 포함해서 같이 보내기
 class MovieDetailSerializer(serializers.ModelSerializer):
     genres = NestedGenreSerializer(many=True, read_only=True) # 조회될 때 장르 보내기
