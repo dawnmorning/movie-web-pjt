@@ -30,7 +30,7 @@
         {{review_like_users_count}}
         <div v-if="review_like_users">
           <h6>좋아요 누른 사람</h6>
-          <ul v-for="review_like_user in review_like_users" :key="review_like_user.id">
+          <ul v-for="review_like_user in review_like_users" :key="review_like_user.id" style='padding:0;'>
               <img :src="`http://127.0.0.1:8000${review_like_user.profile_image}`" alt="프로필 이미지" style='width:10%;'>
               <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}" style='text-decoration-line: none;'>
                   {{review_like_user.nickname}}

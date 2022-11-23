@@ -13,7 +13,7 @@
     </div>
 
     <!-- 리뷰 자리 -->
-    <div class='left_body' >
+    <div class='left_body float-md-start'  >
       <div v-for="review in reviews" :key="review.id" style='margin-top:20px;'>
         <ReviewListItem
         :review=review
@@ -22,14 +22,21 @@
     </div>
     
     <!-- 프로필 자리 -->
-    <div class='right_body' v-if="profileImage">
-      <div class='profile_box'>
-        <a class='jua' style='text-decoration: none; color:; font-size:smaller ' :href="`http://localhost:8080/profile/${username}`">
-          <img class='profile_img' :src=profileImage alt="">
-          <div v-if="username">{{ username }}</div>
-          <div class='nickname'>{{ this.$store.state.nickname }}</div>
-        </a>
-      </div>
+      <div class='right_body float-md-start' v-if="profileImage">
+      <div class='profile_box' style='position:relaitve; '>
+            <a text=black; class='jua' style='text-decoration: none; text:black; font-size:smaller position:relaitve; top:50px; width:10px; height:10px; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
+              <div> <img style='float:left; position:relative; top:-30px;' class='profile_img' :src=profileImage alt=""></div>
+            </a>
+            <div style='text-align:left; width:300px; height:100%; justify-content:center; align-items:center;'>
+              <a v-if="username" class='jua' style='text-decoration:none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
+                {{ username }}
+              </a>  <br>
+              <a class='jua' style='text-decoration: none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
+                  {{ this.$store.state.nickname }}
+              </a>
+
+            </div>
+          </div>
     </div>
   </div>
 </template>
@@ -184,16 +191,15 @@ span{
   font-weight: bold;
 }
 .profile_box {
-  width: 319px;
-  height: 66px;
-  /* border-radius: 20%; */
-  /* overflow:; */
+   width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    /* overflow: hidden; */
 }
 .profile_img {
-  width:50%;
-  height:100%;
-  object-fit: cover;
-  object-fit:cover;
+ width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 a {
   text-decoration: none;
