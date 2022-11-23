@@ -22,6 +22,8 @@ export default new Vuex.Store({
     username: null,
     nickname: null,
     profile_image: null,
+    grade: null,
+    followings: null,
     // 영화 관련 데이터
     latest_movies: null,
     popular_movies: null,
@@ -35,6 +37,7 @@ export default new Vuex.Store({
 
   getters: {
     isLogin(state){ return state.token ? true : false },
+    
     random_movies_10(state) { return _.sampleSize(state.random_movies, 10) },
   },
 
@@ -50,6 +53,10 @@ export default new Vuex.Store({
       state.email = data.email
       state.profile_image = data.profile_image
       state.grade = data.grade
+      state.followings = data.followings
+    },
+    UPDATE_FOLLOWING(state, myfollowings) {
+      state.followings = myfollowings
     },
 
     LOGOUT(state) {
@@ -79,6 +86,11 @@ export default new Vuex.Store({
     // community 관련 함수
     GET_REVIEWS(state, reviews){
       state.reviews = reviews
+    },
+
+    ADD_REVIEW(state, review){
+      state.reviews.push(review)
+      router.push({name : 'CommunityView'})
     },
 
     DELETE_COMMENT(state, comment){
@@ -128,21 +140,19 @@ export default new Vuex.Store({
           Authorization : `Token ${data.token}`,
         },
       })
-      .then(res => {
-        // console.log(res)
-        // console.log(context)
-        
+
+      .then(res => {                
         context.commit('GET_PROFILE', res.data)
       })
       .catch( err => console.log(err))
     },
 
-    getFollowings(context, data){     
+    getFollowings(context){     
       axios({
         method: 'get',
-        url : `${DJANGO_URL}/api/v1/${data.username}/`,
+        url : `${DJANGO_URL}/api/v1/${context.state.username}/`,
         headers:{
-          Authorization : `Token ${data.token}`,
+          Authorization : `Token ${context.state.token}`,
         },
       })
       .then(res => { 
@@ -207,8 +217,8 @@ export default new Vuex.Store({
         context.dispatch('getProfile', data)
         router.push({name: 'HomeView'})
       })
-      .catch(err => {
-        console.error(err)
+      .catch(() => {
+        alert('로그인을 실패하셨습니다. 회원 정보를 다시 확인해주세요 :<')
       })
     },
 
@@ -298,8 +308,10 @@ export default new Vuex.Store({
           rating: payload.rating,
         }
       })
-      .then(() => {
-        router.push({ name : 'CommunityView'})
+      .then((res) => {
+        console.log(res)
+        context.commit('ADD_REVIEW', res.data)
+
       })
       .catch(err => console.log(err))
     },

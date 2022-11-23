@@ -1,6 +1,7 @@
 <template>
     <div>
 <!-- 최신순 영화 -->
+
         <div class='new col-md '>
             <div class='jua position-relative ' style='margin-top:30px; right:30%; top:100px; '>
                 <span style='margin-bottom:5px; margin-top:20px; fw-lighter'>최근 개봉한 영화</span>
@@ -104,9 +105,9 @@ export default {
         }
     },
     watch: {
-        latest_count(value) {{ this.latest_count = value % 10 }},
-        popular_count(value) {{ this.popular_count = value % 10 }},
-        vote_count(value) {{ this.vote_count = value % 10 }},
+        latest_count(value) {{ this.latest_count = value % 20 }},
+        popular_count(value) {{ this.popular_count = value % 20 }},
+        vote_count(value) {{ this.vote_count = value % 20 }},
     },
     computed: {
         latestMovies() {
@@ -130,7 +131,7 @@ export default {
                 url: `${DJANGO_URL}/api/v2/movies/random/`,
                 headers: { Authorization : `Token ${this.$store.state.token}` }
             })
-            .then(res => {
+            .then(res => {                
                 this.randomMovies = res.data
             })
             .catch(err => { console.log(err) })

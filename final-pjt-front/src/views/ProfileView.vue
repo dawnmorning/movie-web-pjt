@@ -9,11 +9,18 @@
 import UserInformation from '@/components/UserInformation'
 
 export default {
-    name: 'ProfileView',
-    components:{
-        UserInformation,
+  name: 'ProfileView',
+  data() {
+    return {
+      profile: null,
     }
-}
+  },
+  components:{
+      UserInformation,
+  },
+  methods:{
+  },
+} 
 </script>
 
 <style>
