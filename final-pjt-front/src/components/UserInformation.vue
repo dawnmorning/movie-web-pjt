@@ -38,9 +38,7 @@
                                 </a>
                             </ul>
                         </div>
-                        <div class="tit_desc">
-                            <span>{{ followings }}</span>
-                            
+                        <div class="tit_desc">                            
                             <span class="title">팔로우</span>
                             <span class="sub_title">{{ cnt_followings }}</span>
                             <ul v-for="following in followings" :key="following.id">

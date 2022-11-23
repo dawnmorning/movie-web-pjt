@@ -227,8 +227,9 @@ div .card-body{
 }
 .splide-card {
   height: 10%;
-  width: 10px;
+  width: 10%;
   background-size: cover;
   background-position: center center;
+  background-color: aquamarine;
 }
 </style>

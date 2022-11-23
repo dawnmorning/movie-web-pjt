@@ -23,6 +23,7 @@
                 </div>
                 <div class='inlineToBlock'>
                      <button class="button btnPush btnBlueGreen">사진 수정하기</button>
+                     <input class="inputfile" @change="upload" accept="image/jpg" type="file" id="file"/>
                 </div>
                 <br>
                 <br>
@@ -42,12 +43,12 @@
 <script>
 export default {
     name:'EditProfile',
-    // data(){
-    //   return{
-    //     nickname: '',
-    //     profile_image: '',
-    //   }
-    // },
+    data(){
+      return{
+        // nickname: '',
+        profile_image: '',
+      }
+    },
     computed:{
       username() {
         return this.$store.state.username
@@ -68,6 +69,18 @@ export default {
       },
       backprofile(){
         this.$router.push({name: 'ProfileView'})
+      },
+      upload(e){
+        var file = e.target.files;
+        console.log(file)
+        
+        // let url = URL.createObjectURL(file[0]);
+        // this.image = url;
+
+      },
+      updateProfile(){
+        this.$store.dispatch('updateProfile', file)
+        
       }
     }
 }
