@@ -1,7 +1,7 @@
 <template>
   <div class="container" v-if="reviews">
     <!-- 팔로워 목록 -->
-
+ 
 
     <div>나는야 홈런왕</div>
 

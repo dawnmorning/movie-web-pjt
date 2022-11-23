@@ -31,6 +31,11 @@ library.add(faUserSecret)
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
+
+import VueGlide from 'vue-glide-js'
+Vue.use(VueGlide)
+
+
 Vue.config.productionTip = false
 
 new Vue({

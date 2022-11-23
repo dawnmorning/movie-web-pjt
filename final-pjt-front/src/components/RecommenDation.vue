@@ -1,19 +1,20 @@
 <template>
     <div>
 <!-- 최신순 영화 -->
-        <div class='new'>
-            <div class='jua' style='margin-top:80px;'>
-                <h1 style='margin-bottom:5px; margin-top:20px;'>최근 개봉한 영화</h1>
-                <button
+        <div class='new col-md '>
+            <div class='jua position-relative ' style='margin-top:30px; right:30%; top:100px; '>
+                <span style='margin-bottom:5px; margin-top:20px; fw-lighter'>최근 개봉한 영화</span>
+                <span><button
                 @click="latest_count ++"
-                style='font-size:20px; margin-top:20px;'
-                >더보기</button>
+                style='font-size:20px; top:-5px; '
+                class='position-relative btn btn-outline-success'
+                >더보기</button></span>
             </div>
             <div>
-                <div  v-if='latestMovies' class='update' >
+                
+                <div v-if='latestMovies' class='update' >
                     <div v-for='movie in latestMovies' :key='movie.id' style='margin-top:-20px;'> 
                         <MovieCard :movie="movie"/>
-                    
                     </div>        
                 </div>
             </div>
@@ -21,11 +22,12 @@
         
 <!-- 인기순 영화 -->
         <div class='popular'>
-            <div class='jua' style='margin-top:80px;'>
-            <h1 style='margin-bottom:5px; margin-top:20px;' >지금, 인기있는 영화</h1>
+            <div class='jua position-relative' style='margin-top:30px; right:30%; top:100px;'>
+            <span style='margin-bottom:5px; margin-top:10px;'>지금, 인기있는 영화</span>
             <button
             @click="popular_count ++"
-            style='font-size:20px; margin-top:20px;'
+            style='font-size:20px; top:-5px;'
+            class='position-relative'
             >더보기</button>
             </div>
             <div class=''>
@@ -38,11 +40,12 @@
         </div>
 <!-- 평점순 영화 -->
         <div class='voteaver'>
-            <div class='jua' style='margin-top:80px;'>
-                <h1 style='margin-bottom:5px; margin-top:20px;'>평점순</h1>
+            <div class='jua position-relative' style='margin-top:30px; right:30%; top:100px;'>
+            <span style='margin-bottom:5px; margin-top:10px;'>평점이 높은 영화</span>
                 <button
                 @click="vote_count ++"
-                style='font-size:20px; margin-top:20px;'
+                style='font-size:20px; top:-5px;'
+                class='position-relative'
                 >더보기</button>
             </div>
             <div class=''>
@@ -56,11 +59,12 @@
         </div>
 <!-- 랜덤 영화 -->   
         <div class='random' >
-            <div class='jua' style='margin-top:80px;'>
-                <h1 style='margin-bottom:5px; margin-top:20px;'>랜덤</h1>
+             <div class='jua position-relative' style='margin-top:30px; right:30%; top:100px;'>
+            <span style='margin-bottom:5px; margin-top:10px;'>랜덤 추천</span>
                 <button
                 @click="getRandomMovies"
-                style='font-size:20px; margin-top:20px;'
+                style='font-size:20px; top:-5px;'
+                class='position-relative'
                 >더보기</button>
             </div>
             <div class=''>
@@ -144,9 +148,9 @@ export default {
 
 .update{
     /* width: 90%; */
-    display: flex;
+    display: grid;
     /* grid-template-areas: 1fr 1fr 1fr 1fr 1fr 1fr; */
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(5, 1fr);
     /* grid-auto-rows: 300px; */
     /* grid-auto-flow: column; */
     /* grid-auto-columns: 1fr 1fr 1fr; */
@@ -156,8 +160,10 @@ export default {
     /* width : 400px; */
     margin-top: 100px;
     grid-gap: -70px; 
-    /* width: 70%; */
-    
+    width: 70%;
+    text-align: center;
+    left: 13%;
+    position: relative;
 }
 
 </style>

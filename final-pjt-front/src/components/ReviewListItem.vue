@@ -18,16 +18,16 @@
         <h5 class="card-subtitle mb-2 text-muted">{{review.updated_at}}</h5>
         <h5 class="card-subtitle mb-2 text-muted">별점 : {{review.rating}}</h5>
         <p class="card-text">{{review.content}}</p>
-        <button @click="likeReview">
-        <span v-if="!review_isLike">좋아요</span>
-        <span v-if="review_isLike">좋아요 취소</span>
+        <button @click="likeReview" class='fun-btn' style='width:30px;'>
+          <span v-if="!review_isLike"><i class="fa-regular fa-heart"></i></span>
+          <span v-if="review_isLike"><i class="fa-solid fa-heart"></i></span>
         </button>
         {{review_like_users_count}}
         <div v-if="review_like_users">
           <h6>좋아요 누른 사람</h6>
           <ul v-for="review_like_user in review_like_users" :key="review_like_user.id">
-              <img :src="`http://127.0.0.1:8000${review_like_user.profile_image}`" alt="프로필 이미지">
-              <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}">
+              <img :src="`http://127.0.0.1:8000${review_like_user.profile_image}`" alt="프로필 이미지" style='width:10%;'>
+              <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}" style='text-decoration-line: none;'>
                   {{review_like_user.nickname}}
               </router-link>
           </ul>
@@ -58,13 +58,13 @@
         </button>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">댓글목록</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body" style='right:350px;'>
                 <div v-for="comment in comments" :key="comment.id">
                   <CommentListItem
                   :comment=comment

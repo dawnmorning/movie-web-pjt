@@ -87,8 +87,8 @@
                             <div @click="goReviewDetail(myReview)">
                                 <img class='profilegrid' :src="`https://image.tmdb.org/t/p/w500/${myReview.movie.poster_path}`">
                                 <!-- 좋아요 있을 때 좋아요 표시필요 -->
-																<span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요 수 : {{ myReview.like_users.length }}</span>
-                                <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요한 사람 : {{ myReview.like_users }}</span>
+                                <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요 수 : {{ myReview.like_users.length }}</span>
+                                <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요한 사람 : {{ myReview.like_users}}</span>
                             </div>
                             <!-- <MyReviewItem :myReview='myReview'/> -->
                         </div>

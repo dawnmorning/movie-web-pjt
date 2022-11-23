@@ -1,5 +1,5 @@
 <template>
-    <div class='reviewbody '>
+    <div class='reviewbody' style='margin-top: 100px;'>
 			<div id="box" class='postfont animate__animated animate__fadeIn animate-delay-2s'>
 				<img class='img-fluid' :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" style='height: 500px; margin-left:15%; border-radius: 0.5cm;'>
 				<h1 class="heading" style='font-weight:600;'>{{movie.title}}</h1>
@@ -19,7 +19,7 @@
       
       <!-- Modal -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog jua">
+        <div class="modal-dialog modal-dialog-centered jua">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="text-align-center modal-title fs-5" id="staticBackdropLabel">리뷰 작성</h1>
@@ -29,7 +29,7 @@
             <div class="modal-body jua" style='margin-top:10px;'>
               <div class='reviewModal' v-if='is_show' style='text-align:center; margin-top:10px; '>
               <div class="ReviewInlineblock" style= 'width: 400px;'>
-                  <input style=' width:400px;' type="text" id='username' v-model='title' placeholder="댓글 제목" class='id'>
+                  <input style=' width:400px;' type="text" id='username' v-model='title' placeholder="제목" class='id'>
               </div>
               <div class="ReviewInlineblock">
                   <input size='44' style=' height:100px; flex-wrap:wrap' type="text" id='content'  v-model='content' placeholder="내용" class='content'>      
@@ -37,7 +37,6 @@
               <div class="ReviewInlineblock">
                 <star-rating id=setstar :star-size="30" v-model="rating" :border-width="5" border-color="#d8d8d8" 
                 :rounded-corners="true" 
-                :increment="0.5"
                 :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]">
                 </star-rating>
               </div>
