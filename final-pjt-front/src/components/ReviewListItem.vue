@@ -1,17 +1,16 @@
 <template>
 
-  <div class='bodyWrap' v-if="review">
+  <div class='bodyWrap' v-if="review" >
     <!-- {{review.comments}} -->
-    
+    <!-- {{profileImage}} -->
     <div class="card-body border border-secondary" style='border-radius:0.3cm'>
-      <div class='needinLine' v-if="profileImage" style="height:10%;">
-        <a class='jua' style='text-decoration: none; color:; font-size:smaller; height:10%; margin:0px;' :href="`http://localhost:8080/profile/${review.author.username}`">
-        <div class="splide-card" :style="`background-image: ${profileImage};`">
-        </div>
-          <!-- <img :src=profileImage alt="" class='userImage'> -->
-        <p class="card-text" style='font-size:16px; margin-top:5px;'>{{review.author.nickname}}</p>
-        </a>
+      <div class='needinLine' v-if="profileImage" style="height:50%; text-aling:center">
+        <a class='jua' style='text-decoration: none; color:; font-size:smaller; height:10%; margin:0px;' :href="`http://localhost:8080/profile/${review.author.username}`"></a>
+        <div class="splide-card" :style="`background-image: url(${profileImage});`"></div>
+        <p class="card-text" style='font-size:16px; margin-top:10px;'>{{review.author.nickname}}</p>  
         
+        <div><button style='margin-left : 300px; margin-top:5px;'>수정하기</button></div>
+
       </div>
       
       <img class='reviewimg ' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
@@ -223,12 +222,14 @@ div .card-body{
   width:10%;
 }
 .needinLine{
-  display: flex
+  display: flex;
+  flex-wrap: nowrap;
 }
 .splide-card {
-  height: 10%;
-  width: 10px;
+  height: 40px;
+  width: 30px;
   background-size: cover;
   background-position: center center;
+  /* background-color: blue; */
 }
 </style>
