@@ -44,7 +44,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button @click='postReview' type="button" class="btn btn-primary">작성하기</button>
+                <button @click='postReview' type="button" class="btn btn-primary" data-bs-dismiss="modal">작성하기</button>
               </div>
           </div>
         </div>

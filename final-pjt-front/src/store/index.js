@@ -90,7 +90,7 @@ export default new Vuex.Store({
 
     ADD_REVIEW(state, review){
       state.reviews.push(review)
-      router.push({name : 'CommunityView'})
+      // router.push({name : 'CommunityView'})
     },
 
     DELETE_COMMENT(state, comment){

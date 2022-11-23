@@ -1,7 +1,8 @@
 <template>
-    <div class='jua' style='text-align:center; margin-top:100px;' v-if="review">
+<div>
+    <div class='jua juaDetail' :style="`background-image: url(https://image.tmdb.org/t/p/w500/${review.movie.poster_path})`" v-if="review"></div>
         <!-- <div :style="`background-image: url(${review.movie.poster_path})`"></div> -->
-        <div  class="card reviewbody " style='margin-top: 50px; font-size:20px;  width:1000px; left:25%; object-fit:cover;'>
+        <div class="jua card reviewbody " style= 'font-size:20px;  width:1000px; left:25%; object-fit:cover;'>
             <p class="card-text">작성자 : {{review.author.nickname}}</p>
             <div class="card-body">
                 <div><img class='img-fluid' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'></div>
@@ -36,7 +37,6 @@
             <button @click="goBack" style='font-size:20px; left:40px;'>뒤로가기</button>
             </div>
         </div>
-        
     </div>
 </template>
 <script>
@@ -87,5 +87,16 @@ export default {
 </script>
 
 <style>
-
+.juaDetail{
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(3px) brightness(160%) contrast(30%);
+    width: 100%;
+    height: 150%;
+    background-size: cover;
+    margin-top:-155px;
+    transform: translateY(-120px);
+    
+}
 </style>
