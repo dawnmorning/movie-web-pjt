@@ -58,6 +58,10 @@ export default new Vuex.Store({
     UPDATE_FOLLOWING(state, myfollowings) {
       state.followings = myfollowings
     },
+    
+    UPLOAD_PROFILE(state, data) {
+      state.profile_image = data.profile_image
+    },
 
     LOGOUT(state) {
       state.user_id = null
@@ -232,6 +236,21 @@ export default new Vuex.Store({
       .then(() => {
         context.commit('LOGOUT')
         console.log('logout')
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    },
+
+    uploadProfile(context, formData){
+      axios.post(`${DJANGO_URL}/api/v1/${context.state.username}/`, formData, {
+          headers: {
+
+              Authorization : `Token ${context.state.token}`,
+          }
+      })
+      .then((res) => {
+        context.commit('UPLOAD_PROFILE', res.data)
       })
       .catch(err => {
         console.error(err)

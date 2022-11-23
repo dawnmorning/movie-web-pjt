@@ -1,25 +1,30 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
-from .serializers import UserSerializer, NestedUserSerializer
+from .serializers import UserSerializer, NestedUserSerializer, UpdateUserSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 # Create your views here.
+import base64
+import os
+from datetime import datetime
+from django.conf import settings
 
 User = get_user_model()
 
-@api_view(["GET", "PUT"])
+@api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def user_ru(request, username):
     person = get_object_or_404(User, username=username)
 
-    if request.method == "PUT":
+    if request.method == "POST":
         if request.user != person:
             return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
-            
-        serializer = UserSerializer(person, data=request.data)
+        serializer = UpdateUserSerializer(person, data=request.data)
         if serializer.is_valid(raise_exception=True):
+            
+            os.remove(os.path.join(settings.MEDIA_ROOT, person.profile_image.name))
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -41,7 +46,7 @@ def follow(request, username):
         else:
             you.followers.add(me)
             is_following = True
-    
+
     followers = you.followers.all()
     followers = NestedUserSerializer(data=followers, many=True)
     myFollowings = me.followings.all()

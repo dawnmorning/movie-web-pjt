@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-
+    
     <!-- 리뷰 자리 -->
     <div class='left_body' >
       <div v-for="review in reviews" :key="review.id" style='margin-top:20px;'>

@@ -1,38 +1,52 @@
 <template>
   <nav class='navWrap'>
     <div class='contentsWrap ' style='font-size:20px; margin-top:0;'>
-        <form @submit.prevent='signUp' class = 'formWrap animate__animated animate__fadeIn'>
+        <form @submit.prevent="uploadProfile" class='formWrap animate__animated animate__fadeIn'>
             <!-- <div class="jua"></div> -->
             <div class='editWindow jua' style=''>
-                <h1 style='margin-top:30px;'>프로필 수정</h1>
-                <div class="inlineToBlock">
-                  <div>
-          
+              <h1 style='margin-top:30px;'>프로필 수정</h1>
+
+              <div class="profile" v-if='nickname'>
+                <div class="profile_img">
+                    <img :src="profileImage" alt="프로필 이미지">
+                </div>
+              </div>
+
+              <div class="inlineToBlock">
+                <div>
+                    <div style="text-align: start;">
                       <label for="" class='labeleft'>아이디</label>
                       <span style='font-size: 20px; margin-left:20px;'>{{username}}</span>
-                    
-                      <br>
+                    </div>
+                    <div>
                       <label for="" class='labeleft' style= 'margin-left:-3px;'>이메일</label>
                       <span style='font-size: 15px;  margin-left:20px;'>{{ email }}</span>
-                    
-                  </div>
-                    <div style='margin-top:20px;'>
-                      <label for="">닉네임</label>
-                      <input type="text" id='nickname' v-model.trim='nickname' class='id' style='margin-left:50px;'>
                     </div>
                 </div>
-                <div class='inlineToBlock'>
-                     <button class="button btnPush btnBlueGreen">사진 수정하기</button>
-                     <input class="inputfile" @change="upload" accept="image/jpg" type="file" id="file"/>
+
+                <div style='margin-top:20px;'>
+                  <label for="">닉네임</label>
+                  <span style='font-size: 15px;  margin-left:20px;'>{{ nickname }}</span>
+                    <!-- <input type="text" id='nickname' v-model.trim='nickname' class='id' style='margin-left:50px;'> -->
                 </div>
-                <br>
-                <br>
-                <div class="inlineToBlock">
-                  <button class='Btn btnPush btnBlueGreen' type="submit" style='margin-top:0 margin-left:30px;'>프로필 수정</button>
-                  <button @click='backprofile' class='Btn btnPush btnBlueGreen' type="submit" style='margin-top:0'>취소</button>
-                </div>
-                <!-- <button>뒤로 가기</button> -->
-                <!-- {{ email }} -->
+              </div>
+
+              <div class='inlineToBlock'>
+                <!-- <button class="button btnPush btnBlueGreen">사진 수정하기</button>
+                -->
+                <input type="file"
+                  accept="image/jpeg/*"
+                  @change="uploadImage"
+                  
+                />
+                <!-- <input class="inputfile" @change="upload" accept="image/jpg" type="file" id="file"/> -->
+              </div>
+
+              <div class="inlineToBlock">
+                <button class='Btn btnPush btnBlueGreen' type="submit" style='margin-top:0 margin-left:30px;'>프로필 수정</button>
+                <button @click='goBack' class='Btn btnPush btnBlueGreen' type="submit" style='margin-top:0'>취소</button>
+              </div>
+
             </div>
         </form>
     </div>
@@ -41,12 +55,16 @@
 </template>
 
 <script>
+const DJANGO_URL='http://127.0.0.1:8000'
+
+
 export default {
     name:'EditProfile',
     data(){
       return{
         // nickname: '',
         profile_image: '',
+        file: null,
       }
     },
     computed:{
@@ -57,7 +75,7 @@ export default {
           return this.$store.state.nickname
       },
       profileImage(){
-          return this.$store.state.profile_image
+          return DJANGO_URL + this.$store.state.profile_image
       },
       email(){
         return this.$store.state.email
@@ -70,19 +88,22 @@ export default {
       backprofile(){
         this.$router.push({name: 'ProfileView'})
       },
-      upload(e){
-        const file = e.target.files;
-        console.log(file)
+      uploadImage(e) {
         
-        // let url = URL.createObjectURL(file[0]);
-        // this.image = url;
-
+        let fd = new FormData();
+        fd.append('profile_image', e.target.files[0])
+        this.file = fd
+        
       },
-      // updateProfile(){
-      //   this.$store.dispatch('updateProfile', file)
-        
-      // }
-    }
+      uploadProfile(){
+        this.$store.dispatch('uploadProfile', this.file)
+        this.file = null
+      },
+      
+      goBack() {
+        this.$router.go(-1)
+      }
+    },
 }
 </script>
 
@@ -144,5 +165,19 @@ div .alreadyBlock{
 .labeleft{
   margin-left: -110px;
   margin-right: 60px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+}
+.profile .profile_img {
+    margin: 0 70px;
+}
+.profile .profile_img img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 </style>
