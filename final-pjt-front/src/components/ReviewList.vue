@@ -1,20 +1,20 @@
 <template>
-  <div class="container" v-if="reviews">
+  <div class="container" v-if="reviews" style='margin-top:30px;'>
     <!-- 팔로워 목록 -->
-    <div v-if="myFollowings">
+    <div v-if="myFollowings" style='margin-top:50px;'>
       <div v-for="myFollowing in myFollowings" :key="myFollowing.id">
-        <div class='profile_box' >
+        <div class='profile_box' style='width:100px;'>
           <a class='jua' style='text-decoration: none; color:; font-size:smaller ' :href="`http://localhost:8080/profile/${myFollowing.username}`">
-            <img class='profile_img' :src="`http://127.0.0.1:8000${myFollowing.profile_image}`" alt="">
-            <p>{{myFollowing.nickname}}</p>
+          <img class='profile_img' :src="`http://127.0.0.1:8000${myFollowing.profile_image}`" alt="" style='display:inline;'>
+          <p>{{myFollowing.nickname}}</p>
           </a>
         </div>
       </div>
     </div>
 
     <!-- 리뷰 자리 -->
-    <div class='left_body'>
-      <div  v-for="review in reviews" :key="review.id">
+    <div class='left_body' >
+      <div v-for="review in reviews" :key="review.id" style='margin-top:20px;'>
         <ReviewListItem
         :review=review
         />
@@ -194,13 +194,6 @@ span{
   height:100%;
   object-fit: cover;
   object-fit:cover;
-}
-.
-{
-  color: blue;
-  font-weight: 500;
-  opacity:0.3;
-  margin-top: 5px;
 }
 a {
   text-decoration: none;

@@ -71,17 +71,17 @@ export default {
         this.$router.push({name: 'ProfileView'})
       },
       upload(e){
-        var file = e.target.files;
+        const file = e.target.files;
         console.log(file)
         
         // let url = URL.createObjectURL(file[0]);
         // this.image = url;
 
       },
-      updateProfile(){
-        this.$store.dispatch('updateProfile', file)
+      // updateProfile(){
+      //   this.$store.dispatch('updateProfile', file)
         
-      }
+      // }
     }
 }
 </script>
