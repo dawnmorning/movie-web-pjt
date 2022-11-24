@@ -72,7 +72,7 @@ export default {
           return this.$store.getters.isLogin
       },
       movieTitles() {
-        return this.$store.state.movieTitles.map(movietitle => {
+        return this.$store.state.movieTitles?.map(movietitle => {
           return movietitle.title
         })
       }

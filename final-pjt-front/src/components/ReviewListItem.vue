@@ -2,7 +2,6 @@
 
   <div class='bodyWrap' v-if="review" >
     <!-- {{review}} -->
-
     <div class="card-body border border-secondary" style='border-radius:0.3cm'>
       <div class='needinLine' v-if="profileImage" style="height:50%; text-aling:center">
         <a class='jua' style='none; color:; font-size:smaller; height:10%; margin:0px;' :href="`http://localhost:8080/profile/${review.author.username}`"></a>
@@ -48,7 +47,7 @@
           </ul>
         </div>
       </div>
-        
+      
         <!-- 댓글 -->
         
         <hr style='margin:0px;'>
