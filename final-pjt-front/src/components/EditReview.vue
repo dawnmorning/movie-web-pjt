@@ -22,7 +22,7 @@
 				</p>
 				<div style='text-align: center;'>
 					<button @click='showModal' class='jua btn-open-popup' style='font-size:15px; margin-top: -30px; width:80px; border-radius:0.3cm;' 
-					data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰쓰기
+					data-bs-toggle="modal" data-bs-target="#staticBackdrop">수정하기
           </button>
 					<button @click='goBack' class='jua btn-open-popup' style='font-size:15px; margin-top: -30px; width:80px; border-radius:0.3cm;' 
 					>뒤로가기
@@ -34,7 +34,7 @@
         <div class="modal-dialog modal-dialog-centered jua">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="text-align-center modal-title fs-5" id="staticBackdropLabel">리뷰 작성</h1>
+              <h1 class="text-align-center modal-title fs-5" id="staticBackdropLabel">수정</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style='font-size:20px;'></button>
             </div>
             <div class="modal-body jua" style='margin-top:10px;'>
@@ -54,9 +54,10 @@
               </div>
               </div>
               <div class="modal-footer">
+                <button @click="editReview" type="button" class="btn btn-primary" data-bs-dismiss="modal">수정</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button @click="deleteReview" type="button" class="btn btn-warning" data-bs-dismiss="modal">삭제</button>
 
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">작성하기</button>
               </div>
           </div>
         </div>
@@ -88,9 +89,9 @@ export default {
   data() {
     return {
       // review: this.$store.state.review_detail,
-      title:null,
-      content:null,
-      rating:4,
+      title:this.$store.state.review_detail.title,
+      content:this.$store.state.review_detail.content,
+      rating:this.$store.state.review_detail.rating,
       is_show : true,
     }
   },
@@ -99,6 +100,21 @@ export default {
     movie() {return this.review.movie },
   },
   methods: {
+    editReview() {
+      const payload = {
+        review_id: this.review.id,
+        title : this.title,
+        content: this.content,
+        rating: this.rating,
+      }
+      this.$store.dispatch('editReview', payload)
+    },
+    deleteReview() {
+      const payload = {
+        review_id: this.review.id,
+      }
+      this.$store.dispatch('deleteReview', payload)
+    },
     showModal(){
       this.is_show = true
     },

@@ -102,6 +102,23 @@ export default new Vuex.Store({
     ADD_REVIEW(state, review){
       state.reviews.push(review)
     },
+    EDIT_REVIEW(state, review){
+      state.review_detail = review
+      state.reviews = state.reviews.map(reviewInState => {
+        if (reviewInState.id === review.id) {
+          reviewInState = review
+        }
+        return reviewInState
+      })
+    },
+
+    DELETE_REVIEW(state, review){
+      state.review_detail = null
+      state.reviews = state.reviews.filter(reviewInState => {
+        return reviewInState.id != review.id
+      })
+      router.push({name: "CommunityView" })
+    },
 
     DELETE_COMMENT(state, comment){
       state.reviews = state.reviews.map( review => {
@@ -355,6 +372,38 @@ export default new Vuex.Store({
       .catch(err => console.log(err))
     },
 
+    editReview(context, payload) {
+      axios({
+        method: 'put',
+        url: `${DJANGO_URL}/api/v3/review/update/${payload.review_id}/`,
+        headers:{
+          Authorization : `Token ${context.state.token}`,
+        },
+        data: {
+          title: payload.title,
+          content: payload.content,
+          rating: payload.rating,
+        }
+      })
+      .then((res) => {
+        context.commit('EDIT_REVIEW', res.data)
+      })
+      .catch(err => console.log(err))
+    },
+    deleteReview(context, payload) {
+      axios({
+        method: 'delete',
+        url: `${DJANGO_URL}/api/v3/review/delete/${payload.review_id}/`,
+        headers:{
+          Authorization : `Token ${context.state.token}`,
+        },
+      })
+      .then((res) => {
+        context.commit('DELETE_REVIEW', res.data)
+      })
+      .catch(err => console.log(err))
+    },
+    
     deleteComment(context, comment) {
       axios({
           method: 'delete',

@@ -1,8 +1,7 @@
 <template>
   <div class="container" v-if="reviews" style='margin-top:-110px;'>  
 
-    <div class='left_body float-md-start'  >
-      <!-- 팔로워 목록 -->
+    <div class='left_body float-md-start'>
       <div class="d-flex flex-row card-body border border-secondary align-items-bottom"  v-if="myFollowings" style='border-radius:0.3cm; margin-top:150px; width:494px; height:119px; position:relative;'>
         <carousel class="slide" style="overflow:auto" :per-page="4" :navigate-to="someLocalProperty" :mouse-drag="true">
           <slide style='text-align:center; margin-left:-20px;' v-for="myFollowing in myFollowings" :key="myFollowing.id" class='slide__item '>
