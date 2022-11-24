@@ -8,13 +8,13 @@
                 <span><button
                 @click="latest_count ++"
                 style='font-size:20px; top:-5px; '
-                class='position-relative btn btn-outline-success'
+                class='position-relative btn btn-outline-primary'
                 >더보기</button></span>
             </div>
             <div>
                 
-                <div v-if='latestMovies' class='update' >
-                    <div v-for='movie in latestMovies' :key='movie.id' style='margin-top:-20px;'> 
+                <div v-if='latestMovies' class='update justify-content-center' >
+                    <div v-for='movie in latestMovies' :key='movie.id' style='margin-top:-20px; margin-right:5px; '> 
                         <MovieCard :movie="movie"/>
                     </div>        
                 </div>
@@ -28,12 +28,12 @@
             <button
             @click="popular_count ++"
             style='font-size:20px; top:-5px; '
-            class='position-relative btn btn-outline-success'
+            class='position-relative btn btn-outline-primary'
             >더보기</button>
             </div>
             <div class=''>
-                <div  v-if='popularMovies' class='update' >
-                    <div v-for='movie in popularMovies' :key='movie.id'>
+                <div  v-if='popularMovies' class='update justify-content-center' >
+                    <div v-for='movie in popularMovies' :key='movie.id' style='margin-right:5px;'>
                         <MovieCard :movie="movie"/>
                     </div>        
                 </div>
@@ -46,12 +46,12 @@
                 <button
                 @click="vote_count ++"
                 style='font-size:20px; top:-5px; '
-                class='position-relative btn btn-outline-success'
+                class='position-relative btn btn-outline-primary'
                 >더보기</button>
             </div>
             <div class=''>
-                <div  v-if='voteMovies' class='update' >
-                    <div v-for='movie in voteMovies' :key='movie.id'>
+                <div  v-if='voteMovies' class='update justify-content-center' >
+                    <div v-for='movie in voteMovies' :key='movie.id' style='margin-right:5px;'>
                         <MovieCard :movie="movie"/>
 
                     </div>        
@@ -61,16 +61,16 @@
         <!-- 랜덤 영화 -->   
         <div class='random' >
             <div class='jua position-relative' style='margin-top:30px; right:30%; top:100px;'>
-            <span style='margin-bottom:5px; margin-top:10px;'>랜덤 영화</span>
+            <span style='margin-bottom:5px; margin-top:10px; position:relative; right:60px;'>랜덤 영화</span>
                 <button
                 @click="getRandomMovies"
-                style='font-size:20px; top:-5px; '
-                class='position-relative btn btn-outline-success'
+                style='font-size:20px; top:-5px; right:50px;'
+                class='position-relative btn btn-outline-primary'
                 >더보기</button>
             </div>
             <div class=''>
-                <div  v-if='randomMovies' class='update' >
-                    <div v-for='movie in randomMovies' :key='movie.id'>
+                <div  v-if='randomMovies' class='update justify-content-center' >
+                    <div v-for='movie in randomMovies' :key='movie.id' style='margin-right:5px;'>
                         <MovieCard :movie="movie"/>
     
                     </div>        
@@ -177,7 +177,7 @@ export default {
     /* grid-template-columns: 100px 100px 100px; */
     /* width : 400px; */
     margin-top: 100px;
-    grid-gap: -70px; 
+    grid-gap: -90px; 
     width: 70%;
     text-align: center;
     left: 13%;

@@ -1,15 +1,6 @@
 <template>
   <div class="container" v-if="reviews" style='margin-top:-110px;'>  
-    <!-- 리뷰 자리 -->
-    <div class=''>
-      <div  v-if='myFollowings' class='update' >
-          <carousel :per-page="1" :navigate-to="someLocalProperty" :mouse-drag="false">
-              <slide v-for='movie in randomMovies' :key='movie.id' class='slide__item '>
-                  <MovieCard  :movie="movie"/>
-              </slide>
-          </carousel>
-      </div>
-    </div>
+    
     
     <div class='left_body float-md-start'  >
         <!-- 팔로워 목록 -->
@@ -25,6 +16,7 @@
               </slide>
           </carousel>
       </div>
+      <!-- 리뷰 자리 -->
       <div v-for="review in reviews" :key="review.id" style='margin-top:20px;'>
         <ReviewListItem
         :review=review
@@ -34,23 +26,24 @@
     
     <!-- 프로필 자리 -->
       <div class='right_body float-md-start' v-if="profileImage">
-        <div>
-          <div class='jua' style='margin-top:0px; font-size:15px;'>내 프로필</div>
-        </div>
-          <div class='profile_box' style='position:relaitve; top:100px;'>
-                <a text=black; class='jua' style='text-decoration: none; text:black; font-size:smaller position:relaitve; top:50px; width:10px; height:10px; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
-                  <div style='background-color: #f5f5f5;'> <img style='float:left; position:relative; top:-10px; width:80px; ' class='profile_img' :src=profileImage alt=""></div>
-                </a>
-                <div style='text-align:left; width:300px; height:100%; '>
-                  <a v-if="username" class='jua' style='text-decoration:none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
-                    {{ username }}
-                  </a>  <br>
-                  <a class='jua' style='text-decoration: none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
-                      {{ this.$store.state.nickname }}
+        <div class='right_body_profile'>
+          <div>
+            <div class='jua' style='position:relative; left: -41px; margin-top:0px; font-size:15px;'>내 프로필</div>
+          </div>
+            <div class='profile_box' style='position:relaitve; top:100px;'>
+                  <a text=black; class='jua' style='text-decoration: none; text:black; font-size:smaller position:relaitve; top:50px; width:10px; height:10px; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
+                    <div style='background-color: #f5f5f5;'> <img style='padding:20px; float:left; position:relative; top:-10px; width:80px; margin-right:10px;' class='profile_img' :src=profileImage alt=""></div>
                   </a>
-
-                </div>
-            </div>
+                  <div style='text-align:left; width:300px; height:100%; '>
+                    <a v-if="username" class='jua' style='text-decoration:none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
+                      {{ username }}
+                    </a>  <br>
+                    <a class='jua' style='text-decoration: none; font-size:12px; opacity:0.7' :href="`http://localhost:8080/profile/${username}`">
+                       {{ this.$store.state.nickname }}
+                    </a>
+                  </div>
+              </div>
+        </div>
       </div>
   </div>
 </template>
@@ -149,7 +142,7 @@ export default {
 .right_body {
   position : absolute;
   top : 15%;
-  right: 500px; 
+  right: 400px; 
   width:320px; 
   height:100%; 
   /* position: sticky; */
@@ -228,5 +221,10 @@ html{
 .VueCarousel-pagination {
   background-color:rgba(0,0,0,0);
   display: none;
+}
+.right_body_profile{
+  border: 1px solid black;
+  height: 90px;
+  border-radius: 3%;
 }
 </style>
