@@ -74,7 +74,7 @@ def review_d(request, review_pk):
         return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_401_UNAUTHORIZED)
     
     review.delete()
-    return Response({'message': f'리뷰 {review_pk}번 글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
+    return Response({'review_id': review_pk}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])

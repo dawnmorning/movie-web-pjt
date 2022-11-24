@@ -28,7 +28,7 @@
         <h5 class="card-title mb-2">리뷰 : {{review.title}}</h5>
         <p class="card-subtitle mb-2">{{review.content}}</p>
         <h5 class="card-text mb-2 text-muted">작성일 : {{review.updated_at.split('T', 1)[0]}}</h5>
-        <star-rating id=setstar :star-size="30" v-model="rating" :border-width="5" border-color="#d8d8d8" read-only="true"
+        <star-rating id="setstar" :star-size="15" v-model="rating" :border-width="5" border-color="#d8d8d8" read-only=true
           :rounded-corners="true" 
           :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]">
         </star-rating>
