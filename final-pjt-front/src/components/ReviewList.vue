@@ -29,7 +29,7 @@
             <div class='jua' style='position:relative; left: -41px; margin-top:0px; font-size:15px;'>내 프로필</div>
           </div>
             <div class='profile_box' style='position:relaitve; top:100px;'>
-                  <a text=black; class='jua' style='text-decoration: none; text:black; font-size:smaller position:relaitve; top:50px; width:10px; height:10px; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
+                  <a text=black; class='jua' style='text-decoration: none; text:black; font-size:smaller; position:relaitve; top:50px; width:10px; height:10px; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
                     <div style='background-color: #f5f5f5;'> <img style='padding:20px; float:left; position:relative; top:-20px; width:80px; margin-right:10px;' class='profile_img' :src=profileImage alt=""></div>
                   </a>
                   <div style='text-align:left; width:300px; height:100%; '>
@@ -42,6 +42,16 @@
                   </div>
               </div>
         </div>
+
+        <!-- user 검색창 -->
+        <div v-if="nicknames" style=''> 
+          <SearchAutocompleteUsers
+            style="width: 300px; border-color:rgba(255,255,255,0.1); position:relative; right:150px; border:none; padding:0;  background-color: #f5f5f5;"
+            class="form-control"
+            :items="nicknames"
+            @selected-user="goProfile"
+          />
+        </div>
       </div>
   </div>
 </template>
@@ -49,20 +59,26 @@
 <script>
 
 const DJANGO_URL = 'http://127.0.0.1:8000'
+import axios from 'axios'
 import ReviewListItem from '@/components/ReviewListItem'
+import SearchAutocompleteUsers from './SearchAutocompleteUsers.vue'
 import { Carousel, Slide } from 'vue-carousel';
+
 
 export default {
   name:'ReviewList',
   data(){
     return{
       username: this.$store.state.username,
+      nicknames: null,
+      users: null,
     }
   },
   components: {
       ReviewListItem,
       Carousel,
       Slide,
+      SearchAutocompleteUsers,
   },
   computed:{
    myFollowings() {
@@ -86,10 +102,35 @@ export default {
 
 
   },
-
+  methods: {
+    goProfile(nickname) {
+      const user = this.users.find(user => {
+        return user.nickname === nickname
+      })
+      this.$router.push({name: 'ProfileView', params:{username: user.username}})
+    },
+    getUsers() {
+      axios({
+        method: 'get',
+        url: `${DJANGO_URL}/api/v1/users/all/`,
+        headers:{
+          Authorization : `Token ${this.$store.state.token}`,
+        },
+      })
+      .then(res => { 
+        this.users = res.data    
+        this.nicknames = res.data.map( user => {
+          return user.nickname
+        })
+      })
+      console.log(this.nicknames)
+      
+    }
+  },
   created() {
     this.$store.dispatch('getReviews')
     this.$store.dispatch('getFollowings')
+    this.getUsers()
   },
 
 }
