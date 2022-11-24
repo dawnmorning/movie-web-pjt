@@ -1,13 +1,20 @@
 <template>
    <div class="autocomplete">
     <input
-      v-model="search"
       @input="onChange"
       @keydown.down="onArrowDown"
       @keydown.up="onArrowUp"
       @keydown.enter="onEnter"
       type="text"
     />
+    <!-- <input
+      v-model="search"
+      @input="onChange"
+      @keydown.down="onArrowDown"
+      @keydown.up="onArrowUp"
+      @keydown.enter="onEnter"
+      type="text"
+    /> -->
     <ul
       v-show="isOpen"
       class="autocomplete-results"
@@ -80,7 +87,8 @@ export default {
     filterResults() {
       this.results = this.items.filter(item => item.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
     },
-    onChange() {
+    onChange(event) {
+      this.search= event.target.value      
       this.$emit('input', this.search);
 
       if (this.isAsync) {
