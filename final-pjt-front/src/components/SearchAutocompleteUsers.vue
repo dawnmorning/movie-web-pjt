@@ -6,7 +6,7 @@
       @keydown.up="onArrowUp"
       @keydown.enter="onEnter"
       type="text"
-      style="margin-right:5px; background-color: #f5f5f5';" placeholder='검색도 가능해요!' :value=" search"
+      style="margin-right:5px; background-color: #f5f5f5';" placeholder='유저 검색' :value="search"
     />
     <ul
       v-show="isOpen"
@@ -30,7 +30,7 @@
       </li>
     </ul>
     <button class="btn btn-outline-success"
-    @click="selectMovie"
+    @click="selectUser"
     style='width:60px; height:20px; position:relative; padding:0;'
     ><i style='' class="fa-solid fa-magnifying-glass"></i></button>
   </div>
@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: 'SearchAutocomplete',
+  name: 'SearchAutocompleteUsers',
   props: {
     items: {
       type: Array,
@@ -74,8 +74,8 @@ export default {
       this.search = result;
       this.isOpen = false;
     },
-    selectMovie() {
-      this.$emit('selected-movie', this.search)
+    selectUser() {
+      this.$emit('selected-user', this.search)
       this.search = ''
     },
     filterResults() {
@@ -152,6 +152,7 @@ export default {
     padding: 4px 2px;
     cursor: pointer;
     background-color: white;
+
   }
 
   .autocomplete-result.is-active,

@@ -16,7 +16,6 @@
                 class="form-control"
                 :items="movieTitles"
                 @selected-movie="goMovieCard"
-                
               />
             </div>
 
@@ -91,8 +90,6 @@ export default {
     //   }
     // },
     goMovieCard(movietitle) {
-      console.log(movietitle)
-      
       const movie = this.$store.state.movieTitles.find(movieTitles => {
         return movieTitles.title === movietitle
       })

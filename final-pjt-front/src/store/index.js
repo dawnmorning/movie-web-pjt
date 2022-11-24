@@ -167,7 +167,6 @@ export default new Vuex.Store({
           Authorization : `Token ${data.token}`,
         },
       })
-
       .then(res => {                
         context.commit('GET_PROFILE', res.data)
       })

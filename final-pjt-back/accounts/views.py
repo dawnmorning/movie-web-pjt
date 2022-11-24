@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from django.contrib.auth import get_user_model
 from .serializers import UserSerializer, NestedUserSerializer, UpdateUserSerializer
 from rest_framework import status
@@ -31,6 +31,16 @@ def user_ru(request, username):
     elif request.method == 'GET':
         serializer = UserSerializer(person)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def users_r(request):
+    users = User.objects.all().values('nickname', 'username')
+    # print(users)
+    serializer = UserSerializer(users, many=True)
+    # serializer.is_valid()
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 @api_view(["PUT"])
 @permission_classes([IsAuthenticated])
