@@ -8,7 +8,6 @@ import createPersistedState from 'vuex-persistedstate'
 
 const DJANGO_URL='http://127.0.0.1:8000'
 
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
