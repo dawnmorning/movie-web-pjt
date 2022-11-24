@@ -1,27 +1,20 @@
 <template>
-  <div style='position:realted'>
+  <div style='position:related; margin-top:170px;'>
     <!-- 로그인 시 보일 화면 -->
     <div v-if='isLogin' >
-      <div class='jua animate__animated animate__backInUp delay-4s' style='color:black; margin-top:200px;'>
+      <div class='jua animate__animated animate__backInUp delay-4s' style='color:black; margin-top:100px;'>
         <div class=''>안녕하세요, {{ nickname }} 님</div> 
         <div class='mt-5 ' >오늘 기분은 어때요?</div>
         <b-button style='background-color: white;' @click='goRecommend' class='btn btn-outline-primary btn-lg'><span>영화를 고르러 가볼까요?</span> </b-button>
       </div>
       <div>
-      <div class="today jua " style='display:inline; position:related; right:1200px;'>
-          <div class='visitor animate__animated animate__heartBeat animate__repeat-3 delay-4s'>
-              <p>오늘 방문자 수</p>
-              <number class="number" :from="0" :to="16823405" :duration="500"/>
-          </div>
+        <div class="today jua " style='display:inline; position:related; right:1200px;'>
+            <div class='visitor animate__animated animate__heartBeat animate__repeat-3 delay-4s'>
+                <p>오늘 방문자 수</p>
+                <number class="number" :from="0" :to="16823405" :duration="500"/>
+            </div>
+        </div>
       </div>
-      </div>
-        <!-- 라우터링크에 애니메이션 넣기 -->
-        <!-- <router-link :to="{name: 'RecomView'}">영화를 추천해줄게요!</router-link>
-        <b-nav>
-          <router-link :to="{name: 'HomeView'}">홈</router-link> |
-          <router-link :to="`/profile/${this.$route.params.username}`">내 프로필</router-link> |
-        <b-button @click='noToken'>로그아웃</b-button>
-        </b-nav> -->
     </div>
     <!-- 비로그인 시 보일 화면 -->
     <div v-if='!isLogin'>

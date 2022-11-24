@@ -18,13 +18,10 @@
         </div>
       </div>
     </div>
-      
-      <img class='reviewimg ' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
-      <hr>       
-      <h5 class="card-title" style='text-align:center;'>영화 : {{review.movie.title}}</h5>
-      
-      <hr>
-      <div class="card-body">
+      <div class="card-body" style='border: 1px solid black;'>
+        <img class='reviewimg ' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
+        <hr>       
+        <h5 class="card-title" style='text-align:center;'>영화 : {{review.movie.title}}</h5>
         <h5 class="card-title mb-2">리뷰 : {{review.title}}</h5>
         <p class="card-subtitle mb-2">{{review.content}}</p>
         <h5 class="card-text mb-2 text-muted">작성일 : {{review.updated_at.split('T', 1)[0]}}</h5>
@@ -54,7 +51,7 @@
               </div>
               <div class="modal-footer">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">닫기</button>
-             
+              
             </div>
           </div>
         </div>
@@ -63,7 +60,6 @@
   </div>
 
         <!-- 댓글 -->
-        
         <hr style='margin:0px;'>
         <!-- <h5>댓글 입력</h5> -->
       <form class='commentstyle'>       

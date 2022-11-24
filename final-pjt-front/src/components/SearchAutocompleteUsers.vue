@@ -1,13 +1,23 @@
 <template>
    <div class="autocomplete">
-    <input
-      @input="onChange"
-      @keydown.down="onArrowDown"
-      @keydown.up="onArrowUp"
-      @keydown.enter="onEnter"
-      type="text"
-      style="margin-right:5px; background-color: #f5f5f5';" placeholder='유저 검색' :value="search"
-    />
+    <div class='d-flex flex-row'>
+      <div>
+        <input
+          @input="onChange"
+          @keydown.down="onArrowDown"
+          @keydown.up="onArrowUp"
+          @keydown.enter="onEnter"
+          type="text"
+          style="margin-right:5px; background-color: #f5f5f5';" placeholder='유저 검색' :value="search"
+        />
+      </div>
+      <div >
+        <button class="btn btn-outline-success"
+        @click="selectUser"
+        style='width:60px; height:20px; position:relative; padding:0;'
+        ><i style='' class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </div>
     <ul
       v-show="isOpen"
       class="autocomplete-results"
@@ -29,10 +39,7 @@
       {{ result }}
       </li>
     </ul>
-    <button class="btn btn-outline-success"
-    @click="selectUser"
-    style='width:60px; height:20px; position:relative; padding:0;'
-    ><i style='' class="fa-solid fa-magnifying-glass"></i></button>
+    
   </div>
 </template>
 
@@ -146,7 +153,7 @@ export default {
   }
 
   .autocomplete-result {
-    width:80%;
+    width:84%;
     list-style: none;
     text-align: left;
     padding: 4px 2px;
