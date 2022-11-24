@@ -1,32 +1,23 @@
 <template>
 
   <div class='bodyWrap' v-if="review" >
-    <!-- {{review.comments}} -->
-    <!-- {{profileImage}} -->
+    <!-- {{review}} -->
+
     <div class="card-body border border-secondary" style='border-radius:0.3cm'>
       <div class='needinLine' v-if="profileImage" style="height:50%; text-aling:center">
         <a class='jua' style='text-decoration: none; color:; font-size:smaller; height:10%; margin:0px;' :href="`http://localhost:8080/profile/${review.author.username}`"></a>
         <div class="splide-card" :style="`background-image: url(${profileImage});`"></div>
         <p class="card-text" style='font-size:16px; margin-top:10px;'>{{review.author.nickname}}</p>  
-        
         <div>
-
-          <button style='margin-left : 300px; margin-top:5px;'>수정하기</button>
+          <div v-show="isAuthor">
+            <button 
+              @click="goEditReview"
+              style='margin-left : 300px
+              margin-top:5px;'>수정하기</button>
+          </div>
         </div>
-        <!-- <div v-if="user_id === comment.author.id">
-        
-        <form @submit.prevent="updateComment">
-          <input type="text" v-model.trim='inputComment'>
-
-          <button type="submit">수정</button> |
-          <button @click='deleteComment'>삭제</button>
-        </form>
-
-
-      </div> -->
-
-
       </div>
+    </div>
       
       <img class='reviewimg ' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'>
       <hr>       
@@ -50,9 +41,9 @@
               <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}" style='text-decoration-line: none;'>
                   {{review_like_user.nickname}}
               </router-link>
-            </ul>
-          </div>
+          </ul>
         </div>
+      </div>
         
         <!-- 댓글 -->
         
@@ -65,10 +56,7 @@
         placeholder="댓글 달기"
         style= 'width:100%;' 
         >
-        <div
-        @click="createComment"
-        class='buttonstyle'
-        >입력</div>
+        <div @click="createComment" class='buttonstyle'>입력</div>
         
         <!-- 모달 -->
         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style='font-size:15px; width:70px;'>
@@ -97,7 +85,6 @@
         </div>
       </form>
     </div>
-  </div>
 </template>
 <script>
 import CommentListItem from '@/components/CommentListItem'
@@ -128,10 +115,17 @@ export default {
     comments() { return this.review.comments },
     review_isLike() { return this.review_like_users.some(user => { return user.id === this.user_id })},
     profileImage() { return DJANGO_URL+this.review.author.profile_image },
+    isAuthor() { return this.user_id === this.review.author.id}
 
   },
 
   methods: {
+    goEditReview() {
+      console.log(this.review)
+      
+      this.$router.push({name: 'EditReview', params: { review_id: this.review.id}})
+
+    },
     createComment() {
         const payload = {
             review_id: this.review.id,

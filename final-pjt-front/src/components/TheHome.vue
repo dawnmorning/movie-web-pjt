@@ -62,8 +62,14 @@ export default {
     },
     goRecommend(){
       this.$router.push({name: "RecomView"})
+    },
+    getMovieTitle() {
+        this.$store.dispatch('getMovieTitles')
     }
   },
+  created() {
+        this.getMovieTitle()
+    },
 }
 </script>
 

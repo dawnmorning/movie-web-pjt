@@ -61,7 +61,7 @@
     </div>
 </div>
 </template>
-z
+
 <script>
 // const IMG_URL = "https://image.tmdb.org/t/p/w500"
 import StarRating from 'vue-star-rating'

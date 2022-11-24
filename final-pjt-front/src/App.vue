@@ -7,17 +7,12 @@
         <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light ">
           <div class="container-fluid jua " style='margin-top:0px; width:1300px;' >
             <router-link style='width:600px;' class="navbar-brand fs-1" :to='{name: "HomeView"}'><img src="http://127.0.0.1:8000/media/final_logo2.jpg" style='width:28%;'></router-link>
-            <b-button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-              <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
-            </b-button>
 
             <div class="justify-content-end collapse navbar-collapse " id="navbarSupportedContent">
 
             <div v-if="movieTitles" style=''> 
               <SearchAutocomplete
-                style="width: 300px; border-color:rgba(255,255,255,0.1); position:relative; right:150px; border:none; padding:0; background-color: red';"
+                style=" background-color:rgba(0,0,0,0); width: 300px; border-color:rgba(255,255,255,0.1); position:relative; right:150px; border:none; padding:0;"
                 class="form-control"
                 :items="movieTitles"
                 @selected-movie="goMovieCard"
@@ -115,9 +110,6 @@ export default {
       this.$store.dispatch('getMovieTitles')
     }
   },
-  created() {
-    this.getMovieTitle()
-  }
 }
 </script>
 

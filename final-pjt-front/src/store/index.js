@@ -33,6 +33,7 @@ export default new Vuex.Store({
     movieTitles: null,
     // 커뮤니티 관련 함수
     reviews:null,
+    review_detail:null,
   },
 
   getters: {
@@ -93,6 +94,9 @@ export default new Vuex.Store({
     // community 관련 함수
     GET_REVIEWS(state, reviews){
       state.reviews = reviews
+    },
+    GET_REVIEW_DETAIL(state, review){
+      state.review_detail = review
     },
 
     ADD_REVIEW(state, review){
@@ -315,20 +319,20 @@ export default new Vuex.Store({
       .catch(err => { console.log(err)})
     },
     
-    // getReviewDetail(context, payload){
-    //   axios({
-    //     method: 'get',
-    //     url:`${DJANGO_URL}/api/v3/review/`,
-    //     headers:{
-    //       Authorization : `Token ${context.state.token}`,
-    //     },
-    //   })
-    //   .then(res => {
-    //     const reviews = res.data // Array
-    //     context.commit('GET_REVIEWS', reviews)
-    //   })
-    //   .catch(err => { console.log(err)})
-    // },
+    getReviewDetail(context, review_id){
+      axios({
+        method: 'get',
+        url:`${DJANGO_URL}/api/v3/review/${review_id}/detail/`,
+        headers:{
+          Authorization : `Token ${context.state.token}`,
+        },
+      })
+      .then(res => {
+        const review = res.data
+        context.commit('GET_REVIEW_DETAIL', review)
+      })
+      .catch(err => { console.log(err)})
+    },
 
     postReview(context, payload) {
       axios({

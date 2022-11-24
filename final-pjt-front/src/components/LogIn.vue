@@ -66,8 +66,10 @@ export default {
       
       goToSignup() {
         return this.$router.push('/signup')
-      }
-    }
+      },
+      
+    },
+
 }
 </script>
 

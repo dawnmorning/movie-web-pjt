@@ -5,6 +5,7 @@ import SignUp from '@/components/SignUp'
 import LogIn from '@/components/LogIn'
 import PostReview from '@/components/PostReview'
 import ReviewDetail from '@/components/ReviewDetail'
+import EditReview from '@/components/EditReview'
 
 import HomeView from '@/views/HomeView'
 import testView from '@/views/testView'
@@ -63,6 +64,11 @@ const routes = [
     path: '/post/review/:movie_id',
     name: 'PostReview',
     component: PostReview
+  },
+  {
+    path: '/Edit/review/:review_id',
+    name: 'EditReview',
+    component: EditReview
   },
   {
     path: '/review/:review_id/detail/',
