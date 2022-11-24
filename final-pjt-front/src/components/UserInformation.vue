@@ -31,58 +31,58 @@
                         <div class="tit_desc" style='background-color:#f5f5f5;'>
                             <button style='border:0; outline:0;' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="title">팔로워</span></button>
                             <span class="sub_title">{{ cnt_followers }}</span>
-														<!-- 팔로잉 모달 -->
+                            <!-- 팔로워 모달 -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-															<div class="modal-dialog">
-																<div class="modal-content">
-																	<div class="modal-header">
-																		<h1 style='text-align:left;' class="modal-title fs-5" id="exampleModalLabel">팔로잉 목록</h1>
-																	</div>
-																	<div class="modal-body" style='text-align:left; padding:0px;'>
-																		<ul v-for="follower in followers" :key="follower.id" style='padding:0px;'>
-																				<img class='profile_img' :src="`http://127.0.0.1:8000${follower.profile_image}`" alt="프로필 이미지" style='width:100px; margin-left:0px; margin-right:10px;  '>
-																				<a :href="`http://localhost:8080/profile/${follower.username}`" style='text-decoration:none; color:black;'>
-																				{{follower.nickname}}
-																				</a>
-																		</ul>
-																	</div>
-															</div>
-															<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-															</div>
-														</div>
-													</div>
-												</div>
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 style='text-align:left;' class="modal-title fs-5" id="exampleModalLabel">팔로워 목록</h1>
+                                        </div>
+                                        <div class="modal-body" style='text-align:left; padding:0px;'>
+                                            <ul v-for="follower in followers" :key="follower.id" style='padding:5px;'>
+                                                    <img class='profile_img' :src="`http://127.0.0.1:8000${follower.profile_image}`" alt="프로필 이미지" style='width:100px; margin-left:0px; margin-right:10px;  '>
+                                                    <a :href="`http://localhost:8080/profile/${follower.username}`" style='text-decoration:none; color:black;'>
+                                                    {{follower.nickname}}
+                                                    </a>
+                                            </ul>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-												<!-- 팔로워 모달 -->
+                        <!-- 팔로잉 모달 -->
                         <div class="tit_desc">                            
-                            <button style='border:0; outline:0;' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="title">팔로워</span></button>
+                            <button style='border:0; outline:0;' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><span class="title">팔로잉</span></button>
                             <span class="sub_title">{{ cnt_followings }}</span>
 														
-														<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-															<div class="modal-dialog">
-																<div class="modal-content">
-																	<div class="modal-header">
-																		<h1 class="modal-title fs-5" id="exampleModalLabel">팔로워 목록</h1>
-																	</div>
-																	<div class="modal-body">
-																		<ul v-for="following in followings" :key="following.id">
-																				<img :src="`http://127.0.0.1:8000${following.profile_image}`" alt="프로필 이미지">
-																				<a a :href="`http://localhost:8080/profile/${following.username}`">
-																				{{following.nickname}}
-																				</a>
-																		</ul>
-																	</div>
-														</div>
-														<div class="modal-footer">
-														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-							</div>
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">팔로잉 목록</h1>
+                                        </div>
+                                        <div class="modal-body" style='text-align:left; padding:0px; '>
+                                            <ul v-for="following in followings" :key="following.id" style='padding:5px;'>
+                                                    <img class='profile_img' :src="`http://127.0.0.1:8000${following.profile_image}`" alt="프로필 이미지" style='width:100px; margin-left:0px; margin-right:10px;  '>
+                                                    <a style='text-decoration: none; color:black;' a :href="`http://localhost:8080/profile/${following.username}`">
+                                                    {{following.nickname}}
+                                                    </a>
+                                            </ul>
+                                        </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
           <!-- profile -->
           <!-- contents -->
             <div class="contents" v-if="username">

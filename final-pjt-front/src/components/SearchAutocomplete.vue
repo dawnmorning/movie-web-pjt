@@ -6,15 +6,8 @@
       @keydown.up="onArrowUp"
       @keydown.enter="onEnter"
       type="text"
+      style="margin-right:5px; background-color: #f5f5f5';" placeholder='영화검색'
     />
-    <!-- <input
-      v-model="search"
-      @input="onChange"
-      @keydown.down="onArrowDown"
-      @keydown.up="onArrowUp"
-      @keydown.enter="onEnter"
-      type="text"
-    /> -->
     <ul
       v-show="isOpen"
       class="autocomplete-results"
@@ -38,7 +31,8 @@
     </ul>
     <button class="btn btn-outline-success"
     @click="selectMovie"
-    >Search</button>
+    style='width:60px; height:20px; position:relative; padding:0;'
+    ><i style='' class="fa-solid fa-magnifying-glass"></i></button>
   </div>
 </template>
 
@@ -143,7 +137,7 @@ export default {
   .autocomplete-results {
     padding: 0;
     margin: 0;
-    border: 1px solid #eeeeee;
+    /* border: 1px solid #eeeeee; */
     height: 120px;
     min-height: 1em;
     max-height: 400px;    
@@ -162,5 +156,9 @@ export default {
   .autocomplete-result:hover {
     background-color: #4AAE9B;
     color: white;
+  }
+
+  input::placeholder{
+    opacity: 0.7;
   }
 </style>
