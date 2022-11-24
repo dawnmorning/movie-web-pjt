@@ -8,8 +8,8 @@
 					<span v-if="!isLike"><i class="fa-regular fa-heart"></i></span>
 					<span v-if="isLike"><i class="fa-solid fa-heart"></i></span>
 				</button>
-				<span class='showlikeuser'>{{like_users_count}}</span>
-				<div v-if="like_users">
+				<span class='showlikeuser' style='color:white;'>{{like_users_count}}</span>
+				<!-- <div v-if="like_users">
 					<h6>좋아요 누른 사람</h6>
 					<ul v-for="like_user in like_users" :key="like_user.id">
 							<img :src="`http://127.0.0.1:8000${like_user.profile_image}`" alt="프로필 이미지">
@@ -17,7 +17,7 @@
 							{{like_user.nickname}}
 						</router-link>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>                
