@@ -14,15 +14,16 @@
             </b-button>
 
             <div class="justify-content-end collapse navbar-collapse " id="navbarSupportedContent">
-       
 
-
-              <form class="d-flex justify-content-center">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-
-
+            <div v-if="movieTitles"
+> 
+              <SearchAutocomplete
+                style="width: 300px;"
+                class="form-control"
+                :items="movieTitles"
+                @selected-movie="goMovieCard"
+              />
+            </div>
 
               <ul class="nav justify-content-end fs-6">
                 <li class="nav-item">
@@ -50,10 +51,12 @@
       <router-view/>
     </div>
   </body>
+
 </template>
 
 <script>
 // import LogIn from '@/components/LogIn'
+import SearchAutocomplete from './components/SearchAutocomplete.vue'
 
 export default {
   name: 'App',
@@ -61,6 +64,9 @@ export default {
     return {
       result: null,
     }
+  },
+  components: {
+    SearchAutocomplete
   },
   computed:{
     username() {
@@ -70,21 +76,32 @@ export default {
           return this.$store.getters.isLogin
       },
       movieTitles() {
-        return this.$store.state.movieTitles
+        return this.$store.state.movieTitles.map(movietitle => {
+          return movietitle.title
+        })
       }
   },
   methods:{
-    movieInput(event) {
-      const inputData = event.taget.value
-      const autocomplete = document.querySelector(".autocomplete");
-      console.log(inputData)
-      if (inputData) {
-        autocomplete.classList.remove("disabled");
-        this.result = this.movieTitles.filter((title) => {
-          return title.title.includes(inputData)})
-      } else {
-        autocomplete.classList.add("disabled");
-      }
+    // movieInput(event) {
+    //   const inputData = event.taget.value
+    //   const autocomplete = document.querySelector(".autocomplete");
+    //   console.log(inputData)
+    //   if (inputData) {
+    //     autocomplete.classList.remove("disabled");
+    //     this.result = this.movieTitles.filter((title) => {
+    //       return title.title.includes(inputData)})
+    //   } else {
+    //     autocomplete.classList.add("disabled");
+    //   }
+    // },
+    goMovieCard(movietitle) {
+      console.log(movietitle)
+      
+      const movie = this.$store.state.movieTitles.find(movieTitles => {
+        return movieTitles.title === movietitle
+      })
+      this.$router.push({name: 'PostReview', params:{movie_id: movie.id}})
+
     },
     logOut(){
       this.$store.dispatch('logOut')
