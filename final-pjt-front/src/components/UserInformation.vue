@@ -1,6 +1,6 @@
 <template>
   <!-- <div style="overflow: scroll;"> -->
-    <div style='margin:100px;'>
+    <div class='jua' style='margin:100px; font-size:15px;'>
       <!-- profile -->
         <div class="continer">
             <div class="profile" v-if='nickname'>
@@ -27,12 +27,12 @@
                             <span class="title">게시물</span>
                             <span class="sub_title">7</span>
                         </div>
-                        <div class="tit_desc">
-                            <span class="title">팔로워</span>
+                        <div class="tit_desc" style='background-color:#f5f5f5;'>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="title">팔로워</span></button>
                             <span class="sub_title">{{ cnt_followers }}</span>
-                            <ul v-for="follower in followers" :key="follower.id">
-                                <img :src="`http://127.0.0.1:8000${follower.profile_image}`" alt="프로필 이미지">
-                                <a :href="`http://localhost:8080/profile/${follower.username}`">
+                            <ul v-for="follower in followers" :key="follower.id" >
+                                <img class='profile_img' :src="`http://127.0.0.1:8000${follower.profile_image}`" alt="프로필 이미지" style='width:100px; margin-left:30px; margin-right:10px;  '>
+                                <a :href="`http://localhost:8080/profile/${follower.username}`" style='text-decoration:none; color:black;'>
                                 {{follower.nickname}}
                                 </a>
                             </ul>
@@ -84,13 +84,15 @@
                             <div @click="goReviewDetail(myReview)">
                                 <img class='profilegrid' :src="`https://image.tmdb.org/t/p/w500/${myReview.movie.poster_path}`">
                                 <!-- 좋아요 있을 때 좋아요 표시필요 -->
-                                <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요 수 : {{ myReview.like_users.length }}</span>
-                                <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요한 사람 : {{ myReview.like_users}}</span>
-                                <div v-for="like_user in myReview.like_users" :key='like_user.id'>
+                                
+                                <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요 {{ myReview.like_users.length }}</span>
+                                <span class='jua' style='font-size:20px; margin-top:0px; margin-left:5px;'>좋아요한 사람 
+                                    <div v-for="like_user in myReview.like_users" :key='like_user.id'>
                                 
                                     {{like_user.nickname}}
 
-                                </div>
+                                </div></span>
+                                
                             </div>
                             <!-- <MyReviewItem :myReview='myReview'/> -->
                         </div>

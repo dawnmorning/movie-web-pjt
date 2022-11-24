@@ -1,15 +1,17 @@
 <template>
 <div>
   <div class='jua juaDetail' :style="`background-image: url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`" ></div>
-    <div class='reviewbody' style='margin-top: 100px;'>
+    <div class='reviewbody' style='margin-top: 100px; color:white;'>
 
 			<div id="box" class='postfont animate__animated animate__fadeIn animate-delay-2s'>
-				<img class='img-fluid' :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" style='height: 500px; margin-left:15%; border-radius: 0.5cm;'>
+        <div style='width"100%; text-align:center;'>
+        <img class='img-fluid' :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" style='position:relative; width"100%; border-radius: 0.5cm; height:400px; '>
+        </div>
 				<h1 class="heading" style='font-weight:600;'>{{movie.title}}</h1>
 				<div class="data">
-					<span class="average">평점 {{movie.vote_average}}</span>
+					<span class="average" style='color:white;'>평점 {{movie.vote_average}}</span>
 				</div>
-				<p class="texts">
+				<p class="texts" style='font-size:17px;'>
 					{{movie.overview}}
 				</p>
         <!-- Button trigger modal -->
@@ -56,7 +58,7 @@
     </div>
 </div>
 </template>
-
+z
 <script>
 // const IMG_URL = "https://image.tmdb.org/t/p/w500"
 import StarRating from 'vue-star-rating'
@@ -118,12 +120,12 @@ export default {
 }
 
 #box  {
-  width: 500px;
+  width: 1000px;
   border-radius: 8px;
   overflow: hidden;
   margin: 50px auto;
   transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
-	border: 5px double gray;
+	border: 8px ridge peru;
 }
 
 #box:hover {
@@ -138,6 +140,9 @@ export default {
 #box .img {
   display: block;
   object-fit: cover;
+  width:100%;
+  height:100%;
+  margin: auto;
   padding: 0;
 	
 	
