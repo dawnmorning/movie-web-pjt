@@ -56,10 +56,10 @@
 
 												<!-- 팔로워 모달 -->
                         <div class="tit_desc">                            
-                            <button style='border:0; outline:0;' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="title">팔로워</span></button>
+                            <button style='border:0; outline:0;' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><span class="title">팔로워</span></button>
                             <span class="sub_title">{{ cnt_followings }}</span>
 														
-														<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 															<div class="modal-dialog">
 																<div class="modal-content">
 																	<div class="modal-header">

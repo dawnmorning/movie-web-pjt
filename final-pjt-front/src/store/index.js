@@ -377,9 +377,7 @@ export default new Vuex.Store({
           content: payload.comment,
         }
       })
-      .then(res => {
-        console.log(res)
-        
+      .then(res => {      
         context.commit('CREATE_COMMENT', res.data)
       })
     },
@@ -393,9 +391,7 @@ export default new Vuex.Store({
           content: payload.content,
         }
       })
-      .then(res => {
-        console.log(res)
-        
+      .then(res => {       
         context.commit('UPDATE_COMMENT', res.data)
       })
     }

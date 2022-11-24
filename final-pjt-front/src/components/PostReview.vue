@@ -18,6 +18,9 @@
 				<div style='text-align: center;'>
 					<button @click='showModal' class='jua btn-open-popup' style='font-size:15px; margin-top: -30px; width:80px; border-radius:0.3cm;' 
 					data-bs-toggle="modal" data-bs-target="#staticBackdrop">리뷰쓰기
+          </button>
+					<button @click='goBack' class='jua btn-open-popup' style='font-size:15px; margin-top: -30px; width:80px; border-radius:0.3cm;' 
+					>뒤로가기
 					</button>
 				</div>
       </div>
@@ -97,7 +100,11 @@ export default {
         },
 				showModal(){
 					this.is_show = true
-				}
+				},
+        goBack() {
+          this.$router.go(-1)
+        }
+
     },
     created() {
         const payload = {

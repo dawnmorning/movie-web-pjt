@@ -27,8 +27,8 @@
             <span style='margin-bottom:5px; margin-top:10px;'>지금, 인기있는 영화</span>
             <button
             @click="popular_count ++"
-            style='font-size:20px; top:-5px;'
-            class='position-relative'
+            style='font-size:20px; top:-5px; '
+            class='position-relative btn btn-outline-success'
             >더보기</button>
             </div>
             <div class=''>
@@ -45,8 +45,8 @@
             <span style='margin-bottom:5px; margin-top:10px;'>평점이 높은 영화</span>
                 <button
                 @click="vote_count ++"
-                style='font-size:20px; top:-5px;'
-                class='position-relative'
+                style='font-size:20px; top:-5px; '
+                class='position-relative btn btn-outline-success'
                 >더보기</button>
             </div>
             <div class=''>
@@ -58,14 +58,31 @@
                 </div>
             </div>
         </div>
-<!-- 랜덤 영화 -->   
+        <!-- 랜덤 영화 -->   
         <div class='random' >
-             <div class='jua position-relative' style='margin-top:30px; right:30%; top:100px;'>
+            <div class='jua position-relative' style='margin-top:30px; right:30%; top:100px;'>
+            <span style='margin-bottom:5px; margin-top:10px;'>랜덤 영화</span>
+                <button
+                @click="getRandomMovies"
+                style='font-size:20px; top:-5px; '
+                class='position-relative btn btn-outline-success'
+                >더보기</button>
+            </div>
+            <div class=''>
+                <div  v-if='randomMovies' class='update' >
+                    <div v-for='movie in randomMovies' :key='movie.id'>
+                        <MovieCard :movie="movie"/>
+    
+                    </div>        
+                </div>
+            </div>
+<!--         
+            <div class='jua position-relative' style='margin-top:30px; right:30%; top:100px;'>
             <span style='margin-bottom:5px; margin-top:10px;'>랜덤 추천</span>
                 <button
                 @click="getRandomMovies"
                 style='font-size:20px; top:-5px;'
-                class='position-relative'
+                class='position-relative btn btn-outline-success'
                 >더보기</button>
             </div>
             <div class=''>
@@ -76,7 +93,7 @@
                         </slide>
                     </carousel>
                 </div>
-            </div>
+            </div> -->
         </div>
   </div>
 </template>
@@ -85,15 +102,15 @@
 import axios from 'axios'
 // import _ from 'lodash'
 import MovieCard from '@/components/MovieCard'
-import { Carousel, Slide } from 'vue-carousel';
+// import { Carousel, Slide } from 'vue-carousel';
 const DJANGO_URL='http://127.0.0.1:8000'
 // const IMG_URL = "https://image.tmdb.org/t/p/w500"
 export default {
     name: 'RecommenDation',
     components:{
         MovieCard,
-        Carousel,
-        Slide
+        // Carousel,
+        // Slide
     },
     data(){
         return{
