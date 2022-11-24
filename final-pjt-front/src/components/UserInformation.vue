@@ -13,11 +13,14 @@
                             <h2 class="user_id">{{ nickname }} 님</h2>
                         </div>
                         <button
-						style='border:0; outline:0;'
+                        class='btn btn-link'
+						style='border:0; outline:0; color:black; text-decoration:none; opacity:0.7'
                         v-if="isMyProfile"
                         @click='goModify'>프로필 수정</button>
                         <button
                         v-if="!isMyProfile"
+                        class='btn btn-link'
+                        style='color:black; text-decoration:none; opacity:0.7'
                         @click='follower'>
                         <span v-if="!isFollowing">팔로우</span>
                         <span v-if="isFollowing">팔로우 취소</span>
@@ -29,7 +32,7 @@
                             <span class="sub_title">{{myReviews?.length}}</span>
                         </div>
                         <div class="tit_desc" style='background-color:#f5f5f5;'>
-                            <button style='border:0; outline:0;' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="title">팔로워</span></button>
+                            <button class='btn btn-link' style=' color:black; text-decoration:none; opacity:0.7; border:0; outline:0;' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="title">팔로워</span></button>
                             <span class="sub_title">{{ cnt_followers }}</span>
                             <!-- 팔로워 모달 -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,7 +59,7 @@
 
                         <!-- 팔로잉 모달 -->
                         <div class="tit_desc">                            
-                            <button style='border:0; outline:0;' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><span class="title">팔로잉</span></button>
+                            <button class='btn btn-link' style='border:0; outline:0; color:black; text-decoration:none; opacity:0.7' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><span class="title">팔로잉</span></button>
                             <span class="sub_title">{{ cnt_followings }}</span>
 														
                             <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

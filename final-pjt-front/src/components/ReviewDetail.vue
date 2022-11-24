@@ -2,7 +2,7 @@
 <div>
     <div class='jua juaDetail' :style="`background-image: url(https://image.tmdb.org/t/p/w500/${review.movie.poster_path})`" v-if="review"></div>
         <!-- <div :style="`background-image: url(${review.movie.poster_path})`"></div> -->
-        <div class="jua card reviewbody " style= 'font-size:20px;  width:1000px; left:25%; object-fit:cover;'>
+        <div class="jua card reviewbody " style= 'font-size:20px;  width:1000px; left:18%; object-fit:cover;'>
             <p class="card-text">작성자 : {{review.author.nickname}}</p>
             <div class="card-body">
                 <div><img class='img-fluid' :src='`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`'></div>
@@ -23,6 +23,7 @@
                         @keyup.enter="createComment" 
                         >
                         <button
+                        class='btn btn-btn-link' style=' color:black; text-decoration:none;'
                         @click="createComment"
                         >입력</button>
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style='display: flex; position:absolute; bottom:50px; left:120px; font-size:16px;'>
@@ -57,7 +58,7 @@
                     />
                 </div> -->
                 
-            <button @click="goBack" style='float:right; font-size:20px; position:relative; bottom:50px;'>뒤로가기</button>
+            <button class='btn btn-btn-link' @click="goBack" style='color:black; text-decoration:none; float:right; font-size:20px; position:relative; bottom:50px;'>뒤로가기</button>
             </div>
         </div>
     </div>
@@ -116,7 +117,7 @@ export default {
     left: 0;
     filter: blur(3px) brightness(160%) contrast(30%);
     width: 100%;
-    height: 150%;
+    height: 180%;
     background-size: cover;
     margin-top:-155px;
     transform: translateY(-120px);

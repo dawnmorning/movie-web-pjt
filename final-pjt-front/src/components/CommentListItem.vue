@@ -8,8 +8,8 @@
       <div v-if="user_id === comment.author.id">
         <form @submit.prevent="updateComment">
           <input type="text" v-model.trim='inputComment'>
-          <button type="submit">수정</button> |
-          <button @click='deleteComment'>삭제</button>
+          <button class='btn btn-link' style=' color:black; text-decoration:none;' type="submit">수정</button>
+          <button class='btn btn-link' style=' color:black; text-decoration:none;' @click='deleteComment'>삭제</button>
         </form>
       </div>
     <button @click="likeComment" class= 'fun-btn'  style='width:32px; margin-top:3px;'>
@@ -29,9 +29,6 @@
         </ul>
       </div>
     </div>
-    
-
-
   </div>
 </template>
 <script>
