@@ -3,8 +3,11 @@
     <div class='contentsWrap ' style='font-size:20px; margin-top:0;'>
         <form @keyup.enter="signUp" @submit.prevent='signUp' class = 'formWrap animate__animated animate__fadeIn'>
             <!-- <div class="jua"></div> -->
-            <div class='signupWindow jua' style=''>
-                <h1>회원 가입</h1>
+            <div class='jua animate__animated animate__fadeInUp aniamte_duration-2s' style='position:relative; left:30px; margin-left:30px; margin-top: 30px; margin-bottom: 50px;'><img style='width:60%; margin-bottom:-40px;' src="http://127.0.0.1:8000/media/final_logo.jpg" alt="우리 로고"></div>
+
+            <div class='signupWindow jua' style='height:500px;'>
+                <h1 style="margin-top:20px;">회원 가입</h1>
+
                 <div class="inlineToBlock">
                     <input type="text" id='username' v-model.trim='username' placeholder="아이디" class='id'>
                     <p class='ErrorMsg' v-if="ErrorMessage?.username">{{ ErrorMessage.username[0] }}</p>

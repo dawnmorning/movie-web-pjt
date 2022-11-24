@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+const DJANGO_URL='http://127.0.0.1:8000'
 import LogIn from '@/components/LogIn'
 export default {
   name: 'TheHome',
@@ -58,11 +60,24 @@ export default {
     },
     getMovieTitle() {
         this.$store.dispatch('getMovieTitles')
-    }
-  },
-  created() {
-        this.getMovieTitle()
     },
+    getRandomMovies(){
+        axios({
+            method: 'get',
+            url: `${DJANGO_URL}/api/v2/movies/random/`,
+            headers: { Authorization : `Token ${this.$store.state.token}` }
+        })
+        .then(res => {                
+            this.randomMovies = res.data
+        })
+        .catch(err => { console.log(err) })
+      },     
+  },
+  created(){
+        this.getMovieTitle()
+        this.$store.dispatch('getMovies')
+        this.getRandomMovies()
+  }
 }
 </script>
 

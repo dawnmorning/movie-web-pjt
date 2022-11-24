@@ -23,7 +23,7 @@ def user_ru(request, username):
             return Response({'message': '해당 작업의 권한이 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = UpdateUserSerializer(person, data=request.data)
         if serializer.is_valid(raise_exception=True):
-            
+            print(person.profile_image.name)
             os.remove(os.path.join(settings.MEDIA_ROOT, person.profile_image.name))
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -40,7 +40,6 @@ def users_r(request):
     serializer = UserSerializer(users, many=True)
     # serializer.is_valid()
     return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 @api_view(["PUT"])
 @permission_classes([IsAuthenticated])
