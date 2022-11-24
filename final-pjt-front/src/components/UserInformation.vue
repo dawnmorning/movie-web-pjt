@@ -26,7 +26,7 @@
                     <div class="area_text">
                         <div class="tit_desc">
                             <span class="title">게시물</span>
-                            <span class="sub_title">7</span>
+                            <span class="sub_title">{{myReviews.length}}</span>
                         </div>
                         <div class="tit_desc" style='background-color:#f5f5f5;'>
                             <button style='border:0; outline:0;' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="title">팔로워</span></button>
