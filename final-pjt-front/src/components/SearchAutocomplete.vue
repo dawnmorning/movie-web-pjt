@@ -6,7 +6,7 @@
       @keydown.up="onArrowUp"
       @keydown.enter="onEnter"
       type="text"
-      style="margin-right:5px; background-color: #f5f5f5';" placeholder='검색도 가능해요!'
+      style="margin-right:5px; background-color: #f5f5f5';" placeholder='검색도 가능해요!' :value=" search"
     />
     <ul
       v-show="isOpen"

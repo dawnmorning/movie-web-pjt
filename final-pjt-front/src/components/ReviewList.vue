@@ -31,7 +31,7 @@
           </div>
             <div class='profile_box' style='position:relaitve; top:100px;'>
                   <a text=black; class='jua' style='text-decoration: none; text:black; font-size:smaller position:relaitve; top:50px; width:10px; height:10px; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
-                    <div style='background-color: #f5f5f5;'> <img style='padding:20px; float:left; position:relative; top:-10px; width:80px; margin-right:10px;' class='profile_img' :src=profileImage alt=""></div>
+                    <div style='background-color: #f5f5f5;'> <img style='padding:20px; float:left; position:relative; top:-20px; width:80px; margin-right:10px;' class='profile_img' :src=profileImage alt=""></div>
                   </a>
                   <div style='text-align:left; width:300px; height:100%; '>
                     <a v-if="username" class='jua' style='text-decoration:none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">

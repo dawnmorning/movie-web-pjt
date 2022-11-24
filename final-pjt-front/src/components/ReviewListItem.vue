@@ -5,15 +5,16 @@
 
     <div class="card-body border border-secondary" style='border-radius:0.3cm'>
       <div class='needinLine' v-if="profileImage" style="height:50%; text-aling:center">
-        <a class='jua' style='text-decoration: none; color:; font-size:smaller; height:10%; margin:0px;' :href="`http://localhost:8080/profile/${review.author.username}`"></a>
-        <div class="splide-card" :style="`background-image: url(${profileImage});`"></div>
+        <a class='jua' style='none; color:; font-size:smaller; height:10%; margin:0px;' :href="`http://localhost:8080/profile/${review.author.username}`"></a>
+        <div class="splide-card m-1" :style="`  border-radius: 40%; background-image: url(${profileImage});`"></div>
         <p class="card-text" style='font-size:16px; margin-top:10px;'>{{review.author.nickname}}</p>  
         <div>
           <div v-show="isAuthor">
             <button 
-              @click="goEditReview"
-              style='margin-left : 300px
-              margin-top:5px;'>수정하기</button>
+            @click="goEditReview"
+             class='jua btn-open-popup' style='font-size:small; margin-left:370px;
+              margin-top:15px; border-radius:0.3cm; border-color: rgba(0,0,0,0);r'>✏️
+            </button>
           </div>
         </div>
       </div>
@@ -25,10 +26,13 @@
       
       <hr>
       <div class="card-body">
-        <h5 class="card-title">리뷰 : {{review.title}}</h5>
-        <h5 class="card-subtitle mb-2 text-muted">{{review.updated_at}}</h5>
-        <h5 class="card-subtitle mb-2 text-muted">별점 : {{review.rating}}</h5>
-        <p class="card-text">{{review.content}}</p>
+        <h5 class="card-title mb-2">리뷰 : {{review.title}}</h5>
+        <p class="card-subtitle mb-2">{{review.content}}</p>
+        <h5 class="card-text mb-2 text-muted">작성일 : {{review.updated_at.split('T', 1)[0]}}</h5>
+        <star-rating id=setstar :star-size="30" v-model="rating" :border-width="5" border-color="#d8d8d8" read-only="true"
+          :rounded-corners="true" 
+          :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]">
+        </star-rating>
         <button @click="likeReview" class='fun-btn' style='width:30px;'>
           <span v-if="!review_isLike"><i class="fa-regular fa-heart"></i></span>
           <span v-if="review_isLike"><i class="fa-solid fa-heart"></i></span>
@@ -89,6 +93,7 @@
 <script>
 import CommentListItem from '@/components/CommentListItem'
 import axios from 'axios'
+import StarRating from 'vue-star-rating'
 
 // const IMG_URL = "https://image.tmdb.org/t/p/w500"
 // console.log(review.author.profile)
@@ -101,6 +106,7 @@ export default {
   },
   components: {
       CommentListItem,
+      StarRating,
   },
   data() {
       return {
@@ -108,6 +114,7 @@ export default {
         // is_open : false,
         review_like_users: this.review.like_users, 
         review_like_users_count: this.review.cnt_like_users,
+        rating: this.review.rating,
       }
   },
   computed:{

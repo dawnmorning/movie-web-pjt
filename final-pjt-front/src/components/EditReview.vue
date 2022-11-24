@@ -90,7 +90,7 @@ export default {
       // review: this.$store.state.review_detail,
       title:null,
       content:null,
-      rating:null,
+      rating:4,
       is_show : true,
     }
   },

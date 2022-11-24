@@ -11,7 +11,7 @@
       <div class="today jua " style='display:inline; position:related; right:1200px;'>
           <div class='visitor animate__animated animate__heartBeat animate__repeat-3 delay-4s'>
               <p>오늘 방문자 수</p>
-              <number class="number" :from="0" :to="1125" :duration="6"/>
+              <number class="number" :from="0" :to="16823405" :duration="500"/>
           </div>
       </div>
       </div>

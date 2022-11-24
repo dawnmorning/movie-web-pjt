@@ -13,7 +13,7 @@
                             <h2 class="user_id">{{ nickname }} 님</h2>
                         </div>
                         <button
-												style='border:0; outline:0;'
+						style='border:0; outline:0;'
                         v-if="isMyProfile"
                         @click='goModify'>프로필 수정</button>
                         <button
@@ -97,7 +97,7 @@
                         </li>
                         <!-- myLike -->
                         <li>
-                            <router-link :to="{name : '' }">
+                            <router-link :to="{name : 'CollectionView' }">
                                 <i class="fas fa-tv"></i>
                                 <span>컬랙션</span>
                             </router-link>
@@ -183,6 +183,7 @@ export default {
                 this.followers = userInfo.followers;
                 this.followings = userInfo.followings;
                 this.isFollowing = userInfo.followers.some(follower => { return follower.id === user_id; });
+
             });
         },
         follower() {

@@ -7,11 +7,6 @@
         <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light " style=' background-color: #f5f5f5'>
           <div class="container-fluid jua " style='margin-top:0px; width:1300px; background-color: #f5f5f5;' >
             <router-link style='width:600px; ' class="navbar-brand fs-1" :to='{name: "HomeView"}'><img src="http://127.0.0.1:8000/media/final_logo2.jpg" style='width:28%;'></router-link>
-            <b-button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-              <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
-            </b-button>
 
             <div class="justify-content-end collapse navbar-collapse " id="navbarSupportedContent">
 
