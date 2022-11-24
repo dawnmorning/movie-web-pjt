@@ -1,9 +1,10 @@
 <template>
   <nav v-if='!isLogin'>
-    <div class='contentsWrap animate__animated animate__bounceInUp animate__slow' style='margin-top : 40px; height : 100px;' > 
+    
+    <div class='contentsWrap animate__animated animate__bounceInUp animate__slow' style='margin-top : 0px; height : 100px;' > 
         <form @submit.prevent='logIn' class=''>
-          <div class='jua' style='margin-top:50px;'>우리로고 들어갈 곳</div>
-          <div class='loginWindow jua' style= 'margin-top:30px;'>
+          <div class='jua animate__animated animate__fadeInUp aniamte_duration-2s' style='margin-top: 50px; margin-bottom: 50px;'><img style='width:100%; margin-bottom:-60px;' src="http://127.0.0.1:8000/media/final_logo.jpg" alt="우리 로고"></div>
+          <div class='loginWindow jua' style= 'margin-top:0px;'>
             
             <br>
             <h1 style='margin-top:20px;'>로그인</h1>
@@ -19,7 +20,7 @@
             placeholder='비밀번호'
             v-model='password'
             >
-            <button class='inlineToBlock ordinaryLgin unactivatedLoginColor btn btn-primary' type="submit" >로그인</button>
+            <button class='inlineToBlock ordinaryLgin unactivatedLoginColor btn' type="submit" >로그인</button>
             
             <div>
                 <!-- 소셜 로그인 할거라면 넣을곳 -->
