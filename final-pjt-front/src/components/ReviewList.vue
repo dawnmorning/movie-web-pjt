@@ -1,20 +1,24 @@
 <template>
-  <div class="container" v-if="reviews" style='margin-top:-110px;'>  
-
-    <div class='left_body float-md-start'  >
+  <div class="container" v-if="reviews" style='margin-top:-110px;' >  
+    <div class='left_body float-md-start'>
       <!-- 팔로워 목록 -->
-      <div class="d-flex flex-row card-body border border-secondary align-items-bottom"  v-if="myFollowings" style='border-radius:0.3cm; margin-top:150px; width:494px; height:119px; position:relative;'>
-        <carousel class="slide" style="overflow:auto" :per-page="4" :navigate-to="someLocalProperty" :mouse-drag="true">
-          <slide style='text-align:center; margin-left:-20px;' v-for="myFollowing in myFollowings" :key="myFollowing.id" class='slide__item '>
-            <div class='profile_box' style='width:100px; position:relative; top:35px; height:119px;'>
-              <a class='jua' style='text-decoration: none; font-size:smaller ' :href="`http://localhost:8080/profile/${myFollowing.username}`">
-                <div><img  class='profile_img' :src="`http://127.0.0.1:8000${myFollowing.profile_image}`" alt="" style='display:inline; width:50px; height:50px;'></div>
-                <p>{{myFollowing.nickname}}</p>
-              </a>
-            </div>
-          </slide>
-        </carousel>
-      </div>
+        <div class="d-flex flex-row card-body border border-secondary align-items-bottom"  v-if="myFollowings" style='border-radius:0.3cm; margin-top:150px; width:494px; height:119px; position:relative;'>
+          <carousel class="slide" style="overflow:auto" :per-page="4" :navigate-to="someLocalProperty" :mouse-drag="true">
+            <slide style='text-align:center; margin-left:-20px;' v-for="myFollowing in myFollowings" :key="myFollowing.id" class='slide__item '>
+                <div class='profile_box' style='width:100px; position:relative; top:35px; height:119px;'>
+                  <a class='jua' style='text-decoration: none; font-size:smaller ' :href="`http://localhost:8080/profile/${myFollowing.username}`">
+                    <div><img  class='profile_img' :src="`http://127.0.0.1:8000${myFollowing.profile_image}`" alt="" style='display:inline; width:50px; height:50px;'></div>
+                    <p>{{myFollowing.nickname}}</p>
+                  </a>
+                </div>
+            </slide>
+          </carousel>
+        </div>
+        <div v-else style='margin-top:200px;'>
+          <div>체크용 입니다</div>
+        </div>
+    
+      
       <!-- 리뷰 자리 -->
       <div v-for="review in reviews" :key="review.id" style='margin-top:20px;'>
         <ReviewListItem
