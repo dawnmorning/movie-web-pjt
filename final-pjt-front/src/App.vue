@@ -1,66 +1,55 @@
 <template>
-  <div id="app">
-    
-    <!-- 로그인 후 -->
-    <span v-if='isLogin'>
-      <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light ">
-        <div class="container-fluid jua " style='margin-top:0px; width:1300px;' >
-          <router-link class="navbar-brand fs-1" :to='{name: "HomeView"}'>우리 프로젝트 명</router-link>
-          <b-button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                  aria-expanded="false" aria-label="Toggle navigation">
-            <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
-          </b-button>
+  <body style=' background-color: #f5f5f5'>
+    <div id="app">
+      
+      <!-- 로그인 후 -->
+      <span v-if='isLogin'>
+        <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light ">
+          <div class="container-fluid jua " style='margin-top:0px; width:1300px;' >
+            <router-link class="navbar-brand fs-1" :to='{name: "HomeView"}'>우리 프로젝트 명</router-link>
+            <b-button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+              <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
+            </b-button>
 
-          <div class="justify-content-end collapse navbar-collapse " id="navbarSupportedContent">
-            <!-- <i class="fas fa-search">
-              <input @keyup="movieInput" type="text" style="margin-bottom : 15px;" />
-            </i>
-
-            <div class="autocomplete disabled">
-              <div
-                @click="searchMovieAdd"
-                style="cursor: pointer"
-                v-for="(res,i) in result"
-                :key="i"
-                >{{ res.title }}
-                <hr>
-              </div>
-            </div> -->
+            <div class="justify-content-end collapse navbar-collapse " id="navbarSupportedContent">
+       
 
 
-            <form class="d-flex justify-content-center">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+              <form class="d-flex justify-content-center">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
 
 
 
-            <ul class="nav justify-content-end fs-6">
-              <li class="nav-item">
-                <router-link class='nav-link' :to="{name: 'HomeView'}">홈</router-link>
-                <!-- <a class="nav-link active" aria-current="page" href="http://localhost:8080/">홈</a> -->
-              </li>
-              <li class="nav-item">
-                <router-link class='nav-link' :to="{name: 'CommunityView'}">커뮤니티</router-link>
-                <!-- <a class="nav-link" href="/community">커뮤니티</a> -->
-              </li>
-              <li class="nav-item">
-                <router-link class='nav-link' :to="`/profile/${this.$store.state.username}`">내 프로필</router-link>
-                <!-- <a class='nav-link' :href="`/profile/${username}`">내 프로필</a> -->
-              </li>
-              <li class="nav-item">
-                <a @click='logOut' class="nav-link" href="#">로그아웃</a>
-              </li>
+              <ul class="nav justify-content-end fs-6">
+                <li class="nav-item">
+                  <router-link class='nav-link' :to="{name: 'HomeView'}">홈</router-link>
+                  
+                </li>
+                <li class="nav-item">
+                  <router-link class='nav-link' :to="{name: 'CommunityView'}">커뮤니티</router-link>
+                  
+                </li>
+                <li class="nav-item">
+                  <router-link class='nav-link' :to="`/profile/${this.$store.state.username}`">내 프로필</router-link>
+                  
+                </li>
+                <li class="nav-item">
+                  <a @click='logOut' class="nav-link" href="#">로그아웃</a>
+                </li>
+                
+              </ul>
               
-            </ul>
-            
+            </div>
           </div>
-        </div>
-      </nav>
-    </span>
-    <router-view/>
-  </div>
+        </nav>
+      </span>
+      <router-view/>
+    </div>
+  </body>
 </template>
 
 <script>
@@ -141,6 +130,7 @@ nav a {
   font-size: 50px;
   margin-top: 200px;
   text-align: center;
+  color: black;
 } 
 
 nav{
@@ -151,7 +141,9 @@ nav{
   right: 0;
   margin:0 auto;
 }
-
+#app{
+ background-color: #f5f5f5
+}
 /* nav a.router-link-exact-active {
   color: #42b983;
 } */

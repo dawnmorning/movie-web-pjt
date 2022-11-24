@@ -1,19 +1,21 @@
 <template>
   <div class="container" v-if="reviews" style='margin-top:30px;'>
-    <!-- 팔로워 목록 -->
-    <div v-if="myFollowings" style='margin-top:50px;'>
+  
+    
+    
+    <!-- 리뷰 자리 -->
+    <div class='left_body float-md-start'  >
+        <!-- 팔로워 목록 -->
+      <div v-if="myFollowings" style='margin-top:150px; width:494px; height:119px; position:relative;'>
       <div v-for="myFollowing in myFollowings" :key="myFollowing.id">
-        <div class='profile_box' style='width:100px;'>
+        <div class='profile_box' style='width:100px; '>
           <a class='jua' style='text-decoration: none; color:; font-size:smaller ' :href="`http://localhost:8080/profile/${myFollowing.username}`">
-          <img class='profile_img' :src="`http://127.0.0.1:8000${myFollowing.profile_image}`" alt="" style='display:inline;'>
+          <div><img class='profile_img' :src="`http://127.0.0.1:8000${myFollowing.profile_image}`" alt="" style='display:inline; width:40px; height:30px; '></div>
           <p>{{myFollowing.nickname}}</p>
           </a>
         </div>
       </div>
-    </div>
-    
-    <!-- 리뷰 자리 -->
-    <div class='left_body float-md-start'  >
+      </div>
       <div v-for="review in reviews" :key="review.id" style='margin-top:20px;'>
         <ReviewListItem
         :review=review
@@ -23,21 +25,24 @@
     
     <!-- 프로필 자리 -->
       <div class='right_body float-md-start' v-if="profileImage">
-      <div class='profile_box' style='position:relaitve; '>
-            <a text=black; class='jua' style='text-decoration: none; text:black; font-size:smaller position:relaitve; top:50px; width:10px; height:10px; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
-              <div> <img style='float:left; position:relative; top:-30px;' class='profile_img' :src=profileImage alt=""></div>
-            </a>
-            <div style='text-align:left; width:300px; height:100%; justify-content:center; align-items:center;'>
-              <a v-if="username" class='jua' style='text-decoration:none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
-                {{ username }}
-              </a>  <br>
-              <a class='jua' style='text-decoration: none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
-                  {{ this.$store.state.nickname }}
-              </a>
+        <div>
+          <div class='jua' style='margin-top:0px; font-size:15px;'>내 프로필</div>
+        </div>
+          <div class='profile_box' style='position:relaitve; top:100px;'>
+                <a text=black; class='jua' style='text-decoration: none; text:black; font-size:smaller position:relaitve; top:50px; width:10px; height:10px; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
+                  <div style='background-color: #f5f5f5;'> <img style='float:left; position:relative; top:-10px; width:80px; ' class='profile_img' :src=profileImage alt=""></div>
+                </a>
+                <div style='text-align:left; width:300px; height:100%; '>
+                  <a v-if="username" class='jua' style='text-decoration:none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
+                    {{ username }}
+                  </a>  <br>
+                  <a class='jua' style='text-decoration: none; font-size:20px;' :href="`http://localhost:8080/profile/${username}`">
+                      {{ this.$store.state.nickname }}
+                  </a>
 
+                </div>
             </div>
-          </div>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -130,12 +135,11 @@ export default {
 }
 
 .right_body {
-  /* background-color: yellow;  */
   position : absolute;
-  top : 17%;
+  top : 15%;
   right: 500px; 
   width:320px; 
-  height:1000px; 
+  height:100%; 
   /* position: sticky; */
 
 }
@@ -200,8 +204,13 @@ span{
  width: 100%;
     height: 100%;
     object-fit: cover;
-}
+ background-color: #f5f5f5;
+ border-radius: 70cm;
+} 
 a {
   text-decoration: none;
+}
+html{
+  background-color: #f5f5f5;
 }
 </style>
