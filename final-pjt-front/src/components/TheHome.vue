@@ -107,7 +107,7 @@ nav{
 
 .number {
     letter-spacing: 2px;
-    background: white;
+    background: #f5f5f5;
     padding: 10px 20px;
     border-radius: 20px;
 }

@@ -1,16 +1,13 @@
 <template>
-  <div class="container" v-if="reviews" style='margin-top:30px;'>
-  
-    
-    
+  <div class="container" v-if="reviews" style='margin-top:-110px;'>  
     <!-- 리뷰 자리 -->
     <div class='left_body float-md-start'  >
         <!-- 팔로워 목록 -->
-      <div v-if="myFollowings" style='margin-top:150px; width:494px; height:119px; position:relative;'>
-      <div v-for="myFollowing in myFollowings" :key="myFollowing.id">
-        <div class='profile_box' style='width:100px; '>
+      <div class="d-flex flex-row card-body border border-secondary align-items-bottom"  v-if="myFollowings" style='border-radius:0.3cm; margin-top:150px; width:494px; height:119px; position:relative;'>
+      <div style='text-align:center; margin-left:-20px;' v-for="myFollowing in myFollowings" :key="myFollowing.id">
+        <div class='profile_box' style='width:100px; position:relative; top:35px; height:119px;'>
           <a class='jua' style='text-decoration: none; color:; font-size:smaller ' :href="`http://localhost:8080/profile/${myFollowing.username}`">
-          <div><img class='profile_img' :src="`http://127.0.0.1:8000${myFollowing.profile_image}`" alt="" style='display:inline; width:40px; height:30px; '></div>
+          <div><img  class='profile_img' :src="`http://127.0.0.1:8000${myFollowing.profile_image}`" alt="" style='display:inline; width:50px; height:50px;'></div>
           <p>{{myFollowing.nickname}}</p>
           </a>
         </div>

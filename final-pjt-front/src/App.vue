@@ -6,7 +6,7 @@
       <span v-if='isLogin'>
         <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light ">
           <div class="container-fluid jua " style='margin-top:0px; width:1300px;' >
-            <router-link class="navbar-brand fs-1" :to='{name: "HomeView"}'>우리 프로젝트 명</router-link>
+            <router-link style='width:600px;' class="navbar-brand fs-1" :to='{name: "HomeView"}'><img src="http://127.0.0.1:8000/media/final_logo2.jpg" style='width:28%;'></router-link>
             <b-button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
