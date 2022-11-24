@@ -5,7 +5,7 @@
       <div class='jua animate__animated animate__backInUp delay-4s' style='color:black; margin-top:200px;'>
         <div class=''>안녕하세요, {{ nickname }} 님</div> 
         <div class='mt-5 ' >오늘 기분은 어때요?</div>
-        <b-button @click='goRecommend' class='btn btn-info btn-lg'><span>영화를 고르러 가볼까요?</span> </b-button>
+        <b-button style='background-color: white;' @click='goRecommend' class='btn btn-outline-primary btn-lg'><span>영화를 고르러 가볼까요?</span> </b-button>
       </div>
       <div>
       <div class="today jua " style='display:inline; position:related; right:1200px;'>

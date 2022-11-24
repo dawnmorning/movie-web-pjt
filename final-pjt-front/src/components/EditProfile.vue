@@ -1,47 +1,48 @@
 <template>
   <nav class='navWrap'>
     <div class='contentsWrap ' style='font-size:20px; margin-top:0;'>
+ 
         <form @submit.prevent="uploadProfile" class='formWrap animate__animated animate__fadeIn'>
             <!-- <div class="jua"></div> -->
-            <div class='editWindow jua' style=''>
-              <h1 style='margin-top:30px;'>프로필 수정</h1>
+            <div class='editWindow jua' style='background-color:white;'>
+              <h1 style='margin-top:10px; margin-bottom:-5px;'>프로필 수정</h1>
 
-              <div class="profile" v-if='nickname'>
-                <div class="profile_img">
+              <div class="profile" v-if='nickname' >
+                <div class="profile_img" style='background-color:white;'>
                     <img :src="profileImage" alt="프로필 이미지">
                 </div>
               </div>
+              <div v-if='filename'>
 
-              <div class="inlineToBlock">
-                <div>
-                    <div style="text-align: start;">
-                      <label for="" class='labeleft'>아이디</label>
-                      <span style='font-size: 20px; margin-left:20px;'>{{username}}</span>
+              <div  v-for='(file, idx) in filename' :key='idx'>
+                   {{file[1]}}
+              </div>
+              </div>
+              <div class="">
+                <div style='font-size: 15px; text-align:left; position:relative; left:80px;'>
+                    <div style="margin-bottom: 10px;">
+                      <label style='margin-right:100px;' for="" class=''>아이디</label>
+                      <span style=''>{{username}}</span>
                     </div>
-                    <div>
-                      <label for="" class='labeleft' style= 'margin-left:-3px;'>이메일</label>
-                      <span style='font-size: 15px;  margin-left:20px;'>{{ email }}</span>
+                    <div style="margin-bottom: 10px;">
+                      <label  for="" class='' style='margin-right:100px;'>이메일</label>
+                      <span style=' '>{{ email }}</span>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                      <label style='margin-right:100px;' for="">닉네임</label>
+                      <span style='  '>{{ nickname }}</span>
+                    </div>
+                    <div class='filebox' style="margin-bottom: 40px;">
+                      <input class="upload-name" :value="filename" placeholder="첨부파일" >
+                      <label for="file" style='margin-top:10px; position:relative; left:-8px;'>파일찾기</label> 
+                      <input type="file"
+                      id="file"
+                        accept="image/jpeg/*"
+                        @change="uploadImage"
+                        />
                     </div>
                 </div>
-
-                <div style='margin-top:20px;'>
-                  <label for="">닉네임</label>
-                  <span style='font-size: 15px;  margin-left:20px;'>{{ nickname }}</span>
-                    <!-- <input type="text" id='nickname' v-model.trim='nickname' class='id' style='margin-left:50px;'> -->
-                </div>
               </div>
-
-              <div class='inlineToBlock'>
-                <!-- <button class="button btnPush btnBlueGreen">사진 수정하기</button>
-                -->
-                <input type="file"
-                  accept="image/jpeg/*"
-                  @change="uploadImage"
-                  
-                />
-                <!-- <input class="inputfile" @change="upload" accept="image/jpg" type="file" id="file"/> -->
-              </div>
-
               <div class="inlineToBlock">
                 <button class='Btn btnPush btnBlueGreen' type="submit" style='margin-top:0 margin-left:30px;'>프로필 수정</button>
                 <button @click='goBack' class='Btn btnPush btnBlueGreen' type="submit" style='margin-top:0'>취소</button>
@@ -65,6 +66,7 @@ export default {
         // nickname: '',
         profile_image: '',
         file: null,
+        filename:null,
       }
     },
     computed:{
@@ -79,7 +81,8 @@ export default {
       },
       email(){
         return this.$store.state.email
-      }
+      },
+
     },
     methods:{
       showname(){
@@ -90,10 +93,10 @@ export default {
       },
       uploadImage(e) {
         
+        this.filename = e.target.files[0].name
         let fd = new FormData();
         fd.append('profile_image', e.target.files[0])
         this.file = fd
-        
       },
       uploadProfile(){
         this.$store.dispatch('uploadProfile', this.file)
@@ -129,7 +132,7 @@ div .editWindow {
     overflow: hidden;
     background-color: #fcfcfc;
     padding: 10px auto;
-    height: 500px;
+    height: 80%;
     width: 450px;
     justify-content: center;
     border: 1px solid #dfdfdf;
@@ -162,10 +165,7 @@ div .button {
 div .alreadyBlock{
   left:50%;
 }
-.labeleft{
-  margin-left: -110px;
-  margin-right: 60px;
-}
+
 
 .profile {
     display: flex;
@@ -179,5 +179,32 @@ div .alreadyBlock{
     width: 150px;
     height: 150px;
     border-radius: 50%;
+}
+.filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 78%;
+    color: #999999;
+}
+.filebox label {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 10px;
+}
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
 }
 </style>

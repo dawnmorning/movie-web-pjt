@@ -6,7 +6,7 @@
       @keydown.up="onArrowUp"
       @keydown.enter="onEnter"
       type="text"
-      style="margin-right:5px; background-color: #f5f5f5';" placeholder='영화검색'
+      style="margin-right:5px; background-color: #f5f5f5';" placeholder='검색도 가능해요!'
     />
     <ul
       v-show="isOpen"
@@ -160,5 +160,6 @@ export default {
 
   input::placeholder{
     opacity: 0.7;
+    font-size: 12px;
   }
 </style>

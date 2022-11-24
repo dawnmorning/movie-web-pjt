@@ -1,18 +1,23 @@
-<template>
+<template style=' background-color: #f5f5f5;'>
   <body style=' background-color: #f5f5f5'>
-    <div id="app">
+    <div id="app  background-color: #f5f5f5;">
       
       <!-- 로그인 후 -->
       <span v-if='isLogin' style=' background-color: #f5f5f5;'>
-        <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light ">
-          <div class="container-fluid jua " style='margin-top:0px; width:1300px;' >
-            <router-link style='width:600px;' class="navbar-brand fs-1" :to='{name: "HomeView"}'><img src="http://127.0.0.1:8000/media/final_logo2.jpg" style='width:28%;'></router-link>
+        <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light " style=' background-color: #f5f5f5'>
+          <div class="container-fluid jua " style='margin-top:0px; width:1300px; background-color: #f5f5f5;' >
+            <router-link style='width:600px; ' class="navbar-brand fs-1" :to='{name: "HomeView"}'><img src="http://127.0.0.1:8000/media/final_logo2.jpg" style='width:28%;'></router-link>
+            <b-button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+              <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
+            </b-button>
 
             <div class="justify-content-end collapse navbar-collapse " id="navbarSupportedContent">
 
             <div v-if="movieTitles" style=''> 
               <SearchAutocomplete
-                style=" background-color:rgba(0,0,0,0); width: 300px; border-color:rgba(255,255,255,0.1); position:relative; right:150px; border:none; padding:0;"
+                style="width: 300px; border-color:rgba(255,255,255,0.1); position:relative; right:150px; border:none; padding:0;  background-color: #f5f5f5;"
                 class="form-control"
                 :items="movieTitles"
                 @selected-movie="goMovieCard"
@@ -22,20 +27,20 @@
 
               <ul class="nav justify-content-end fs-6">
                 <li class="nav-item">
-                  <router-link class='nav-link' :to="{name: 'HomeView'}">홈</router-link>
+                  <router-link style='color:27AEF5;' class='nav-link' :to="{name: 'HomeView'}">홈</router-link>
                   
                 </li>
                 <li class="nav-item">
-                  <router-link class='nav-link' :to="{name: 'CommunityView'}">커뮤니티</router-link>
+                  <router-link  style='color:27AEF5;' class='nav-link' :to="{name: 'CommunityView'}">커뮤니티</router-link>
                   
                 </li>
                 <li class="nav-item">
                   <!-- <router-link class='nav-link' :to="`/profile/${this.$store.state.username}`">내 프로필</router-link> -->
-                  <a class='nav-link' :href="`http://localhost:8080/profile/${this.$store.state.username}`">내 프로필</a>
+                  <a class='nav-link'  style='color:27AEF5;' :href="`http://localhost:8080/profile/${this.$store.state.username}`">내 프로필</a>
                   
                 </li>
                 <li class="nav-item">
-                  <a @click='logOut' class="nav-link" href="#">로그아웃</a>
+                  <a @click='logOut'  style='color:27AEF5;' class="nav-link" href="#">로그아웃</a>
                 </li>
                 
               </ul>
@@ -157,4 +162,8 @@ nav{
 /* nav a.router-link-exact-active {
   color: #42b983;
 } */
+
+router-link{
+  color: green;
+}
 </style>

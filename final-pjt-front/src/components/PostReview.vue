@@ -4,8 +4,8 @@
     <div class='reviewbody' style='margin-top: 100px; color:white;'>
 
 			<div id="box" class='postfont animate__animated animate__fadeIn animate-delay-2s'>
-        <div style='width"100%; text-align:center;'>
-        <img class='img-fluid' :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" style='position:relative; width"100%; border-radius: 0.5cm; height:400px; '>
+        <div style='width:100%; text-align:center;'>
+          <img class='img-fluid' :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="" style='position:relative; width"100%; border-radius: 0.5cm; height:400px; '>
         </div>
 				<h1 class="heading" style='font-weight:600;'>{{movie.title}}</h1>
 				<div class="data">
@@ -132,7 +132,7 @@ export default {
   overflow: hidden;
   margin: 50px auto;
   transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
-	border: 8px ridge peru;
+	border: 1px solid white;
 }
 
 #box:hover {
