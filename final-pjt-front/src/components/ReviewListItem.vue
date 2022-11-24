@@ -36,18 +36,32 @@
           <span v-if="!review_isLike"><i class="fa-regular fa-heart"></i></span>
           <span v-if="review_isLike"><i class="fa-solid fa-heart"></i></span>
         </button>
-        {{review_like_users_count}}
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{review_like_users_count}}</button>
         <div v-if="review_like_users">
-          <h6>좋아요 누른 사람</h6>
-          <ul v-for="review_like_user in review_like_users" :key="review_like_user.id" style='padding:0;'>
-              <img :src="`http://127.0.0.1:8000${review_like_user.profile_image}`" alt="프로필 이미지" style='width:10%;'>
-              <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}" style='text-decoration-line: none;'>
-                  {{review_like_user.nickname}}
-              </router-link>
-          </ul>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" >좋아요 누른 사람</h1>
+              </div>
+              <div class="modal-body">
+                <ul v-for="review_like_user in review_like_users" :key="review_like_user.id" style='padding:0;'>
+                    <img :src="`http://127.0.0.1:8000${review_like_user.profile_image}`" alt="프로필 이미지" style='width:10%;'>
+                    <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}" style='text-decoration-line: none;'>
+                        <span style='color:black;'>{{review_like_user.nickname}}</span>
+                    </router-link>
+                </ul>
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-light" data-bs-dismiss="modal">닫기</button>
+             
+            </div>
+          </div>
         </div>
       </div>
-      
+    </div>
+  </div>
+
         <!-- 댓글 -->
         
         <hr style='margin:0px;'>

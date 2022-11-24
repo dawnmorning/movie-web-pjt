@@ -9,7 +9,7 @@
 
               <div class="profile" v-if='nickname' >
                 <div class="profile_img" style='background-color:white;'>
-                    <img :src="profileImage" alt="프로필 이미지">
+                    <img style='width:185px;' :src="profileImage" alt="프로필 이미지">
                 </div>
               </div>
               <div v-if='filename'>

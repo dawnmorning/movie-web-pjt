@@ -3,7 +3,7 @@
     
     <div class='contentsWrap animate__animated animate__bounceInUp animate__slow' style='margin-top : 0px; height : 100px;' > 
         <form @submit.prevent='logIn' class=''>
-          <div class='jua animate__animated animate__fadeInUp aniamte_duration-2s' style='margin-top: 50px; margin-bottom: 50px;'><img style='width:90%; margin-bottom:-60px;' src="http://127.0.0.1:8000/media/final_logo.jpg" alt="우리 로고"></div>
+          <div class='jua animate__animated animate__fadeInUp aniamte_duration-2s' style='margin-top: 40px; margin-bottom: 50px;'><img style='width:60%; margin-bottom:-40px;' src="http://127.0.0.1:8000/media/final_logo.jpg" alt="우리 로고"></div>
           <div class='loginWindow jua' style= 'margin-top:0px;'>
             
             <br>
