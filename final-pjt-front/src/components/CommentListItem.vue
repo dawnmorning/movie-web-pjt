@@ -16,19 +16,42 @@
       <span v-if="!comment_isLike"><i class="fa-regular fa-heart"></i></span>
       <span v-if="comment_isLike"><i class="fa-solid fa-heart"></i></span>
     </button>
-    {{comment_like_users_count}}
+    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal" >{{comment_like_users_count}}</button>
+    
     <div v-if="comment_like_users">
-      <h6>좋아요 누른 사람</h6>
-      <div style='text-align:left; margin-left:0px; padding: 0px;'>
-        <ul style='margin-left:0px; margin-bottom: 15px; padding: 0px;' v-for="like_user in comment_like_users" :key="like_user.id">
-            <img :src="`http://127.0.0.1:8000${like_user.profile_image}`" alt="프로필 이미지" style='width:50px;'>
-          <router-link :to="{name: 'ProfileView', params: { username : like_user.username}}" style=' text-decoration-line: none;'>
-            {{like_user.nickname}}
-            <hr>
-          </router-link>
-        </ul>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">좋아요 누른 사람</h1>
+            </div>
+            <div class="modal-body">  
+              <div style='text-align:left; margin-left:0px; padding: 0px;'>
+                <ul style='margin-left:0px; margin-bottom: 15px; padding: 0px;' v-for="like_user in comment_like_users" :key="like_user.id">
+                    <img :src="`http://127.0.0.1:8000${like_user.profile_image}`" alt="프로필 이미지" style='width:50px;'>
+                  <router-link :to="{name: 'ProfileView', params: { username : like_user.username}}" style=' text-decoration-line: none;'>
+                    {{like_user.nickname}}
+                    <hr>
+                  </router-link>
+                </ul>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+        
+        
+      
+      
+        
+      
+
+
   </div>
 </template>
 <script>

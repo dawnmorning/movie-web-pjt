@@ -1,11 +1,11 @@
-<template style=' background-color: #f5f5f5;'>
-  <body style=' background-color: #f5f5f5'>
-    <div id="app  background-color: #f5f5f5;">
+<template>
+  <body style='background-color: #f5f5f5'>
+    <div id="app ">
       
       <!-- 로그인 후 -->
       <span v-if='isLogin' style=' background-color: #f5f5f5;'>
-        <nav class="navbar fixed-top navbar navbar-expand-lg navbar-light bg-light " style=' background-color: #f5f5f5'>
-          <div class="container-fluid jua " style='margin-top:0px; width:1300px; background-color: #f5f5f5;' >
+        <nav class="navbar fixed-top navbar navbar-expand-lg" style=' background-color: #f5f5f5; border-bottom: solid 1px black;'>
+          <div class="container-fluid jua " style='margin-top:0px; width:1300px; height: ' >
             <router-link style='width:600px; ' class="navbar-brand fs-1" :to='{name: "HomeView"}'><img src="http://127.0.0.1:8000/media/final_logo2.jpg" style='width:28%;'></router-link>
 
             <div class="justify-content-end collapse navbar-collapse " id="navbarSupportedContent">

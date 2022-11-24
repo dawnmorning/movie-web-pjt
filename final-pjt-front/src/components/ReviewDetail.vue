@@ -10,9 +10,9 @@
                 <h5 class="card-title">영화 : {{review.movie.title}}</h5>
                 <hr>
                 <div class="card-body" style='height:200px;'>
-                    <div style='text-align:left; width:100%;'>
+                    <div style='text-align:left; padding-left:10px; width:100%;'>
                         <h5 class="card-title" style=''>제목 : {{review.title}}</h5>
-                        <h5 class="card-subtitle mb-2 text-muted">{{review.updated_at}}</h5>
+                        <h5 class="card-subtitle mb-2 text-muted">{{review.updated_at.split('T', 1)[0]}}</h5>
                         <h5>별점 : {{review.rating}}</h5>
                         <!-- <star-rating class="card-subtitle mb-2 text-muted" :value='`${review.rating}`' :read-only='true'>별점 : {{review.rating}}</star-rating> -->
                         <p class="card-text">{{review.content}}</p>
@@ -20,7 +20,8 @@
                         <h5>댓글 작성하기</h5>
                         <input type="text"
                         v-model="inputData"
-                        @keyup.enter="createComment" 
+                        @keyup.enter="createComment"
+                        style='width: 500px;' 
                         >
                         <button
                         class='btn btn-btn-link' style=' color:black; text-decoration:none;'
@@ -38,7 +39,7 @@
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">댓글목록</h1>
                                
                             </div>
-                            <div class="modal-body" style='padding:0'>
+                            <div class="modal-body" style='padding:10px;'>
                                 <div v-for="comment in comments" :key="comment.id">
                                         <CommentListItem
                                         :comment=comment

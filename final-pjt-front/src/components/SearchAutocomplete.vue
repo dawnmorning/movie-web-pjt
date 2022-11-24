@@ -6,15 +6,20 @@
       @keydown.up="onArrowUp"
       @keydown.enter="onEnter"
       type="text"
-      style="margin-right:5px; background-color: #f5f5f5';" placeholder='검색도 가능해요!' :value=" search"
+      style="margin-top:8px; margin-right:5px; background-color: #f5f5f5; border-radius:0.1cm" placeholder='영화 검색' :value=" search"
     />
+    <button class="btn btn-outline-dark"
+    @click="selectMovie"
+    style='width:60px; height:30px; position:relative; padding:0;'
+    ><i style='' class="fa-solid fa-magnifying-glass"></i></button>
     <ul
       v-show="isOpen"
-      class="autocomplete-results"
+      class="autocomplete-results1"
     >
       <li
           v-if="isLoading"
           class="loading"
+          style='width:160px;'
         >
         Loading results...
       </li>
@@ -23,16 +28,13 @@
         v-for="(result, i) in results"
         :key="i"
         @click="setResult(result)"
-        class="autocomplete-result"
+        class="autocomplete-result1"
         :class="{ 'is-active': i === arrowCounter }"
       >
       {{ result }}
       </li>
     </ul>
-    <button class="btn btn-outline-success"
-    @click="selectMovie"
-    style='width:60px; height:20px; position:relative; padding:0;'
-    ><i style='' class="fa-solid fa-magnifying-glass"></i></button>
+    
   </div>
 </template>
 
@@ -145,13 +147,15 @@ export default {
     width: 100%;
   }
 
-  .autocomplete-result {
-    width:80%;
+  .autocomplete-result1 {
+    width:66%;
     list-style: none;
     text-align: left;
     padding: 4px 2px;
     cursor: pointer;
     background-color: white;
+    position: relative;
+    right: 5px;
   }
 
   .autocomplete-result.is-active,

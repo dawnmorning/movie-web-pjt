@@ -20,7 +20,7 @@
             placeholder='비밀번호'
             v-model='password'
             >
-            <button class='inlineToBlock ordinaryLgin unactivatedLoginColor btn' type="submit" >로그인</button>
+            <button class='inlineToBlock ordinaryLgin unactivatedLoginColor btn btn-primary' type="submit" >로그인</button>
             
             <div>
                 <!-- 소셜 로그인 할거라면 넣을곳 -->

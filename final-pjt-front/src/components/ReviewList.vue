@@ -44,7 +44,7 @@
         </div>
 
         <!-- user 검색창 -->
-        <div v-if="nicknames" style=''> 
+        <div v-if="nicknames" style='position:relative; left:138px;'> 
           <SearchAutocompleteUsers
             style="width: 300px; border-color:rgba(255,255,255,0.1); position:relative; right:150px; border:none; padding:0;  background-color: #f5f5f5;"
             class="form-control"
