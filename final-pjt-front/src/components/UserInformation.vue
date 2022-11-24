@@ -22,7 +22,6 @@
                         <span v-if="isFollowing">팔로우 취소</span>
                         </button>
                     </div>
-
                     <div class="area_text">
                         <div class="tit_desc">
                             <span class="title">게시물</span>

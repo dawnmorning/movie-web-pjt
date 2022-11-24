@@ -9,7 +9,22 @@
         <div class="splide-card" :style="`background-image: url(${profileImage});`"></div>
         <p class="card-text" style='font-size:16px; margin-top:10px;'>{{review.author.nickname}}</p>  
         
-        <div><button style='margin-left : 300px; margin-top:5px;'>수정하기</button></div>
+        <div>
+
+          <button style='margin-left : 300px; margin-top:5px;'>수정하기</button>
+        </div>
+        <!-- <div v-if="user_id === comment.author.id">
+        
+        <form @submit.prevent="updateComment">
+          <input type="text" v-model.trim='inputComment'>
+
+          <button type="submit">수정</button> |
+          <button @click='deleteComment'>삭제</button>
+        </form>
+
+
+      </div> -->
+
 
       </div>
       
@@ -34,7 +49,6 @@
               <img :src="`http://127.0.0.1:8000${review_like_user.profile_image}`" alt="프로필 이미지" style='width:10%;'>
               <router-link :to="{name: 'ProfileView', params: { username : review_like_user.username}}" style='text-decoration-line: none;'>
                   {{review_like_user.nickname}}
-
               </router-link>
             </ul>
           </div>
@@ -44,7 +58,7 @@
         
         <hr style='margin:0px;'>
         <!-- <h5>댓글 입력</h5> -->
-      <form class='commentstyle'>
+      <form class='commentstyle'>       
         <input type="text"
         v-model="inputData"
         @keyup.enter="createComment"
@@ -68,7 +82,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">댓글목록</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body" style='right:350px;'>
+              <div class="modal-body" style='right:350px;' v-if="comments">
                 <div v-for="comment in comments" :key="comment.id">
                   <CommentListItem
                   :comment=comment
@@ -165,9 +179,6 @@ export default {
       })
     },
   },
-  // created() {
-  //   this.getReview()
-  // },
 }
 </script>
 
