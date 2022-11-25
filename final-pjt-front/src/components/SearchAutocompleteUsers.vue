@@ -153,7 +153,7 @@ export default {
   }
 
   .autocomplete-result {
-    width:84%;
+    width:60%;
     list-style: none;
     text-align: left;
     padding: 4px 2px;
