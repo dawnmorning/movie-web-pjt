@@ -99,12 +99,7 @@
                             </a>
                         </li>
                         <!-- myLike -->
-                        <li>
-                            <router-link :to="{name : 'CollectionView' }">
-                                <i class="fas fa-tv"></i>
-                                <span>컬랙션</span>
-                            </router-link>
-                        </li>
+                        
                     </ul>
                 </div>
                 

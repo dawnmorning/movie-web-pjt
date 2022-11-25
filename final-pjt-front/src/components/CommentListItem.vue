@@ -16,10 +16,10 @@
       <span v-if="!comment_isLike"><i class="fa-regular fa-heart"></i></span>
       <span v-if="comment_isLike"><i class="fa-solid fa-heart"></i></span>
     </button>
-    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal" >{{comment_like_users_count}}</button>
+    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2" >{{comment_like_users_count}}</button>
     
     <div v-if="comment_like_users">
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
