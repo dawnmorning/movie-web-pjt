@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f62c76f2-05c4-4ca2-abd5-4aaccf23e83c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/final-pjt-front/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/final-pjt-front/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final-pjt-front/src/components/LogIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/final-pjt-front/src/components/LogIn.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final-pjt-front/src/components/ReviewList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/final-pjt-front/src/components/ReviewList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final-pjt-front/src/components/TheHome.vue" beforeDir="false" afterPath="$PROJECT_DIR$/final-pjt-front/src/components/TheHome.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final-pjt-front/src/components/UserInformation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/final-pjt-front/src/components/UserInformation.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documents/final_pjt_ppt.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/final-pjt-front/src/components/EditReview.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/final-pjt-front/src/components/SearchAutocompleteUsers.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
