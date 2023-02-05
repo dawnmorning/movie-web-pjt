@@ -13,7 +13,7 @@
 
 ### 로그인
 
-![로그인.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\로그인.PNG)
+<img width="80%" src="https://user-images.githubusercontent.com/109330901/216799438-3e622e7c-6b3c-47a9-8515-cfedc3dc9902.PNG"/>
 
 ```
 우리 프로젝트의 로고를 배치하고, 로그인을 하지 않을 시 페이지에 들어갈 수 없도록 초기화면을 로그인화면으로 구성하였다.
@@ -22,7 +22,7 @@
 
 ### 회원가입
 
-![회원가입.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\회원가입.PNG)
+<img width="80%" src="https://user-images.githubusercontent.com/109330901/216799451-61434dbf-2020-49d7-9206-fcea3beb02d0.PNG"/>
 
 ```
 로그인과 똑같은 UI를 적용하여 사용자가 어색함을 느끼지 않도록 구성하였다.
@@ -30,7 +30,7 @@
 
 ### 메인화면
 
-![메인화면.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\메인화면.PNG)
+<img width="80%" src="https://user-images.githubusercontent.com/109330901/216799468-6d669571-884a-410a-985f-b6419de9799b.PNG"/>
 
 ```
 가벼운 프로젝트였기 때문에 사용할 수 있는 라이브러리를 많이 찾아본 뒤 적용해보는 것에 중점을 두었다. 메인화면에서 네비게이션 바 부분을 클릭하면 각각의 컴포넌트로 이동한다.
@@ -39,14 +39,6 @@ body부분의 영화고르러가기 버튼을 누르면 영화 목록을 보여�
 
 ### 영화 목록 화면
 
-<<<<<<< HEAD
-
-=======
-
-<p align="center>
-  <img src="https://user-images.githubusercontent.com/109330901/216799236-38f330be-1a85-4b7d-9905-7136cb12c264.gif">
-</p>
->>>>>>> 68b7889c0b6319b9d25fc835fd0183950fb64abe
 
 ```
 최근 개봉 영화, 지금 인기잇는 영화, 평점이 높은영화 랜덤영화 순으로 영화를 grid display를 통해 보여주고 더보기를 통해 100개까지 보여줄 수 있다. 포스터에 hover하게 되면 좋아요를 눌러 유저 data에 저장되고, 물음표 버튼을 누르면 상세페이지로 이동한다.
@@ -60,7 +52,8 @@ body부분의 영화고르러가기 버튼을 누르면 영화 목록을 보여�
 
 ### 마이프로필
 
-![마이프로필.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\마이프로필.PNG)
+
+<img width="80%" src="https://user-images.githubusercontent.com/109330901/216799479-b8d7f688-8167-43a2-927d-900c7356cc62.PNG"/>
 
 ```
 방금 작성한 리뷰글이 내 프로필에 담기게 된다.
@@ -68,7 +61,8 @@ body부분의 영화고르러가기 버튼을 누르면 영화 목록을 보여�
 
 ### 피드
 
-![피드.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\피드.PNG)
+<img width="80%"
+ src="https://user-images.githubusercontent.com/109330901/216799486-9405966b-f771-4c25-af47-833cfa3e7fe6.PNG"/>
 
 ```
 작성한 게시글이 feed페이지에 나타나게 되고, 팔로우 한 사람이 있다면 그 사람의 글도 표시가 되게 된다.
