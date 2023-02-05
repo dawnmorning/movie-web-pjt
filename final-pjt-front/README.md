@@ -13,8 +13,6 @@
 
 ### 로그인
 
-
-
 ![로그인.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\로그인.PNG)
 
 ```
@@ -24,8 +22,6 @@
 
 ### 회원가입
 
-
-
 ![회원가입.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\회원가입.PNG)
 
 ```
@@ -33,10 +29,6 @@
 ```
 
 ### 메인화면
-
-
-
-
 
 ![메인화면.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\메인화면.PNG)
 
@@ -47,11 +39,14 @@ body부분의 영화고르러가기 버튼을 누르면 영화 목록을 보여�
 
 ### 영화 목록 화면
 
+<<<<<<< HEAD
 
+=======
 
-
-
-
+<p align="center>
+  <img src="https://user-images.githubusercontent.com/109330901/216799236-38f330be-1a85-4b7d-9905-7136cb12c264.gif">
+</p>
+>>>>>>> 68b7889c0b6319b9d25fc835fd0183950fb64abe
 
 ```
 최근 개봉 영화, 지금 인기잇는 영화, 평점이 높은영화 랜덤영화 순으로 영화를 grid display를 통해 보여주고 더보기를 통해 100개까지 보여줄 수 있다. 포스터에 hover하게 되면 좋아요를 눌러 유저 data에 저장되고, 물음표 버튼을 누르면 상세페이지로 이동한다.
@@ -59,15 +54,11 @@ body부분의 영화고르러가기 버튼을 누르면 영화 목록을 보여�
 
 ### 상세페이지
 
-
-
 ```
 리뷰쓰기를 누르면 모달이 열리면서 글을 작성할 수 있고, 평점을 별점으로 매길 수 있게 하였다.
 ```
 
 ### 마이프로필
-
-
 
 ![마이프로필.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\마이프로필.PNG)
 
@@ -76,8 +67,6 @@ body부분의 영화고르러가기 버튼을 누르면 영화 목록을 보여�
 ```
 
 ### 피드
-
-
 
 ![피드.PNG](C:\Users\Kim%20jong%20hyeok\ssafy8\PJT\LastPJT-1\moviepjt%20사진\피드.PNG)
 
